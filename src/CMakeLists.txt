@@ -1,5 +1,5 @@
 
-SET( antigrain_HEADERS
+SET(antigrain_HEADERS
     ${antigrain_SOURCE_DIR}/include/agg_alpha_mask_u8.h
     ${antigrain_SOURCE_DIR}/include/agg_arc.h
     ${antigrain_SOURCE_DIR}/include/agg_array.h
@@ -127,8 +127,7 @@ SET( antigrain_HEADERS
     ${antigrain_SOURCE_DIR}/include/agg_span_gradient_image.h
 )
 
-ADD_LIBRARY( antigrain
-
+add_library(antigrain
     agg_arc.cpp
     agg_arrowhead.cpp
     agg_bezier_arc.cpp
@@ -153,12 +152,11 @@ ADD_LIBRARY( antigrain
     agg_vcgen_stroke.cpp
     agg_vpgen_clip_polygon.cpp
     agg_vpgen_segmentator.cpp
-
     ${antigrain_HEADERS}
 )
 
 #controls code for interactive modifying samples
-SET( controls_HEADERS   
+SET(controls_HEADERS
     ${antigrain_SOURCE_DIR}/include/ctrl/agg_slider_ctrl.h
     ${antigrain_SOURCE_DIR}/include/ctrl/agg_spline_ctrl.h
     ${antigrain_SOURCE_DIR}/include/ctrl/agg_scale_ctrl.h
@@ -171,7 +169,7 @@ SET( controls_HEADERS
     ${antigrain_SOURCE_DIR}/include/ctrl/agg_bezier_ctrl.h
 )
 
-ADD_LIBRARY( controls    
+add_library(controls
     ctrl/agg_spline_ctrl.cpp
     ctrl/agg_slider_ctrl.cpp
     ctrl/agg_scale_ctrl.cpp
@@ -181,99 +179,97 @@ ADD_LIBRARY( controls
     ctrl/agg_gamma_ctrl.cpp
     ctrl/agg_cbox_ctrl.cpp
     ctrl/agg_bezier_ctrl.cpp
-
     ${controls_HEADERS}
 )
 
+target_link_libraries(controls antigrain)
+
 #freetype library
 
-IF ( agg_USE_FREETYPE )
+IF(agg_USE_FREETYPE)
 
-    INCLUDE_DIRECTORIES( ${antigrain_SOURCE_DIR}/font_freetype )
+    INCLUDE_DIRECTORIES(${antigrain_SOURCE_DIR}/font_freetype)
 
-    ADD_LIBRARY( freetypefont
+    add_library(freetypefont
         ../font_freetype/agg_font_freetype.h
         ../font_freetype/agg_font_freetype.cpp
-    )	
-    SET_TARGET_PROPERTIES( freetypefont  PROPERTIES OUTPUT_NAME aggfontfreetype${PFDEBUG} )
-    INSTALL( TARGETS freetypefont DESTINATION lib )
-	INSTALL( FILES ../font_freetype/agg_font_freetype.h DESTINATION agg/font_freetype )	
-ENDIF ( agg_USE_FREETYPE )
+   )
+    SET_TARGET_PROPERTIES(freetypefont  PROPERTIES OUTPUT_NAME aggfontfreetype${PFDEBUG})
+    INSTALL(TARGETS freetypefont DESTINATION lib)
+	INSTALL(FILES ../font_freetype/agg_font_freetype.h DESTINATION agg/font_freetype)
+ENDIF(agg_USE_FREETYPE)
 
 #platform stuff to ease sample use
-SET( platform_HEADERS   
+SET(platform_HEADERS
     ${antigrain_SOURCE_DIR}/include/platform/agg_platform_support.h
 )
 
 IF(WIN32)
-    INCLUDE_DIRECTORIES( ${antigrain_SOURCE_DIR}/font_win32_tt )
+    INCLUDE_DIRECTORIES(${antigrain_SOURCE_DIR}/font_win32_tt)
 
-    ADD_LIBRARY( platform
+    add_library(platform STATIC
         ../src/platform/win32/agg_win32_bmp.cpp
         ../src/platform/win32/agg_platform_support.cpp
         ../font_win32_tt/agg_font_win32_tt.cpp
-		
-		${platform_HEADERS}		
-    )
-	INSTALL( FILES ../font_win32_tt/agg_font_win32_tt.h DESTINATION agg/font_win32_tt )	
+		${platform_HEADERS})
+	INSTALL(FILES ../font_win32_tt/agg_font_win32_tt.h DESTINATION agg/font_win32_tt)
 ENDIF(WIN32)
 IF(UNIX)
-    ADD_LIBRARY( platform
+    add_library(platform STATIC
         ../src/platform/X11/agg_platform_support.cpp
-
-		${platform_HEADERS}		
-    )
+		${platform_HEADERS}
+   )
 ENDIF(UNIX)
 IF(APPLE)
-    ADD_LIBRARY( platform
+    add_library(platform STATIC
         ../src/platform/mac/agg_mac_pmap.cpp
         ../src/platform/mac/agg_platform_support.cpp
-
-		${platform_HEADERS}		
-    )
+		${platform_HEADERS}
+   )
 ENDIF(APPLE)
+target_link_libraries(platform antigrain)
 
-IF( SDL_FOUND AND agg_USE_SDL_PLATFORM )
-    ADD_LIBRARY( sdlplatform
+IF(SDL_FOUND AND agg_USE_SDL_PLATFORM)
+    add_library(sdlplatform
         ../src/platform/sdl/agg_platform_support.cpp
-		
-		${platform_HEADERS}		
-    )
-    INSTALL( TARGETS sdlplatform DESTINATION lib )
-    SET_TARGET_PROPERTIES( sdlplatform  PROPERTIES OUTPUT_NAME aggsdlplatform${PFDEBUG} )
-ENDIF( SDL_FOUND AND agg_USE_SDL_PLATFORM )
+
+		${platform_HEADERS}
+   )
+    INSTALL(TARGETS sdlplatform DESTINATION lib)
+    SET_TARGET_PROPERTIES(sdlplatform  PROPERTIES OUTPUT_NAME aggsdlplatform${PFDEBUG})
+ENDIF(SDL_FOUND AND agg_USE_SDL_PLATFORM)
 
 # boolean operations library GPC
 
-IF ( agg_USE_GPC )
-    INCLUDE_DIRECTORIES( ${antigrain_SOURCE_DIR}/gpc )
+IF(agg_USE_GPC)
+    INCLUDE_DIRECTORIES(${antigrain_SOURCE_DIR}/gpc)
 
-    ADD_LIBRARY( gpcbool
+    add_library(gpcbool
         ../gpc/gpc.c
         ../gpc/gpc.h
-    )
-    INSTALL( TARGETS gpcbool DESTINATION lib )
-	INSTALL( FILES ../gpc/gpc.h DESTINATION agg/gpc )	
-    SET_TARGET_PROPERTIES( gpcbool   PROPERTIES OUTPUT_NAME gpc${PFDEBUG} )
-ENDIF ( agg_USE_GPC )
+   )
+    INSTALL(TARGETS gpcbool DESTINATION lib)
+	INSTALL(FILES ../gpc/gpc.h DESTINATION agg/gpc)
+    SET_TARGET_PROPERTIES(gpcbool PROPERTIES OUTPUT_NAME gpc${PFDEBUG})
+ENDIF(agg_USE_GPC)
 
-IF ( agg_USE_AGG2D )
-    INCLUDE_DIRECTORIES( ${antigrain_SOURCE_DIR}/agg2d )
+IF(agg_USE_AGG2D)
+    INCLUDE_DIRECTORIES(${antigrain_SOURCE_DIR}/agg2d)
 
-    ADD_LIBRARY( agg2d
+    add_library(agg2d
         ../agg2d/agg2d.cpp
         ../agg2d/agg2d.h
-    )
-    INSTALL( TARGETS agg2d DESTINATION lib )
-	INSTALL( FILES ../agg2d/agg2d.h DESTINATION agg/agg2d )	
-    SET_TARGET_PROPERTIES( agg2d  PROPERTIES OUTPUT_NAME agg2d${PFDEBUG} )
-ENDIF ( agg_USE_AGG2D )
+   )
+    INSTALL(TARGETS agg2d DESTINATION lib)
+	INSTALL(FILES ../agg2d/agg2d.h DESTINATION agg/agg2d)
+    SET_TARGET_PROPERTIES(agg2d  PROPERTIES OUTPUT_NAME agg2d${PFDEBUG})
+ENDIF(agg_USE_AGG2D)
 
-SET_TARGET_PROPERTIES( antigrain PROPERTIES OUTPUT_NAME agg${PFDEBUG} )
-SET_TARGET_PROPERTIES( controls  PROPERTIES OUTPUT_NAME aggctrl${PFDEBUG} )
-SET_TARGET_PROPERTIES( platform  PROPERTIES OUTPUT_NAME aggplatform${PFDEBUG} )
+SET_TARGET_PROPERTIES(antigrain PROPERTIES OUTPUT_NAME agg${PFDEBUG})
+SET_TARGET_PROPERTIES(controls  PROPERTIES OUTPUT_NAME aggctrl${PFDEBUG})
+SET_TARGET_PROPERTIES(platform  PROPERTIES OUTPUT_NAME aggplatform${PFDEBUG})
 
-INSTALL( FILES ${antigrain_HEADERS} DESTINATION agg/include )	
-INSTALL( FILES ${controls_HEADERS} DESTINATION agg/include/ctrl )	
-INSTALL( FILES ${platform_HEADERS} DESTINATION agg/include/platform )	
-INSTALL( TARGETS antigrain controls platform DESTINATION lib )
+INSTALL(FILES ${antigrain_HEADERS} DESTINATION agg/include)
+INSTALL(FILES ${controls_HEADERS} DESTINATION agg/include/ctrl)
+INSTALL(FILES ${platform_HEADERS} DESTINATION agg/include/platform)
+INSTALL(TARGETS antigrain controls platform DESTINATION lib)

@@ -1,4 +1,4 @@
-
+LINK_LIBRARIES(platform controls antigrain)
 ADD_EXECUTABLE( aa_demo ${WIN32GUI}
     aa_demo.cpp
 )
@@ -314,7 +314,7 @@ IF(WIN32)
         ./win32_api/pure_api/StdAfx.cpp
         ./win32_api/pure_api/pure_api.rc
         parse_lion.cpp
-            
+
     )
 ENDIF(WIN32)
 
@@ -328,4 +328,4 @@ ENDIF( agg_USE_AGG2D )
 
 
 
-    
+
