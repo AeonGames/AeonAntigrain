@@ -134,16 +134,14 @@ ENDIF ( ${CMAKE_GENERATOR} MATCHES "Borland Makefiles" )
 # Set all includes, flags, libraries, related to expat
 ##################################################
 
-IF( agg_USE_EXPAT )
-
-    FIND_PACKAGE( EXPAT )
-
+if( agg_USE_EXPAT )
+    find_package( EXPAT )
     IF(EXPAT_FOUND)
         INCLUDE_DIRECTORIES(${EXPAT_INCLUDE_DIRS})
-    ELSE(EXPAT_FOUND)
+    ELSE()
         MESSAGE(SEND_ERROR "expat not found")
-    ENDIF(EXPAT_FOUND)
-ENDIF( agg_USE_EXPAT )
+    ENDIF()
+endif()
 
 ##################################################
 # Set all includes, flags, libraries, related to freetype

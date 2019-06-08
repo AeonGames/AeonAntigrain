@@ -292,8 +292,8 @@ ADD_EXECUTABLE( trans_polar ${WIN32GUI}
     trans_polar.cpp
 )
 
-IF ( agg_USE_EXPAT )
-    ADD_EXECUTABLE( svg_test ${WIN32GUI}
+if(agg_USE_EXPAT AND EXPAT_FOUND)
+    add_executable( svg_test ${WIN32GUI}
         ./svg_viewer/svg_test.cpp
         ./svg_viewer/agg_svg_exception.h
         ./svg_viewer/agg_svg_parser.cpp
@@ -301,9 +301,9 @@ IF ( agg_USE_EXPAT )
         ./svg_viewer/agg_svg_path_renderer.cpp
         ./svg_viewer/agg_svg_path_renderer.h
         ./svg_viewer/agg_svg_path_tokenizer.cpp
-        ./svg_viewer/agg_svg_path_tokenizer.h
-        )
-ENDIF ( agg_USE_EXPAT )
+        ./svg_viewer/agg_svg_path_tokenizer.h)
+    target_link_libraries(svg_test ${EXPAT_LIBRARIES})
+endif()
 
 IF(WIN32)
     ADD_EXECUTABLE( pure_api ${WIN32GUI}
