@@ -29,7 +29,7 @@ if(CMAKE_GENERATOR MATCHES "(MSYS|Unix) Makefiles")
 
   set(DEBUG_CONFIGURATIONS "")
 
-  set(directories ${CMAKE_SOURCE_DIR}/examples ${CMAKE_SOURCE_DIR}/myapp)
+  set(directories ${CMAKE_SOURCE_DIR}/examples)
   
   foreach(DIRECTORY ${directories})
       if(IS_DIRECTORY ${DIRECTORY} AND EXISTS ${DIRECTORY}/CMakeLists.txt)
@@ -37,13 +37,14 @@ if(CMAKE_GENERATOR MATCHES "(MSYS|Unix) Makefiles")
           foreach(TARGET ${TARGETS})
               get_target_property(target_type ${TARGET} TYPE)
               if (${target_type} STREQUAL "EXECUTABLE")
+                  get_property(debug_arguments TARGET ${TARGET} PROPERTY DEBUG_ARGUMENTS)
                   message(STATUS "Generating debug launch configuration for ${TARGET}")
                   set(DEBUG_CONFIGURATIONS "${DEBUG_CONFIGURATIONS}
                   {
                   \"name\": \"${TARGET}\",
                   \"type\": \"cppdbg\",
                   \"request\": \"launch\",
-                  \"args\": [],
+                  \"args\": [\"${debug_arguments}\"],
                   \"stopAtEntry\": false,
                   \"cwd\": \"${CMAKE_BINARY_DIR}\",
                   \"environment\": [

@@ -303,6 +303,7 @@ if(agg_USE_EXPAT AND EXPAT_FOUND)
         ./svg_viewer/agg_svg_path_tokenizer.cpp
         ./svg_viewer/agg_svg_path_tokenizer.h)
     target_link_libraries(svg_test ${EXPAT_LIBRARIES})
+    set_target_properties(svg_test PROPERTIES DEBUG_ARGUMENTS "${CMAKE_CURRENT_SOURCE_DIR}/art/tiger.svg")
 endif()
 
 IF(WIN32)

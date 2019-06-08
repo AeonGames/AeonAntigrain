@@ -56,6 +56,12 @@ find_program(GREP_EXECUTABLE grep
         MSYS2_PATH
         ProgramFiles
     PATH_SUFFIXES bin usr/bin Git/usr/bin)
+find_program(BASH_EXECUTABLE bash
+    HINTS ENV
+        MINGW_PREFIX
+        MSYS2_PATH
+        ProgramFiles
+    PATH_SUFFIXES bin usr/bin Git/usr/bin)
 
 configure_file("${CMAKE_SOURCE_DIR}/cmake/pre-commit.in"
                "${CMAKE_SOURCE_DIR}/.git/hooks/pre-commit")
@@ -80,7 +86,12 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
                             "MinSizeRel"
                             "RelWithDebInfo")
 endif()
+
 set(CMAKE_DEBUG_POSTFIX "d")
+
+define_property(TARGET PROPERTY DEBUG_ARGUMENTS INHERITED
+    BRIEF_DOCS "Debug Arguments"
+    FULL_DOCS "Arguments to be passed when debugging")
 
 # for the moment this decides the platform code.
 IF(WIN32)
@@ -224,28 +235,6 @@ ADD_SUBDIRECTORY( src )
 
 ADD_SUBDIRECTORY( examples )
 
-CONFIGURE_FILE( ${antigrain_SOURCE_DIR}/cmake/AggConfig.cmake.in
-                ${antigrain_BINARY_DIR}/cmake/AggConfig.cmake
-                @ONLY IMMEDIATE )
-
-CONFIGURE_FILE( ${antigrain_SOURCE_DIR}/cmake/AggConfigOutBuild.cmake.in
-                ${antigrain_BINARY_DIR}/cmake/AggConfigOutBuild.cmake
-                @ONLY IMMEDIATE )
-
-CONFIGURE_FILE( ${antigrain_SOURCE_DIR}/cmake/FindAgg.cmake
-                ${antigrain_BINARY_DIR}/myapp/FindAgg.cmake
-                @ONLY IMMEDIATE )
-
-CONFIGURE_FILE( ${antigrain_SOURCE_DIR}/cmake/UseAgg.cmake.in
-                ${antigrain_BINARY_DIR}/cmake/UseAgg.cmake
-                @ONLY IMMEDIATE )
-
-ADD_SUBDIRECTORY( myapp )
-
-INSTALL( FILES ${antigrain_BINARY_DIR}/cmake/AggConfigOutBuild.cmake DESTINATION "bin" RENAME AggConfig.cmake )
-INSTALL( FILES ${antigrain_BINARY_DIR}/cmake/AggConfig.cmake DESTINATION "bin" )
-INSTALL( FILES ${antigrain_BINARY_DIR}/cmake/UseAgg.cmake DESTINATION "bin" )
-
 #-------------------------------------------------------------------
 # Build a CPack installer if CPack is available and this is a build
 IF ( agg_USE_PACK )
@@ -276,7 +265,5 @@ IF ( agg_USE_PACK )
         INCLUDE(CPack)
     ENDIF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 ENDIF ( agg_USE_PACK )
-
-INCLUDE( myapp/myproject.cmake )
 
 include(vscode)
