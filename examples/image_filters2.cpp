@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -37,8 +52,8 @@ static rgba g_image[] =
 
 class the_application : public agg::platform_support
 {
-    typedef agg::renderer_base<pixfmt> renderer_base;
-    typedef agg::renderer_base<pixfmt_pre> renderer_base_pre;
+    using renderer_base = agg::renderer_base<pixfmt>;
+    using renderer_base_pre = agg::renderer_base<pixfmt_pre>;
 
     agg::slider_ctrl<agg::rgba> m_radius;
     agg::rbox_ctrl<agg::rgba>   m_filters;
@@ -124,11 +139,11 @@ public:
         double para[] = { 200, 40, 200+300, 40, 200+300, 40+300, 200, 40+300 };
         agg::trans_affine img_mtx(para, 0,0,4,4);
 
-        typedef agg::span_interpolator_linear<> interpolator_type;
+        using interpolator_type = agg::span_interpolator_linear<>;
         interpolator_type interpolator(img_mtx); 
         agg::span_allocator<color_type> sa;
 
-        typedef agg::image_accessor_clone<pixfmt> img_source_type;
+        using img_source_type = agg::image_accessor_clone<pixfmt>;
         img_source_type source(img_pixf);
 
         ras.reset();

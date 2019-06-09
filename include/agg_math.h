@@ -34,6 +34,7 @@ limitations under the License.
 #ifndef AGG_MATH_INCLUDED
 #define AGG_MATH_INCLUDED
 
+#include <array>
 #include <cmath>
 #include "agg_basics.h"
 
@@ -263,8 +264,8 @@ namespace agg
 
     //------------------------------------------------------------------------
     // Tables for fast sqrt
-    extern AGGAPI int16u g_sqrt_table[1024];
-    extern AGGAPI int8   g_elder_bit_table[256];
+    extern AGGAPI std::array<int16u, 1024> g_sqrt_table;
+    extern AGGAPI std::array<int8,256> g_elder_bit_table;
 
 
     //---------------------------------------------------------------fast_sqrt

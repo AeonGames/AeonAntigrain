@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -75,10 +90,10 @@ namespace agg
         }
     };
 
-    typedef color_conv_rgb24_rgb48<0,2> color_conv_rgb24_to_rgb48;
-    typedef color_conv_rgb24_rgb48<0,2> color_conv_bgr24_to_bgr48;
-    typedef color_conv_rgb24_rgb48<2,0> color_conv_rgb24_to_bgr48;
-    typedef color_conv_rgb24_rgb48<2,0> color_conv_bgr24_to_rgb48;
+    using color_conv_rgb24_to_rgb48 = color_conv_rgb24_rgb48<0,2>;
+    using color_conv_bgr24_to_bgr48 = color_conv_rgb24_rgb48<0,2>;
+    using color_conv_rgb24_to_bgr48 = color_conv_rgb24_rgb48<2,0>;
+    using color_conv_bgr24_to_rgb48 = color_conv_rgb24_rgb48<2,0>;
 
 
     //-----------------------------------------------------color_conv_rgb24_rgb48
@@ -101,10 +116,10 @@ namespace agg
         }
     };
 
-    typedef color_conv_rgb48_rgb24<0,2> color_conv_rgb48_to_rgb24;
-    typedef color_conv_rgb48_rgb24<0,2> color_conv_bgr48_to_bgr24;
-    typedef color_conv_rgb48_rgb24<2,0> color_conv_rgb48_to_bgr24;
-    typedef color_conv_rgb48_rgb24<2,0> color_conv_bgr48_to_rgb24;
+    using color_conv_rgb48_to_rgb24 = color_conv_rgb48_rgb24<0,2>;
+    using color_conv_bgr48_to_bgr24 = color_conv_rgb48_rgb24<0,2>;
+    using color_conv_rgb48_to_bgr24 = color_conv_rgb48_rgb24<2,0>;
+    using color_conv_bgr48_to_rgb24 = color_conv_rgb48_rgb24<2,0>;
 
 
     //----------------------------------------------color_conv_rgbAAA_rgb24
@@ -128,10 +143,10 @@ namespace agg
         }
     };
 
-    typedef color_conv_rgbAAA_rgb24<0,2> color_conv_rgbAAA_to_rgb24;
-    typedef color_conv_rgbAAA_rgb24<2,0> color_conv_rgbAAA_to_bgr24;
-    typedef color_conv_rgbAAA_rgb24<2,0> color_conv_bgrAAA_to_rgb24;
-    typedef color_conv_rgbAAA_rgb24<0,2> color_conv_bgrAAA_to_bgr24;
+    using color_conv_rgbAAA_to_rgb24 = color_conv_rgbAAA_rgb24<0,2>;
+    using color_conv_rgbAAA_to_bgr24 = color_conv_rgbAAA_rgb24<2,0>;
+    using color_conv_bgrAAA_to_rgb24 = color_conv_rgbAAA_rgb24<2,0>;
+    using color_conv_bgrAAA_to_bgr24 = color_conv_rgbAAA_rgb24<0,2>;
 
 
     //----------------------------------------------color_conv_rgbBBA_rgb24
@@ -155,8 +170,8 @@ namespace agg
         }
     };
 
-    typedef color_conv_rgbBBA_rgb24<0,2> color_conv_rgbBBA_to_rgb24;
-    typedef color_conv_rgbBBA_rgb24<2,0> color_conv_rgbBBA_to_bgr24;
+    using color_conv_rgbBBA_to_rgb24 = color_conv_rgbBBA_rgb24<0,2>;
+    using color_conv_rgbBBA_to_bgr24 = color_conv_rgbBBA_rgb24<2,0>;
 
 
     //----------------------------------------------color_conv_bgrABB_rgb24
@@ -180,8 +195,8 @@ namespace agg
         }
     };
 
-    typedef color_conv_bgrABB_rgb24<2,0> color_conv_bgrABB_to_rgb24;
-    typedef color_conv_bgrABB_rgb24<0,2> color_conv_bgrABB_to_bgr24;
+    using color_conv_bgrABB_to_rgb24 = color_conv_bgrABB_rgb24<2,0>;
+    using color_conv_bgrABB_to_bgr24 = color_conv_bgrABB_rgb24<0,2>;
 
 
     //-------------------------------------------------color_conv_rgba64_rgba32
@@ -205,22 +220,22 @@ namespace agg
     };
 
     //------------------------------------------------------------------------
-    typedef color_conv_rgba64_rgba32<0,1,2,3> color_conv_rgba64_to_rgba32; //----color_conv_rgba64_to_rgba32
-    typedef color_conv_rgba64_rgba32<0,1,2,3> color_conv_argb64_to_argb32; //----color_conv_argb64_to_argb32
-    typedef color_conv_rgba64_rgba32<0,1,2,3> color_conv_bgra64_to_bgra32; //----color_conv_bgra64_to_bgra32
-    typedef color_conv_rgba64_rgba32<0,1,2,3> color_conv_abgr64_to_abgr32; //----color_conv_abgr64_to_abgr32
-    typedef color_conv_rgba64_rgba32<0,3,2,1> color_conv_argb64_to_abgr32; //----color_conv_argb64_to_abgr32
-    typedef color_conv_rgba64_rgba32<3,2,1,0> color_conv_argb64_to_bgra32; //----color_conv_argb64_to_bgra32
-    typedef color_conv_rgba64_rgba32<1,2,3,0> color_conv_argb64_to_rgba32; //----color_conv_argb64_to_rgba32
-    typedef color_conv_rgba64_rgba32<3,0,1,2> color_conv_bgra64_to_abgr32; //----color_conv_bgra64_to_abgr32
-    typedef color_conv_rgba64_rgba32<3,2,1,0> color_conv_bgra64_to_argb32; //----color_conv_bgra64_to_argb32
-    typedef color_conv_rgba64_rgba32<2,1,0,3> color_conv_bgra64_to_rgba32; //----color_conv_bgra64_to_rgba32
-    typedef color_conv_rgba64_rgba32<3,2,1,0> color_conv_rgba64_to_abgr32; //----color_conv_rgba64_to_abgr32
-    typedef color_conv_rgba64_rgba32<3,0,1,2> color_conv_rgba64_to_argb32; //----color_conv_rgba64_to_argb32
-    typedef color_conv_rgba64_rgba32<2,1,0,3> color_conv_rgba64_to_bgra32; //----color_conv_rgba64_to_bgra32
-    typedef color_conv_rgba64_rgba32<0,3,2,1> color_conv_abgr64_to_argb32; //----color_conv_abgr64_to_argb32
-    typedef color_conv_rgba64_rgba32<1,2,3,0> color_conv_abgr64_to_bgra32; //----color_conv_abgr64_to_bgra32
-    typedef color_conv_rgba64_rgba32<3,2,1,0> color_conv_abgr64_to_rgba32; //----color_conv_abgr64_to_rgba32
+    using color_conv_rgba64_to_rgba32 = color_conv_rgba64_rgba32<0,1,2,3>; //----color_conv_rgba64_to_rgba32
+    using color_conv_argb64_to_argb32 = color_conv_rgba64_rgba32<0,1,2,3>; //----color_conv_argb64_to_argb32
+    using color_conv_bgra64_to_bgra32 = color_conv_rgba64_rgba32<0,1,2,3>; //----color_conv_bgra64_to_bgra32
+    using color_conv_abgr64_to_abgr32 = color_conv_rgba64_rgba32<0,1,2,3>; //----color_conv_abgr64_to_abgr32
+    using color_conv_argb64_to_abgr32 = color_conv_rgba64_rgba32<0,3,2,1>; //----color_conv_argb64_to_abgr32
+    using color_conv_argb64_to_bgra32 = color_conv_rgba64_rgba32<3,2,1,0>; //----color_conv_argb64_to_bgra32
+    using color_conv_argb64_to_rgba32 = color_conv_rgba64_rgba32<1,2,3,0>; //----color_conv_argb64_to_rgba32
+    using color_conv_bgra64_to_abgr32 = color_conv_rgba64_rgba32<3,0,1,2>; //----color_conv_bgra64_to_abgr32
+    using color_conv_bgra64_to_argb32 = color_conv_rgba64_rgba32<3,2,1,0>; //----color_conv_bgra64_to_argb32
+    using color_conv_bgra64_to_rgba32 = color_conv_rgba64_rgba32<2,1,0,3>; //----color_conv_bgra64_to_rgba32
+    using color_conv_rgba64_to_abgr32 = color_conv_rgba64_rgba32<3,2,1,0>; //----color_conv_rgba64_to_abgr32
+    using color_conv_rgba64_to_argb32 = color_conv_rgba64_rgba32<3,0,1,2>; //----color_conv_rgba64_to_argb32
+    using color_conv_rgba64_to_bgra32 = color_conv_rgba64_rgba32<2,1,0,3>; //----color_conv_rgba64_to_bgra32
+    using color_conv_abgr64_to_argb32 = color_conv_rgba64_rgba32<0,3,2,1>; //----color_conv_abgr64_to_argb32
+    using color_conv_abgr64_to_bgra32 = color_conv_rgba64_rgba32<1,2,3,0>; //----color_conv_abgr64_to_bgra32
+    using color_conv_abgr64_to_rgba32 = color_conv_rgba64_rgba32<3,2,1,0>; //----color_conv_abgr64_to_rgba32
 
 
 
@@ -248,14 +263,14 @@ namespace agg
 
 
     //------------------------------------------------------------------------
-    typedef color_conv_rgb24_rgba64<1,2,3,0> color_conv_rgb24_to_argb64; //----color_conv_rgb24_to_argb64
-    typedef color_conv_rgb24_rgba64<3,2,1,0> color_conv_rgb24_to_abgr64; //----color_conv_rgb24_to_abgr64
-    typedef color_conv_rgb24_rgba64<2,1,0,3> color_conv_rgb24_to_bgra64; //----color_conv_rgb24_to_bgra64
-    typedef color_conv_rgb24_rgba64<0,1,2,3> color_conv_rgb24_to_rgba64; //----color_conv_rgb24_to_rgba64
-    typedef color_conv_rgb24_rgba64<3,2,1,0> color_conv_bgr24_to_argb64; //----color_conv_bgr24_to_argb64
-    typedef color_conv_rgb24_rgba64<1,2,3,0> color_conv_bgr24_to_abgr64; //----color_conv_bgr24_to_abgr64
-    typedef color_conv_rgb24_rgba64<0,1,2,3> color_conv_bgr24_to_bgra64; //----color_conv_bgr24_to_bgra64
-    typedef color_conv_rgb24_rgba64<2,1,0,3> color_conv_bgr24_to_rgba64; //----color_conv_bgr24_to_rgba64
+    using color_conv_rgb24_to_argb64 = color_conv_rgb24_rgba64<1,2,3,0>; //----color_conv_rgb24_to_argb64
+    using color_conv_rgb24_to_abgr64 = color_conv_rgb24_rgba64<3,2,1,0>; //----color_conv_rgb24_to_abgr64
+    using color_conv_rgb24_to_bgra64 = color_conv_rgb24_rgba64<2,1,0,3>; //----color_conv_rgb24_to_bgra64
+    using color_conv_rgb24_to_rgba64 = color_conv_rgb24_rgba64<0,1,2,3>; //----color_conv_rgb24_to_rgba64
+    using color_conv_bgr24_to_argb64 = color_conv_rgb24_rgba64<3,2,1,0>; //----color_conv_bgr24_to_argb64
+    using color_conv_bgr24_to_abgr64 = color_conv_rgb24_rgba64<1,2,3,0>; //----color_conv_bgr24_to_abgr64
+    using color_conv_bgr24_to_bgra64 = color_conv_rgb24_rgba64<0,1,2,3>; //----color_conv_bgr24_to_bgra64
+    using color_conv_bgr24_to_rgba64 = color_conv_rgb24_rgba64<2,1,0,3>; //----color_conv_bgr24_to_rgba64
 
 
     template<int R, int B> class color_conv_rgb24_gray16
@@ -275,8 +290,8 @@ namespace agg
         }
     };
 
-    typedef color_conv_rgb24_gray16<0,2> color_conv_rgb24_to_gray16;
-    typedef color_conv_rgb24_gray16<2,0> color_conv_bgr24_to_gray16;
+    using color_conv_rgb24_to_gray16 = color_conv_rgb24_gray16<0,2>;
+    using color_conv_bgr24_to_gray16 = color_conv_rgb24_gray16<2,0>;
 
 
 }

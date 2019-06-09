@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -31,8 +46,8 @@ namespace agg
     struct conv_stroke : 
     public conv_adaptor_vcgen<VertexSource, vcgen_stroke, Markers>
     {
-        typedef Markers marker_type;
-        typedef conv_adaptor_vcgen<VertexSource, vcgen_stroke, Markers> base_type;
+        using marker_type = Markers;
+        using base_type = conv_adaptor_vcgen<VertexSource, vcgen_stroke, Markers>;
 
         conv_stroke(VertexSource& vs) : 
             conv_adaptor_vcgen<VertexSource, vcgen_stroke, Markers>(vs)
@@ -43,9 +58,9 @@ namespace agg
         void line_join(line_join_e lj)   { base_type::generator().line_join(lj); }
         void inner_join(inner_join_e ij) { base_type::generator().inner_join(ij); }
 
-        line_cap_e   line_cap()   const { return base_type::generator().line_cap();  }
-        line_join_e  line_join()  const { return base_type::generator().line_join(); }
-        inner_join_e inner_join() const { return base_type::generator().inner_join(); }
+        [[nodiscard]] line_cap_e   line_cap()   const { return base_type::generator().line_cap();  }
+        [[nodiscard]] line_join_e  line_join()  const { return base_type::generator().line_join(); }
+        [[nodiscard]] inner_join_e inner_join() const { return base_type::generator().inner_join(); }
 
         void width(double w) { base_type::generator().width(w); }
         void miter_limit(double ml) { base_type::generator().miter_limit(ml); }
@@ -53,18 +68,17 @@ namespace agg
         void inner_miter_limit(double ml) { base_type::generator().inner_miter_limit(ml); }
         void approximation_scale(double as) { base_type::generator().approximation_scale(as); }
 
-        double width() const { return base_type::generator().width(); }
-        double miter_limit() const { return base_type::generator().miter_limit(); }
-        double inner_miter_limit() const { return base_type::generator().inner_miter_limit(); }
-        double approximation_scale() const { return base_type::generator().approximation_scale(); }
+        [[nodiscard]] double width() const { return base_type::generator().width(); }
+        [[nodiscard]] double miter_limit() const { return base_type::generator().miter_limit(); }
+        [[nodiscard]] double inner_miter_limit() const { return base_type::generator().inner_miter_limit(); }
+        [[nodiscard]] double approximation_scale() const { return base_type::generator().approximation_scale(); }
 
         void shorten(double s) { base_type::generator().shorten(s); }
-        double shorten() const { return base_type::generator().shorten(); }
+        [[nodiscard]] double shorten() const { return base_type::generator().shorten(); }
 
-    private:
-       conv_stroke(const conv_stroke<VertexSource, Markers>&);
+       conv_stroke(const conv_stroke<VertexSource, Markers>&) = delete;
        const conv_stroke<VertexSource, Markers>& 
-           operator = (const conv_stroke<VertexSource, Markers>&);
+           operator = (const conv_stroke<VertexSource, Markers>&) = delete;
 
     };
 

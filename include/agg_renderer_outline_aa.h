@@ -48,7 +48,7 @@ namespace agg
     {
     public:
         //---------------------------------------------------------------------
-        distance_interpolator0() {}
+        distance_interpolator0() = default;
         distance_interpolator0(int x1, int y1, int x2, int y2, int x, int y) :
             m_dx(line_mr(x2) - line_mr(x1)),
             m_dy(line_mr(y2) - line_mr(y1)),
@@ -61,7 +61,7 @@ namespace agg
 
         //---------------------------------------------------------------------
         void inc_x() { m_dist += m_dy; }
-        int  dist() const { return m_dist; }
+        [[nodiscard]] int  dist() const { return m_dist; }
 
     private:
         //---------------------------------------------------------------------
@@ -75,7 +75,7 @@ namespace agg
     {
     public:
         //---------------------------------------------------------------------
-        distance_interpolator00() {}
+        distance_interpolator00() = default;
         distance_interpolator00(int xc, int yc, 
                                 int x1, int y1, int x2, int y2, 
                                 int x,  int y) :
@@ -96,8 +96,8 @@ namespace agg
 
         //---------------------------------------------------------------------
         void inc_x() { m_dist1 += m_dy1; m_dist2 += m_dy2; }
-        int  dist1() const { return m_dist1; }
-        int  dist2() const { return m_dist2; }
+        [[nodiscard]] int  dist1() const { return m_dist1; }
+        [[nodiscard]] int  dist2() const { return m_dist2; }
 
     private:
         //---------------------------------------------------------------------
@@ -114,7 +114,7 @@ namespace agg
     {
     public:
         //---------------------------------------------------------------------
-        distance_interpolator1() {}
+        distance_interpolator1() = default;
         distance_interpolator1(int x1, int y1, int x2, int y2, int x, int y) :
             m_dx(x2 - x1),
             m_dy(y2 - y1),
@@ -164,9 +164,9 @@ namespace agg
         }
 
         //---------------------------------------------------------------------
-        int dist() const { return m_dist; }
-        int dx()   const { return m_dx;   }
-        int dy()   const { return m_dy;   }
+        [[nodiscard]] int dist() const { return m_dist; }
+        [[nodiscard]] int dx()   const { return m_dx;   }
+        [[nodiscard]] int dy()   const { return m_dy;   }
 
     private:
         //---------------------------------------------------------------------
@@ -184,7 +184,7 @@ namespace agg
     {
     public:
         //---------------------------------------------------------------------
-        distance_interpolator2() {}
+        distance_interpolator2() = default;
         distance_interpolator2(int x1, int y1, int x2, int y2,
                                int sx, int sy, int x,  int y) :
             m_dx(x2 - x1),
@@ -299,17 +299,17 @@ namespace agg
         }
 
         //---------------------------------------------------------------------
-        int dist()       const { return m_dist;       }
-        int dist_start() const { return m_dist_start; }
-        int dist_end()   const { return m_dist_start; }
+        [[nodiscard]] int dist()       const { return m_dist;       }
+        [[nodiscard]] int dist_start() const { return m_dist_start; }
+        [[nodiscard]] int dist_end()   const { return m_dist_start; }
 
         //---------------------------------------------------------------------
-        int dx()       const { return m_dx;       }
-        int dy()       const { return m_dy;       }
-        int dx_start() const { return m_dx_start; }
-        int dy_start() const { return m_dy_start; }
-        int dx_end()   const { return m_dx_start; }
-        int dy_end()   const { return m_dy_start; }
+        [[nodiscard]] int dx()       const { return m_dx;       }
+        [[nodiscard]] int dy()       const { return m_dy;       }
+        [[nodiscard]] int dx_start() const { return m_dx_start; }
+        [[nodiscard]] int dy_start() const { return m_dy_start; }
+        [[nodiscard]] int dx_end()   const { return m_dx_start; }
+        [[nodiscard]] int dy_end()   const { return m_dy_start; }
 
     private:
         //---------------------------------------------------------------------
@@ -331,7 +331,7 @@ namespace agg
     {
     public:
         //---------------------------------------------------------------------
-        distance_interpolator3() {}
+        distance_interpolator3() = default;
         distance_interpolator3(int x1, int y1, int x2, int y2,
                                int sx, int sy, int ex, int ey, 
                                int x,  int y) :
@@ -446,17 +446,17 @@ namespace agg
         }
 
         //---------------------------------------------------------------------
-        int dist()       const { return m_dist;       }
-        int dist_start() const { return m_dist_start; }
-        int dist_end()   const { return m_dist_end;   }
+        [[nodiscard]] int dist()       const { return m_dist;       }
+        [[nodiscard]] int dist_start() const { return m_dist_start; }
+        [[nodiscard]] int dist_end()   const { return m_dist_end;   }
 
         //---------------------------------------------------------------------
-        int dx()       const { return m_dx;       }
-        int dy()       const { return m_dy;       }
-        int dx_start() const { return m_dx_start; }
-        int dy_start() const { return m_dy_start; }
-        int dx_end()   const { return m_dx_end;   }
-        int dy_end()   const { return m_dy_end;   }
+        [[nodiscard]] int dx()       const { return m_dx;       }
+        [[nodiscard]] int dy()       const { return m_dy;       }
+        [[nodiscard]] int dx_start() const { return m_dx_start; }
+        [[nodiscard]] int dy_start() const { return m_dy_start; }
+        [[nodiscard]] int dx_end()   const { return m_dx_end;   }
+        [[nodiscard]] int dy_end()   const { return m_dy_end;   }
 
     private:
         //---------------------------------------------------------------------
@@ -480,8 +480,8 @@ namespace agg
     template<class Renderer> class line_interpolator_aa_base
     {
     public:
-        typedef Renderer renderer_type;
-        typedef typename Renderer::color_type color_type;
+        using renderer_type = Renderer;
+        using color_type = typename Renderer::color_type;
 
         //---------------------------------------------------------------------
         enum max_half_width_e
@@ -556,14 +556,13 @@ namespace agg
         }
 
         //---------------------------------------------------------------------
-        bool vertical() const { return m_lp->vertical; }
-        int  width() const { return m_width; }
-        int  count() const { return m_count; }
+        [[nodiscard]] bool vertical() const { return m_lp->vertical; }
+        [[nodiscard]] int  width() const { return m_width; }
+        [[nodiscard]] int  count() const { return m_count; }
 
-    private:
-        line_interpolator_aa_base(const line_interpolator_aa_base<Renderer>&);
+        line_interpolator_aa_base(const line_interpolator_aa_base<Renderer>&) = delete;
         const line_interpolator_aa_base<Renderer>& 
-            operator = (const line_interpolator_aa_base<Renderer>&);
+            operator = (const line_interpolator_aa_base<Renderer>&) = delete;
 
     protected:
         line_parameters* m_lp;
@@ -593,9 +592,9 @@ namespace agg
     public line_interpolator_aa_base<Renderer>
     {
     public:
-        typedef Renderer renderer_type;
-        typedef typename Renderer::color_type color_type;
-        typedef line_interpolator_aa_base<Renderer> base_type;
+        using renderer_type = Renderer;
+        using color_type = typename Renderer::color_type;
+        using base_type = line_interpolator_aa_base<Renderer>;
 
         //---------------------------------------------------------------------
         line_interpolator_aa0(renderer_type& ren, line_parameters& lp) :
@@ -668,28 +667,22 @@ namespace agg
             return ++base_type::m_step < base_type::m_count;
         }
 
-    private:
-        line_interpolator_aa0(const line_interpolator_aa0<Renderer>&);
+        line_interpolator_aa0(const line_interpolator_aa0<Renderer>&) = delete;
         const line_interpolator_aa0<Renderer>& 
-            operator = (const line_interpolator_aa0<Renderer>&);
-
+            operator = (const line_interpolator_aa0<Renderer>&) = delete;
+    private:
         //---------------------------------------------------------------------
         distance_interpolator1 m_di; 
     };
-
-
-
-
-
 
     //====================================================line_interpolator_aa1
     template<class Renderer> class line_interpolator_aa1 :
     public line_interpolator_aa_base<Renderer>
     {
     public:
-        typedef Renderer renderer_type;
-        typedef typename Renderer::color_type color_type;
-        typedef line_interpolator_aa_base<Renderer> base_type;
+        using renderer_type = Renderer;
+        using color_type = typename Renderer::color_type;
+        using base_type = line_interpolator_aa_base<Renderer>;
 
         //---------------------------------------------------------------------
         line_interpolator_aa1(renderer_type& ren, line_parameters& lp, 
@@ -874,9 +867,9 @@ namespace agg
         }
 
     private:
-        line_interpolator_aa1(const line_interpolator_aa1<Renderer>&);
+        line_interpolator_aa1(const line_interpolator_aa1<Renderer>&) = delete;
         const line_interpolator_aa1<Renderer>& 
-            operator = (const line_interpolator_aa1<Renderer>&);
+            operator = (const line_interpolator_aa1<Renderer>&) = delete;
 
         //---------------------------------------------------------------------
         distance_interpolator2 m_di; 
@@ -898,9 +891,9 @@ namespace agg
     public line_interpolator_aa_base<Renderer>
     {
     public:
-        typedef Renderer renderer_type;
-        typedef typename Renderer::color_type color_type;
-        typedef line_interpolator_aa_base<Renderer> base_type;
+        using renderer_type = Renderer;
+        using color_type = typename Renderer::color_type;
+        using base_type = line_interpolator_aa_base<Renderer>;
 
         //---------------------------------------------------------------------
         line_interpolator_aa2(renderer_type& ren, line_parameters& lp, 
@@ -1025,31 +1018,22 @@ namespace agg
         }
 
     private:
-        line_interpolator_aa2(const line_interpolator_aa2<Renderer>&);
+        line_interpolator_aa2(const line_interpolator_aa2<Renderer>&) = delete;
         const line_interpolator_aa2<Renderer>& 
-            operator = (const line_interpolator_aa2<Renderer>&);
+            operator = (const line_interpolator_aa2<Renderer>&) = delete;
 
         //---------------------------------------------------------------------
         distance_interpolator2 m_di; 
     };
-
-
-
-
-
-
-
-
-
 
     //====================================================line_interpolator_aa3
     template<class Renderer> class line_interpolator_aa3 :
     public line_interpolator_aa_base<Renderer>
     {
     public:
-        typedef Renderer renderer_type;
-        typedef typename Renderer::color_type color_type;
-        typedef line_interpolator_aa_base<Renderer> base_type;
+        using renderer_type = Renderer;
+        using color_type = typename Renderer::color_type;
+        using base_type = line_interpolator_aa_base<Renderer>;
 
         //---------------------------------------------------------------------
         line_interpolator_aa3(renderer_type& ren, line_parameters& lp, 
@@ -1255,9 +1239,9 @@ namespace agg
         }
 
     private:
-        line_interpolator_aa3(const line_interpolator_aa3<Renderer>&);
+        line_interpolator_aa3(const line_interpolator_aa3<Renderer>&) = delete;
         const line_interpolator_aa3<Renderer>& 
-            operator = (const line_interpolator_aa3<Renderer>&);
+            operator = (const line_interpolator_aa3<Renderer>&) = delete;
 
         //---------------------------------------------------------------------
         distance_interpolator3 m_di; 
@@ -1274,7 +1258,7 @@ namespace agg
     {
     public:
         //---------------------------------------------------------------------
-        typedef int8u value_type;
+        using value_type = int8u;
         enum subpixel_scale_e
         {
             subpixel_shift = line_subpixel_shift,
@@ -1290,10 +1274,8 @@ namespace agg
         };
         
         //---------------------------------------------------------------------
-        line_profile_aa() : 
-            m_subpixel_width(0),
-            m_min_width(1.0),
-            m_smoother_width(1.0)
+        line_profile_aa() 
+            
         {
             int i;
             for(i = 0; i < aa_scale; i++) m_gamma[i] = (value_type)i;
@@ -1301,10 +1283,8 @@ namespace agg
 
         //---------------------------------------------------------------------
         template<class GammaF> 
-        line_profile_aa(double w, const GammaF& gamma_function) : 
-            m_subpixel_width(0),
-            m_min_width(1.0),
-            m_smoother_width(1.0)
+        line_profile_aa(double w, const GammaF& gamma_function) 
+            
         {
             gamma(gamma_function);
             width(w);
@@ -1327,22 +1307,23 @@ namespace agg
 
         AGGAPI void width(double w);
 
-        unsigned profile_size() const { return m_profile.size(); }
-        int subpixel_width() const { return m_subpixel_width; }
+        [[nodiscard]] unsigned profile_size() const { return m_profile.size(); }
+        [[nodiscard]] int subpixel_width() const { return m_subpixel_width; }
 
         //---------------------------------------------------------------------
-        double min_width() const { return m_min_width; }
-        double smoother_width() const { return m_smoother_width; }
+        [[nodiscard]] double min_width() const { return m_min_width; }
+        [[nodiscard]] double smoother_width() const { return m_smoother_width; }
 
         //---------------------------------------------------------------------
-        value_type value(int dist) const
+        [[nodiscard]] value_type value(int dist) const
         {
             return m_profile[dist + subpixel_scale*2];
         }
 
+        line_profile_aa(const line_profile_aa&) = delete;
+        const line_profile_aa& operator = (const line_profile_aa&) = delete;
+
     private:
-        AGGAPI line_profile_aa(const line_profile_aa&);
-        AGGAPI const line_profile_aa& operator = (const line_profile_aa&);
 
         AGGAPI value_type* profile(double w);
         AGGAPI void set(double center_width, double smoother_width);
@@ -1350,9 +1331,9 @@ namespace agg
         //---------------------------------------------------------------------
         pod_array<value_type> m_profile;
         value_type            m_gamma[aa_scale];
-        int                   m_subpixel_width;
-        double                m_min_width;
-        double                m_smoother_width;
+        int                   m_subpixel_width{0};
+        double                m_min_width{1.0};
+        double                m_smoother_width{1.0};
     };
 
 
@@ -1361,9 +1342,9 @@ namespace agg
     {
     public:
         //---------------------------------------------------------------------
-        typedef BaseRenderer base_ren_type;
-        typedef renderer_outline_aa<base_ren_type> self_type;
-        typedef typename base_ren_type::color_type color_type;
+        using base_ren_type = BaseRenderer;
+        using self_type = renderer_outline_aa<base_ren_type>;
+        using color_type = typename base_ren_type::color_type;
 
         //---------------------------------------------------------------------
         renderer_outline_aa(base_ren_type& ren, line_profile_aa& prof) :
@@ -1380,11 +1361,11 @@ namespace agg
 
         //---------------------------------------------------------------------
         void profile(line_profile_aa& prof) { m_profile = &prof; }
-        const line_profile_aa& profile() const { return *m_profile; }
+        [[nodiscard]] const line_profile_aa& profile() const { return *m_profile; }
         line_profile_aa& profile() { return *m_profile; }
 
         //---------------------------------------------------------------------
-        int subpixel_width() const { return m_profile->subpixel_width(); }
+        [[nodiscard]] int subpixel_width() const { return m_profile->subpixel_width(); }
 
         //---------------------------------------------------------------------
         void reset_clipping() { m_clipping = false; }
@@ -1398,7 +1379,7 @@ namespace agg
         }
 
         //---------------------------------------------------------------------
-        int cover(int d) const
+        [[nodiscard]] int cover(int d) const
         {
             return m_profile->value(d);
         }

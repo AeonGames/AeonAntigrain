@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -100,10 +115,10 @@ class the_application : public agg::platform_support
     agg::rbox_ctrl<color_type> m_polygons;
     agg::rbox_ctrl<color_type> m_operation;
 
-    typedef agg::amask_no_clip_gray8 alpha_mask_type;
-    //typedef agg::alpha_mask_gray8 alpha_mask_type;
+    using alpha_mask_type = agg::amask_no_clip_gray8;
+    //using alpha_mask_type = agg::alpha_mask_gray8;
 
-    typedef pixfmt pixfmt_type;
+    using pixfmt_type = pixfmt;
 
     unsigned char* m_alpha_buf;
     agg::rendering_buffer m_alpha_mask_rbuf;
@@ -175,8 +190,8 @@ public:
         m_alpha_buf = new unsigned char[cx * cy];
         m_alpha_mask_rbuf.attach(m_alpha_buf, cx, cy, cx);
 
-        typedef agg::renderer_base<agg::pixfmt_sgray8> ren_base;
-        typedef agg::renderer_scanline_aa_solid<ren_base> renderer;
+        using ren_base = agg::renderer_base<agg::pixfmt_sgray8>;
+        using renderer = agg::renderer_scanline_aa_solid<ren_base>;
 
         agg::pixfmt_sgray8 pixf(m_alpha_mask_rbuf);
         ren_base rb(pixf);
@@ -208,8 +223,8 @@ public:
     {
         pixfmt_type pixf(rbuf_window());
 
-        typedef agg::pixfmt_amask_adaptor<pixfmt_type, alpha_mask_type> pixfmt_amask_type;
-        typedef agg::renderer_base<pixfmt_amask_type>                   amask_ren_type;
+        using pixfmt_amask_type = agg::pixfmt_amask_adaptor<pixfmt_type, alpha_mask_type>;
+        using amask_ren_type = agg::renderer_base<pixfmt_amask_type>                  ;
 
 
         pixfmt_amask_type pixfa(pixf, m_alpha_mask);
@@ -505,7 +520,7 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt_type> base_ren_type;
+        using base_ren_type = agg::renderer_base<pixfmt_type>;
 
         pixfmt_type pf(rbuf_window());
         base_ren_type ren_base(pf);

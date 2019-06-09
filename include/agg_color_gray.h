@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -38,9 +53,9 @@ namespace agg
     template<class Colorspace>
     struct gray8T
     {
-        typedef int8u  value_type;
-        typedef int32u calc_type;
-        typedef int32  long_type;
+        using value_type = int8u ;
+        using calc_type = int32u;
+        using long_type = int32 ;
         enum base_scale_e
         {
             base_shift = 8,
@@ -48,7 +63,7 @@ namespace agg
             base_mask  = base_scale - 1,
             base_MSB = 1 << (base_shift - 1)
         };
-        typedef gray8T self_type;
+        using self_type = gray8T;
 
         value_type v;
         value_type a;
@@ -411,16 +426,16 @@ namespace agg
         static self_type no_color() { return self_type(0,0); }
     };
 
-    typedef gray8T<linear> gray8;
-    typedef gray8T<sRGB> sgray8;
+    using gray8 = gray8T<linear>;
+    using sgray8 = gray8T<sRGB>;
 
 
     //==================================================================gray16
     struct gray16
     {
-        typedef int16u value_type;
-        typedef int32u calc_type;
-        typedef int64  long_type;
+        using value_type = int16u;
+        using calc_type = int32u;
+        using long_type = int64 ;
         enum base_scale_e
         {
             base_shift = 16,
@@ -428,7 +443,7 @@ namespace agg
             base_mask  = base_scale - 1,
             base_MSB = 1 << (base_shift - 1)
         };
-        typedef gray16 self_type;
+        using self_type = gray16;
 
         value_type v;
         value_type a;
@@ -745,10 +760,10 @@ namespace agg
     //===================================================================gray32
     struct gray32
     {
-        typedef float value_type;
-        typedef double calc_type;
-        typedef double long_type;
-        typedef gray32 self_type;
+        using value_type = float;
+        using calc_type = double;
+        using long_type = double;
+        using self_type = gray32;
 
         value_type v;
         value_type a;

@@ -1,3 +1,33 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -47,8 +77,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct multiplier_rgba
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
 
         //--------------------------------------------------------------------
         static AGG_INLINE void premultiply(value_type* p)
@@ -75,8 +105,8 @@ namespace agg
     class apply_gamma_dir_rgba
     {
     public:
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
 
         apply_gamma_dir_rgba(const GammaLut& gamma) : m_gamma(gamma) {}
 
@@ -95,8 +125,8 @@ namespace agg
     template<class ColorT, class Order, class GammaLut> class apply_gamma_inv_rgba
     {
     public:
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
 
         apply_gamma_inv_rgba(const GammaLut& gamma) : m_gamma(gamma) {}
 
@@ -115,9 +145,9 @@ namespace agg
     template<class ColorT, class Order> 
     struct conv_rgba_pre
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
 
         //--------------------------------------------------------------------
         static AGG_INLINE void set_plain_color(value_type* p, color_type c)
@@ -143,9 +173,9 @@ namespace agg
     template<class ColorT, class Order> 
     struct conv_rgba_plain
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
 
         //--------------------------------------------------------------------
         static AGG_INLINE void set_plain_color(value_type* p, color_type c)
@@ -172,11 +202,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct blender_rgba : conv_rgba_pre<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         // Blend pixels using the non-premultiplied form of Alvy-Ray Smith's
         // compositing function. Since the render buffer is in fact premultiplied
@@ -206,11 +236,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct blender_rgba_pre : conv_rgba_pre<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         // Blend pixels using the premultiplied form of Alvy-Ray Smith's
         // compositing function. 
@@ -242,11 +272,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct blender_rgba_plain : conv_rgba_plain<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         // Blend pixels using the non-premultiplied form of Alvy-Ray Smith's
         // compositing function. 
@@ -284,8 +314,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_clear : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -309,8 +339,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_src : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -340,8 +370,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_dst : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
 
         // Dca' = Dca.Sa + Dca.(1 - Sa) = Dca
         // Da'  = Da.Sa + Da.(1 - Sa) = Da
@@ -356,8 +386,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_src_over : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -384,8 +414,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_dst_over : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -409,8 +439,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_src_in : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -437,8 +467,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_dst_in : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -462,8 +492,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_src_out : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -487,8 +517,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_dst_out : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -512,8 +542,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_src_atop : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -536,8 +566,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_dst_atop : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -563,8 +593,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_xor : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -589,8 +619,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_plus : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -617,8 +647,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_minus : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -644,8 +674,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_multiply : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -673,8 +703,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_screen : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -700,8 +730,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_overlay : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -741,8 +771,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_darken : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -770,8 +800,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_lighten : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -799,8 +829,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_color_dodge : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -846,8 +876,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_color_burn : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -891,8 +921,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_hard_light : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -932,8 +962,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_soft_light : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -980,8 +1010,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_difference : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -1007,8 +1037,8 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_rgba_exclusion : blender_base<ColorT, Order>
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
         using blender_base<ColorT, Order>::get;
         using blender_base<ColorT, Order>::set;
 
@@ -1036,11 +1066,11 @@ namespace agg
     //=====================================================comp_op_rgba_contrast
     template<class ColorT, class Order> struct comp_op_rgba_contrast
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
         enum base_scale_e
         { 
             base_shift = color_type::base_shift,
@@ -1083,11 +1113,11 @@ namespace agg
     //=====================================================comp_op_rgba_invert
     template<class ColorT, class Order> struct comp_op_rgba_invert
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
         enum base_scale_e
         { 
             base_shift = color_type::base_shift,
@@ -1119,11 +1149,11 @@ namespace agg
     //=================================================comp_op_rgba_invert_rgb
     template<class ColorT, class Order> struct comp_op_rgba_invert_rgb
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
         enum base_scale_e
         { 
             base_shift = color_type::base_shift,
@@ -1163,8 +1193,8 @@ namespace agg
     //======================================================comp_op_table_rgba
     template<class ColorT, class Order> struct comp_op_table_rgba
     {
-        typedef typename ColorT::value_type value_type;
-        typedef typename ColorT::calc_type calc_type;
+        using value_type = typename ColorT::value_type;
+        using calc_type = typename ColorT::calc_type;
         typedef void (*comp_op_func_type)(value_type* p, 
                                           value_type cr, 
                                           value_type cg, 
@@ -1256,11 +1286,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_adaptor_rgba
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1277,11 +1307,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_adaptor_clip_to_dst_rgba
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1302,11 +1332,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_adaptor_rgba_pre
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1319,11 +1349,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_adaptor_clip_to_dst_rgba_pre
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1341,11 +1371,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_adaptor_rgba_plain
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1360,11 +1390,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct comp_op_adaptor_clip_to_dst_rgba_plain
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1379,11 +1409,11 @@ namespace agg
     template<class BlenderPre> 
     struct comp_adaptor_rgba
     {
-        typedef typename BlenderPre::color_type color_type;
-        typedef typename BlenderPre::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = typename BlenderPre::color_type;
+        using order_type = typename BlenderPre::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1400,11 +1430,11 @@ namespace agg
     template<class BlenderPre> 
     struct comp_adaptor_clip_to_dst_rgba
     {
-        typedef typename BlenderPre::color_type color_type;
-        typedef typename BlenderPre::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = typename BlenderPre::color_type;
+        using order_type = typename BlenderPre::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1425,11 +1455,11 @@ namespace agg
     template<class BlenderPre> 
     struct comp_adaptor_rgba_pre
     {
-        typedef typename BlenderPre::color_type color_type;
-        typedef typename BlenderPre::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = typename BlenderPre::color_type;
+        using order_type = typename BlenderPre::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1442,11 +1472,11 @@ namespace agg
     template<class BlenderPre> 
     struct comp_adaptor_clip_to_dst_rgba_pre
     {
-        typedef typename BlenderPre::color_type color_type;
-        typedef typename BlenderPre::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = typename BlenderPre::color_type;
+        using order_type = typename BlenderPre::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1465,11 +1495,11 @@ namespace agg
     template<class BlenderPre> 
     struct comp_adaptor_rgba_plain
     {
-        typedef typename BlenderPre::color_type color_type;
-        typedef typename BlenderPre::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = typename BlenderPre::color_type;
+        using order_type = typename BlenderPre::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1484,11 +1514,11 @@ namespace agg
     template<class BlenderPre> 
     struct comp_adaptor_clip_to_dst_rgba_plain
     {
-        typedef typename BlenderPre::color_type color_type;
-        typedef typename BlenderPre::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = typename BlenderPre::color_type;
+        using order_type = typename BlenderPre::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         static AGG_INLINE void blend_pix(unsigned op, value_type* p, 
             value_type r, value_type g, value_type b, value_type a, cover_type cover)
@@ -1505,14 +1535,14 @@ namespace agg
     class pixfmt_alpha_blend_rgba
     {
     public:
-        typedef pixfmt_rgba_tag pixfmt_category;
-        typedef RenBuf   rbuf_type;
-        typedef typename rbuf_type::row_data row_data;
-        typedef Blender  blender_type;
-        typedef typename blender_type::color_type color_type;
-        typedef typename blender_type::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
+        using pixfmt_category = pixfmt_rgba_tag;
+        using rbuf_type = RenBuf  ;
+        using row_data = typename rbuf_type::row_data;
+        using blender_type = Blender ;
+        using color_type = typename blender_type::color_type;
+        using order_type = typename blender_type::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
         enum 
         {
             num_components = 4,
@@ -2067,7 +2097,7 @@ namespace agg
                         unsigned len,
                         int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -2116,8 +2146,8 @@ namespace agg
                               unsigned len,
                               int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
-            typedef typename SrcPixelFormatRenderer::color_type src_color_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
+            using src_color_type = typename SrcPixelFormatRenderer::color_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -2145,7 +2175,7 @@ namespace agg
                             unsigned len,
                             int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -2183,14 +2213,14 @@ namespace agg
     template<class Blender, class RenBuf> class pixfmt_custom_blend_rgba
     {
     public:
-        typedef pixfmt_rgba_tag pixfmt_category;
-        typedef RenBuf   rbuf_type;
-        typedef typename rbuf_type::row_data row_data;
-        typedef Blender  blender_type;
-        typedef typename blender_type::color_type color_type;
-        typedef typename blender_type::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
+        using pixfmt_category = pixfmt_rgba_tag;
+        using rbuf_type = RenBuf  ;
+        using row_data = typename rbuf_type::row_data;
+        using blender_type = Blender ;
+        using color_type = typename blender_type::color_type;
+        using order_type = typename blender_type::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
         enum 
         {
             num_components = 4,
@@ -2586,7 +2616,7 @@ namespace agg
                         unsigned len,
                         int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -2622,8 +2652,8 @@ namespace agg
                               unsigned len,
                               int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
-            typedef typename SrcPixelFormatRenderer::color_type src_color_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
+            using src_color_type = typename SrcPixelFormatRenderer::color_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -2651,7 +2681,7 @@ namespace agg
                             unsigned len,
                             int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -2675,127 +2705,127 @@ namespace agg
 
 
     //-----------------------------------------------------------------------
-    typedef blender_rgba<rgba8, order_rgba> blender_rgba32;
-    typedef blender_rgba<rgba8, order_argb> blender_argb32;
-    typedef blender_rgba<rgba8, order_abgr> blender_abgr32;
-    typedef blender_rgba<rgba8, order_bgra> blender_bgra32;
+    using blender_rgba32 = blender_rgba<rgba8, order_rgba>;
+    using blender_argb32 = blender_rgba<rgba8, order_argb>;
+    using blender_abgr32 = blender_rgba<rgba8, order_abgr>;
+    using blender_bgra32 = blender_rgba<rgba8, order_bgra>;
 
-    typedef blender_rgba<srgba8, order_rgba> blender_srgba32;
-    typedef blender_rgba<srgba8, order_argb> blender_sargb32;
-    typedef blender_rgba<srgba8, order_abgr> blender_sabgr32;
-    typedef blender_rgba<srgba8, order_bgra> blender_sbgra32;
+    using blender_srgba32 = blender_rgba<srgba8, order_rgba>;
+    using blender_sargb32 = blender_rgba<srgba8, order_argb>;
+    using blender_sabgr32 = blender_rgba<srgba8, order_abgr>;
+    using blender_sbgra32 = blender_rgba<srgba8, order_bgra>;
 
-    typedef blender_rgba_pre<rgba8, order_rgba> blender_rgba32_pre;
-    typedef blender_rgba_pre<rgba8, order_argb> blender_argb32_pre;
-    typedef blender_rgba_pre<rgba8, order_abgr> blender_abgr32_pre;
-    typedef blender_rgba_pre<rgba8, order_bgra> blender_bgra32_pre;
+    using blender_rgba32_pre = blender_rgba_pre<rgba8, order_rgba>;
+    using blender_argb32_pre = blender_rgba_pre<rgba8, order_argb>;
+    using blender_abgr32_pre = blender_rgba_pre<rgba8, order_abgr>;
+    using blender_bgra32_pre = blender_rgba_pre<rgba8, order_bgra>;
 
-    typedef blender_rgba_pre<srgba8, order_rgba> blender_srgba32_pre;
-    typedef blender_rgba_pre<srgba8, order_argb> blender_sargb32_pre;
-    typedef blender_rgba_pre<srgba8, order_abgr> blender_sabgr32_pre;
-    typedef blender_rgba_pre<srgba8, order_bgra> blender_sbgra32_pre;
+    using blender_srgba32_pre = blender_rgba_pre<srgba8, order_rgba>;
+    using blender_sargb32_pre = blender_rgba_pre<srgba8, order_argb>;
+    using blender_sabgr32_pre = blender_rgba_pre<srgba8, order_abgr>;
+    using blender_sbgra32_pre = blender_rgba_pre<srgba8, order_bgra>;
 
-    typedef blender_rgba_plain<rgba8, order_rgba> blender_rgba32_plain;
-    typedef blender_rgba_plain<rgba8, order_argb> blender_argb32_plain;
-    typedef blender_rgba_plain<rgba8, order_abgr> blender_abgr32_plain;
-    typedef blender_rgba_plain<rgba8, order_bgra> blender_bgra32_plain;
+    using blender_rgba32_plain = blender_rgba_plain<rgba8, order_rgba>;
+    using blender_argb32_plain = blender_rgba_plain<rgba8, order_argb>;
+    using blender_abgr32_plain = blender_rgba_plain<rgba8, order_abgr>;
+    using blender_bgra32_plain = blender_rgba_plain<rgba8, order_bgra>;
 
-    typedef blender_rgba_plain<srgba8, order_rgba> blender_srgba32_plain;
-    typedef blender_rgba_plain<srgba8, order_argb> blender_sargb32_plain;
-    typedef blender_rgba_plain<srgba8, order_abgr> blender_sabgr32_plain;
-    typedef blender_rgba_plain<srgba8, order_bgra> blender_sbgra32_plain;
+    using blender_srgba32_plain = blender_rgba_plain<srgba8, order_rgba>;
+    using blender_sargb32_plain = blender_rgba_plain<srgba8, order_argb>;
+    using blender_sabgr32_plain = blender_rgba_plain<srgba8, order_abgr>;
+    using blender_sbgra32_plain = blender_rgba_plain<srgba8, order_bgra>;
 
-    typedef blender_rgba<rgba16, order_rgba> blender_rgba64;
-    typedef blender_rgba<rgba16, order_argb> blender_argb64;
-    typedef blender_rgba<rgba16, order_abgr> blender_abgr64;
-    typedef blender_rgba<rgba16, order_bgra> blender_bgra64;
+    using blender_rgba64 = blender_rgba<rgba16, order_rgba>;
+    using blender_argb64 = blender_rgba<rgba16, order_argb>;
+    using blender_abgr64 = blender_rgba<rgba16, order_abgr>;
+    using blender_bgra64 = blender_rgba<rgba16, order_bgra>;
 
-    typedef blender_rgba_pre<rgba16, order_rgba> blender_rgba64_pre;
-    typedef blender_rgba_pre<rgba16, order_argb> blender_argb64_pre;
-    typedef blender_rgba_pre<rgba16, order_abgr> blender_abgr64_pre;
-    typedef blender_rgba_pre<rgba16, order_bgra> blender_bgra64_pre;
+    using blender_rgba64_pre = blender_rgba_pre<rgba16, order_rgba>;
+    using blender_argb64_pre = blender_rgba_pre<rgba16, order_argb>;
+    using blender_abgr64_pre = blender_rgba_pre<rgba16, order_abgr>;
+    using blender_bgra64_pre = blender_rgba_pre<rgba16, order_bgra>;
 
-	typedef blender_rgba_plain<rgba16, order_rgba> blender_rgba64_plain;
-	typedef blender_rgba_plain<rgba16, order_argb> blender_argb64_plain;
-	typedef blender_rgba_plain<rgba16, order_abgr> blender_abgr64_plain;
-	typedef blender_rgba_plain<rgba16, order_bgra> blender_bgra64_plain;
+	using blender_rgba64_plain = blender_rgba_plain<rgba16, order_rgba>;
+	using blender_argb64_plain = blender_rgba_plain<rgba16, order_argb>;
+	using blender_abgr64_plain = blender_rgba_plain<rgba16, order_abgr>;
+	using blender_bgra64_plain = blender_rgba_plain<rgba16, order_bgra>;
 
-	typedef blender_rgba<rgba32, order_rgba> blender_rgba128;
-    typedef blender_rgba<rgba32, order_argb> blender_argb128;
-    typedef blender_rgba<rgba32, order_abgr> blender_abgr128;
-    typedef blender_rgba<rgba32, order_bgra> blender_bgra128;
+	using blender_rgba128 = blender_rgba<rgba32, order_rgba>;
+    using blender_argb128 = blender_rgba<rgba32, order_argb>;
+    using blender_abgr128 = blender_rgba<rgba32, order_abgr>;
+    using blender_bgra128 = blender_rgba<rgba32, order_bgra>;
 
-    typedef blender_rgba_pre<rgba32, order_rgba> blender_rgba128_pre;
-    typedef blender_rgba_pre<rgba32, order_argb> blender_argb128_pre;
-    typedef blender_rgba_pre<rgba32, order_abgr> blender_abgr128_pre;
-    typedef blender_rgba_pre<rgba32, order_bgra> blender_bgra128_pre;
+    using blender_rgba128_pre = blender_rgba_pre<rgba32, order_rgba>;
+    using blender_argb128_pre = blender_rgba_pre<rgba32, order_argb>;
+    using blender_abgr128_pre = blender_rgba_pre<rgba32, order_abgr>;
+    using blender_bgra128_pre = blender_rgba_pre<rgba32, order_bgra>;
 
-    typedef blender_rgba_plain<rgba32, order_rgba> blender_rgba128_plain;
-    typedef blender_rgba_plain<rgba32, order_argb> blender_argb128_plain;
-    typedef blender_rgba_plain<rgba32, order_abgr> blender_abgr128_plain;
-    typedef blender_rgba_plain<rgba32, order_bgra> blender_bgra128_plain;
+    using blender_rgba128_plain = blender_rgba_plain<rgba32, order_rgba>;
+    using blender_argb128_plain = blender_rgba_plain<rgba32, order_argb>;
+    using blender_abgr128_plain = blender_rgba_plain<rgba32, order_abgr>;
+    using blender_bgra128_plain = blender_rgba_plain<rgba32, order_bgra>;
 
 
     //-----------------------------------------------------------------------
-    typedef pixfmt_alpha_blend_rgba<blender_rgba32, rendering_buffer> pixfmt_rgba32;
-    typedef pixfmt_alpha_blend_rgba<blender_argb32, rendering_buffer> pixfmt_argb32;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr32, rendering_buffer> pixfmt_abgr32;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra32, rendering_buffer> pixfmt_bgra32;
+    using pixfmt_rgba32 = pixfmt_alpha_blend_rgba<blender_rgba32, rendering_buffer>;
+    using pixfmt_argb32 = pixfmt_alpha_blend_rgba<blender_argb32, rendering_buffer>;
+    using pixfmt_abgr32 = pixfmt_alpha_blend_rgba<blender_abgr32, rendering_buffer>;
+    using pixfmt_bgra32 = pixfmt_alpha_blend_rgba<blender_bgra32, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_srgba32, rendering_buffer> pixfmt_srgba32;
-    typedef pixfmt_alpha_blend_rgba<blender_sargb32, rendering_buffer> pixfmt_sargb32;
-    typedef pixfmt_alpha_blend_rgba<blender_sabgr32, rendering_buffer> pixfmt_sabgr32;
-    typedef pixfmt_alpha_blend_rgba<blender_sbgra32, rendering_buffer> pixfmt_sbgra32;
+    using pixfmt_srgba32 = pixfmt_alpha_blend_rgba<blender_srgba32, rendering_buffer>;
+    using pixfmt_sargb32 = pixfmt_alpha_blend_rgba<blender_sargb32, rendering_buffer>;
+    using pixfmt_sabgr32 = pixfmt_alpha_blend_rgba<blender_sabgr32, rendering_buffer>;
+    using pixfmt_sbgra32 = pixfmt_alpha_blend_rgba<blender_sbgra32, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_rgba32_pre, rendering_buffer> pixfmt_rgba32_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_argb32_pre, rendering_buffer> pixfmt_argb32_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr32_pre, rendering_buffer> pixfmt_abgr32_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra32_pre, rendering_buffer> pixfmt_bgra32_pre;
+    using pixfmt_rgba32_pre = pixfmt_alpha_blend_rgba<blender_rgba32_pre, rendering_buffer>;
+    using pixfmt_argb32_pre = pixfmt_alpha_blend_rgba<blender_argb32_pre, rendering_buffer>;
+    using pixfmt_abgr32_pre = pixfmt_alpha_blend_rgba<blender_abgr32_pre, rendering_buffer>;
+    using pixfmt_bgra32_pre = pixfmt_alpha_blend_rgba<blender_bgra32_pre, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_srgba32_pre, rendering_buffer> pixfmt_srgba32_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_sargb32_pre, rendering_buffer> pixfmt_sargb32_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_sabgr32_pre, rendering_buffer> pixfmt_sabgr32_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_sbgra32_pre, rendering_buffer> pixfmt_sbgra32_pre;
+    using pixfmt_srgba32_pre = pixfmt_alpha_blend_rgba<blender_srgba32_pre, rendering_buffer>;
+    using pixfmt_sargb32_pre = pixfmt_alpha_blend_rgba<blender_sargb32_pre, rendering_buffer>;
+    using pixfmt_sabgr32_pre = pixfmt_alpha_blend_rgba<blender_sabgr32_pre, rendering_buffer>;
+    using pixfmt_sbgra32_pre = pixfmt_alpha_blend_rgba<blender_sbgra32_pre, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_rgba32_plain, rendering_buffer> pixfmt_rgba32_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_argb32_plain, rendering_buffer> pixfmt_argb32_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr32_plain, rendering_buffer> pixfmt_abgr32_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra32_plain, rendering_buffer> pixfmt_bgra32_plain;
+    using pixfmt_rgba32_plain = pixfmt_alpha_blend_rgba<blender_rgba32_plain, rendering_buffer>;
+    using pixfmt_argb32_plain = pixfmt_alpha_blend_rgba<blender_argb32_plain, rendering_buffer>;
+    using pixfmt_abgr32_plain = pixfmt_alpha_blend_rgba<blender_abgr32_plain, rendering_buffer>;
+    using pixfmt_bgra32_plain = pixfmt_alpha_blend_rgba<blender_bgra32_plain, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_srgba32_plain, rendering_buffer> pixfmt_srgba32_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_sargb32_plain, rendering_buffer> pixfmt_sargb32_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_sabgr32_plain, rendering_buffer> pixfmt_sabgr32_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_sbgra32_plain, rendering_buffer> pixfmt_sbgra32_plain;
+    using pixfmt_srgba32_plain = pixfmt_alpha_blend_rgba<blender_srgba32_plain, rendering_buffer>;
+    using pixfmt_sargb32_plain = pixfmt_alpha_blend_rgba<blender_sargb32_plain, rendering_buffer>;
+    using pixfmt_sabgr32_plain = pixfmt_alpha_blend_rgba<blender_sabgr32_plain, rendering_buffer>;
+    using pixfmt_sbgra32_plain = pixfmt_alpha_blend_rgba<blender_sbgra32_plain, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_rgba64, rendering_buffer> pixfmt_rgba64;
-    typedef pixfmt_alpha_blend_rgba<blender_argb64, rendering_buffer> pixfmt_argb64;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr64, rendering_buffer> pixfmt_abgr64;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra64, rendering_buffer> pixfmt_bgra64;
+    using pixfmt_rgba64 = pixfmt_alpha_blend_rgba<blender_rgba64, rendering_buffer>;
+    using pixfmt_argb64 = pixfmt_alpha_blend_rgba<blender_argb64, rendering_buffer>;
+    using pixfmt_abgr64 = pixfmt_alpha_blend_rgba<blender_abgr64, rendering_buffer>;
+    using pixfmt_bgra64 = pixfmt_alpha_blend_rgba<blender_bgra64, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_rgba64_pre, rendering_buffer> pixfmt_rgba64_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_argb64_pre, rendering_buffer> pixfmt_argb64_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr64_pre, rendering_buffer> pixfmt_abgr64_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra64_pre, rendering_buffer> pixfmt_bgra64_pre;
+    using pixfmt_rgba64_pre = pixfmt_alpha_blend_rgba<blender_rgba64_pre, rendering_buffer>;
+    using pixfmt_argb64_pre = pixfmt_alpha_blend_rgba<blender_argb64_pre, rendering_buffer>;
+    using pixfmt_abgr64_pre = pixfmt_alpha_blend_rgba<blender_abgr64_pre, rendering_buffer>;
+    using pixfmt_bgra64_pre = pixfmt_alpha_blend_rgba<blender_bgra64_pre, rendering_buffer>;
 
-	typedef pixfmt_alpha_blend_rgba<blender_rgba64_plain, rendering_buffer> pixfmt_rgba64_plain;
-	typedef pixfmt_alpha_blend_rgba<blender_argb64_plain, rendering_buffer> pixfmt_argb64_plain;
-	typedef pixfmt_alpha_blend_rgba<blender_abgr64_plain, rendering_buffer> pixfmt_abgr64_plain;
-	typedef pixfmt_alpha_blend_rgba<blender_bgra64_plain, rendering_buffer> pixfmt_bgra64_plain;
+	using pixfmt_rgba64_plain = pixfmt_alpha_blend_rgba<blender_rgba64_plain, rendering_buffer>;
+	using pixfmt_argb64_plain = pixfmt_alpha_blend_rgba<blender_argb64_plain, rendering_buffer>;
+	using pixfmt_abgr64_plain = pixfmt_alpha_blend_rgba<blender_abgr64_plain, rendering_buffer>;
+	using pixfmt_bgra64_plain = pixfmt_alpha_blend_rgba<blender_bgra64_plain, rendering_buffer>;
 
-	typedef pixfmt_alpha_blend_rgba<blender_rgba128, rendering_buffer> pixfmt_rgba128;
-    typedef pixfmt_alpha_blend_rgba<blender_argb128, rendering_buffer> pixfmt_argb128;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr128, rendering_buffer> pixfmt_abgr128;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra128, rendering_buffer> pixfmt_bgra128;
+	using pixfmt_rgba128 = pixfmt_alpha_blend_rgba<blender_rgba128, rendering_buffer>;
+    using pixfmt_argb128 = pixfmt_alpha_blend_rgba<blender_argb128, rendering_buffer>;
+    using pixfmt_abgr128 = pixfmt_alpha_blend_rgba<blender_abgr128, rendering_buffer>;
+    using pixfmt_bgra128 = pixfmt_alpha_blend_rgba<blender_bgra128, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_rgba128_pre, rendering_buffer> pixfmt_rgba128_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_argb128_pre, rendering_buffer> pixfmt_argb128_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr128_pre, rendering_buffer> pixfmt_abgr128_pre;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra128_pre, rendering_buffer> pixfmt_bgra128_pre;
+    using pixfmt_rgba128_pre = pixfmt_alpha_blend_rgba<blender_rgba128_pre, rendering_buffer>;
+    using pixfmt_argb128_pre = pixfmt_alpha_blend_rgba<blender_argb128_pre, rendering_buffer>;
+    using pixfmt_abgr128_pre = pixfmt_alpha_blend_rgba<blender_abgr128_pre, rendering_buffer>;
+    using pixfmt_bgra128_pre = pixfmt_alpha_blend_rgba<blender_bgra128_pre, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_rgba<blender_rgba128_plain, rendering_buffer> pixfmt_rgba128_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_argb128_plain, rendering_buffer> pixfmt_argb128_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_abgr128_plain, rendering_buffer> pixfmt_abgr128_plain;
-    typedef pixfmt_alpha_blend_rgba<blender_bgra128_plain, rendering_buffer> pixfmt_bgra128_plain;
+    using pixfmt_rgba128_plain = pixfmt_alpha_blend_rgba<blender_rgba128_plain, rendering_buffer>;
+    using pixfmt_argb128_plain = pixfmt_alpha_blend_rgba<blender_argb128_plain, rendering_buffer>;
+    using pixfmt_abgr128_plain = pixfmt_alpha_blend_rgba<blender_abgr128_plain, rendering_buffer>;
+    using pixfmt_bgra128_plain = pixfmt_alpha_blend_rgba<blender_bgra128_plain, rendering_buffer>;
 
 }
 

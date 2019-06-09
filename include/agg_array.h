@@ -30,6 +30,7 @@ limitations under the License.
 #ifndef AGG_ARRAY_INCLUDED
 #define AGG_ARRAY_INCLUDED
 
+#include <array>
 #include <cstddef>
 #include <cstring>
 #include "agg_basics.h"
@@ -40,11 +41,11 @@ namespace agg
     template<class T> class pod_array_adaptor
     {
     public:
-        typedef T value_type;
+        using value_type = T;
         pod_array_adaptor(T* array, unsigned size) : 
             m_array(array), m_size(size) {}
 
-        unsigned size() const { return m_size; }
+        [[nodiscard]] unsigned size() const { return m_size; }
         const T& operator [] (unsigned i) const { return m_array[i]; }
               T& operator [] (unsigned i)       { return m_array[i]; }
         const T& at(unsigned i) const           { return m_array[i]; }
@@ -61,10 +62,10 @@ namespace agg
     template<class T, unsigned Size> class pod_auto_array
     {
     public:
-        typedef T value_type;
-        typedef pod_auto_array<T, Size> self_type;
+        using value_type = T;
+        using self_type = pod_auto_array<T, Size>;
 
-        pod_auto_array() {}
+        pod_auto_array() = default;
         explicit pod_auto_array(const T* c)
         {
             std::memcpy(m_array, c, sizeof(T) * Size);
@@ -84,7 +85,7 @@ namespace agg
         T  value_at(unsigned i) const           { return m_array[i]; }
 
     private:
-        T m_array[Size];
+        std::array<T,Size> m_array{};
     };
 
 
@@ -92,10 +93,10 @@ namespace agg
     template<class T, unsigned Size> class pod_auto_vector
     {
     public:
-        typedef T value_type;
-        typedef pod_auto_vector<T, Size> self_type;
+        using value_type = T;
+        using self_type = pod_auto_vector<T, Size>;
 
-        pod_auto_vector() : m_size(0) {}
+        pod_auto_vector()  = default;
 
         void remove_all()            { m_size = 0; }
         void clear()                 { m_size = 0; }
@@ -103,7 +104,7 @@ namespace agg
         void push_back(const T& v)   { m_array[m_size++] = v; }
         void inc_size(unsigned size) { m_size += size; }
         
-        unsigned size() const { return m_size; }
+        [[nodiscard]] unsigned size() const { return m_size; }
         const T& operator [] (unsigned i) const { return m_array[i]; }
               T& operator [] (unsigned i)       { return m_array[i]; }
         const T& at(unsigned i) const           { return m_array[i]; }
@@ -111,8 +112,8 @@ namespace agg
         T  value_at(unsigned i) const           { return m_array[i]; }
 
     private:
-        T m_array[Size];
-        unsigned m_size;
+        std::array<T, Size> m_array{};
+        unsigned m_size{0};
     };
 
 
@@ -120,11 +121,11 @@ namespace agg
     template<class T> class pod_array
     {
     public:
-        typedef T value_type;
-        typedef pod_array<T> self_type;
+        using value_type = T;
+        using self_type = pod_array<T>;
 
         ~pod_array() { pod_allocator<T>::deallocate(m_array, m_size); }
-        pod_array() : m_array(0), m_size(0) {}
+        pod_array() : m_array{nullptr} {}
 
         pod_array(unsigned size) : 
             m_array(pod_allocator<T>::allocate(size)), 
@@ -153,18 +154,18 @@ namespace agg
             return *this;
         }
 
-        unsigned size() const { return m_size; }
+        [[nodiscard]] unsigned size() const { return m_size; }
         const T& operator [] (unsigned i) const { return m_array[i]; }
               T& operator [] (unsigned i)       { return m_array[i]; }
-        const T& at(unsigned i) const           { return m_array[i]; }
+        [[nodiscard]] const T& at(unsigned i) const           { return m_array[i]; }
               T& at(unsigned i)                 { return m_array[i]; }
-        T  value_at(unsigned i) const           { return m_array[i]; }
+        [[nodiscard]] T  value_at(unsigned i) const           { return m_array[i]; }
 
-        const T* data() const { return m_array; }
+        [[nodiscard]] const T* data() const { return m_array; }
               T* data()       { return m_array; }
     private:
-        T*       m_array;
-        unsigned m_size;
+        T*       m_array{nullptr};
+        unsigned m_size{0};
     };
 
 
@@ -176,10 +177,10 @@ namespace agg
     template<class T> class pod_vector
     {
     public:
-        typedef T value_type;
+        using value_type = T;
 
         ~pod_vector() { pod_allocator<T>::deallocate(m_array, m_capacity); }
-        pod_vector() : m_size(0), m_capacity(0), m_array(0) {}
+        pod_vector() :  m_array(0) {}
         pod_vector(unsigned cap, unsigned extra_tail=0);
 
         // Copying
@@ -188,7 +189,7 @@ namespace agg
 
         // Set new capacity. All data is lost, size is set to zero.
         void capacity(unsigned cap, unsigned extra_tail=0);
-        unsigned capacity() const { return m_capacity; }
+        [[nodiscard]] unsigned capacity() const { return m_capacity; }
 
         // Allocate n elements. All data is lost, 
         // but elements can be accessed in range 0...size-1. 
@@ -206,8 +207,8 @@ namespace agg
         void push_back(const T& v)   { m_array[m_size++] = v; }
         void insert_at(unsigned pos, const T& val);
         void inc_size(unsigned size) { m_size += size; }
-        unsigned size()      const   { return m_size; }
-        unsigned byte_size() const   { return m_size * sizeof(T); }
+        [[nodiscard]] unsigned size()      const   { return m_size; }
+        [[nodiscard]] unsigned byte_size() const   { return m_size * sizeof(T); }
         void serialize(int8u* ptr) const;
         void deserialize(const int8u* data, unsigned byte_size);
         const T& operator [] (unsigned i) const { return m_array[i]; }
@@ -224,8 +225,8 @@ namespace agg
         void cut_at(unsigned num) { if(num < m_size) m_size = num; }
 
     private:
-        unsigned m_size;
-        unsigned m_capacity;
+        unsigned m_size{0};
+        unsigned m_capacity{0};
         T*       m_array;
     };
 
@@ -347,7 +348,7 @@ namespace agg
             block_mask  = block_size - 1
         };
 
-        typedef T value_type;
+        using value_type = T;
 
         ~pod_bvector();
         pod_bvector();
@@ -390,7 +391,7 @@ namespace agg
             if(size < m_size) m_size = size;
         }
 
-        unsigned size() const { return m_size; }
+        [[nodiscard]] unsigned size() const { return m_size; }
 
         const T& operator [] (unsigned i) const
         {
@@ -402,7 +403,7 @@ namespace agg
             return m_blocks[i >> block_shift][i & block_mask];
         }
 
-        const T& at(unsigned i) const
+        [[nodiscard]] const T& at(unsigned i) const
         { 
             return m_blocks[i >> block_shift][i & block_mask];
         }
@@ -412,12 +413,12 @@ namespace agg
             return m_blocks[i >> block_shift][i & block_mask];
         }
 
-        T value_at(unsigned i) const
+        [[nodiscard]] T value_at(unsigned i) const
         { 
             return m_blocks[i >> block_shift][i & block_mask];
         }
 
-        const T& curr(unsigned idx) const
+        [[nodiscard]] const T& curr(unsigned idx) const
         {
             return (*this)[idx];
         }
@@ -427,7 +428,7 @@ namespace agg
             return (*this)[idx];
         }
 
-        const T& prev(unsigned idx) const
+        [[nodiscard]] const T& prev(unsigned idx) const
         {
             return (*this)[(idx + m_size - 1) % m_size];
         }
@@ -437,7 +438,7 @@ namespace agg
             return (*this)[(idx + m_size - 1) % m_size];
         }
 
-        const T& next(unsigned idx) const
+        [[nodiscard]] const T& next(unsigned idx) const
         {
             return (*this)[(idx + 1) % m_size];
         }
@@ -447,7 +448,7 @@ namespace agg
             return (*this)[(idx + 1) % m_size];
         }
 
-        const T& last() const
+        [[nodiscard]] const T& last() const
         {
             return (*this)[m_size - 1];
         }
@@ -457,7 +458,7 @@ namespace agg
             return (*this)[m_size - 1];
         }
 
-        unsigned byte_size() const;
+        [[nodiscard]] unsigned byte_size() const;
         void serialize(int8u* ptr) const;
         void deserialize(const int8u* data, unsigned byte_size);
         void deserialize(unsigned start, const T& empty_val, 
@@ -471,7 +472,7 @@ namespace agg
 
             for(unsigned i = 0; i < elem_size; ++i)
             {
-                int8u* ptr = (int8u*)data_ptr();
+                auto* ptr = (int8u*)data_ptr();
                 for(unsigned j = 0; j < sizeof(T); ++j)
                 {
                     *ptr++ = *data;
@@ -510,15 +511,15 @@ namespace agg
             }
         }
 
-        const T* block(unsigned nb) const { return m_blocks[nb]; }
+        [[nodiscard]] const T* block(unsigned nb) const { return m_blocks[nb]; }
 
     private:
         void allocate_block(unsigned nb);
         T*   data_ptr();
 
-        unsigned        m_size;
-        unsigned        m_num_blocks;
-        unsigned        m_max_blocks;
+        unsigned        m_size{0};
+        unsigned        m_num_blocks{0};
+        unsigned        m_max_blocks{0};
         T**             m_blocks;
         unsigned        m_block_ptr_inc;
     };
@@ -564,10 +565,8 @@ namespace agg
 
     //------------------------------------------------------------------------
     template<class T, unsigned S> pod_bvector<T, S>::pod_bvector() :
-        m_size(0),
-        m_num_blocks(0),
-        m_max_blocks(0),
-        m_blocks(0),
+        
+        m_blocks(nullptr),
         m_block_ptr_inc(block_size)
     {
     }
@@ -815,8 +814,8 @@ namespace agg
             }
             m_num_blocks = 0;
             m_max_blocks = 0;
-            m_blocks = 0;
-            m_buf_ptr = 0;
+            m_blocks = nullptr;
+            m_buf_ptr = nullptr;
             m_rest = 0;
         }
 
@@ -830,8 +829,8 @@ namespace agg
             m_block_ptr_inc(block_ptr_inc),
             m_num_blocks(0),
             m_max_blocks(0),
-            m_blocks(0),
-            m_buf_ptr(0),
+            m_blocks(nullptr),
+            m_buf_ptr(nullptr),
             m_rest(0)
         {
         }
@@ -839,7 +838,7 @@ namespace agg
 
         int8u* allocate(unsigned size, unsigned alignment=1)
         {
-            if(size == 0) return 0;
+            if(size == 0) return nullptr;
             if(size <= m_rest)
             {
                 int8u* ptr = m_buf_ptr;
@@ -906,13 +905,6 @@ namespace agg
         unsigned    m_rest;
     };
 
-
-
-
-
-
-
-
     //------------------------------------------------------------------------
     enum quick_sort_threshold_e
     {
@@ -938,8 +930,8 @@ namespace agg
         typename Array::value_type* e1;
         typename Array::value_type* e2;
 
-        int  stack[80];
-        int* top = stack; 
+        std::array<int,80> stack{};
+        int* top = stack.data(); 
         int  limit = arr.size();
         int  base = 0;
 
@@ -1020,7 +1012,7 @@ namespace agg
                         }
                     }
                 }
-                if(top > stack)
+                if(top > stack.data())
                 {
                     top  -= 2;
                     base  = top[0];
@@ -1098,13 +1090,13 @@ namespace agg
     template<class Array> class range_adaptor
     {
     public:
-        typedef typename Array::value_type value_type;
+        using value_type = typename Array::value_type;
 
         range_adaptor(Array& array, unsigned start, unsigned size) :
             m_array(array), m_start(start), m_size(size)
         {}
 
-        unsigned size() const { return m_size; }
+        [[nodiscard]] unsigned size() const { return m_size; }
         const value_type& operator [] (unsigned i) const { return m_array[m_start + i]; }
               value_type& operator [] (unsigned i)       { return m_array[m_start + i]; }
         const value_type& at(unsigned i) const           { return m_array[m_start + i]; }

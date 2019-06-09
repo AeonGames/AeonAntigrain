@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -30,8 +45,8 @@ namespace agg
     template<class Source, class Interpolator> class span_image_filter
     {
     public:
-        typedef Source source_type;
-        typedef Interpolator interpolator_type;
+        using source_type = Source;
+        using interpolator_type = Interpolator;
 
         //--------------------------------------------------------------------
         span_image_filter() {}
@@ -95,9 +110,9 @@ namespace agg
     public span_image_filter<Source, span_interpolator_linear<trans_affine> >
     {
     public:
-        typedef Source source_type;
-        typedef span_interpolator_linear<trans_affine> interpolator_type;
-        typedef span_image_filter<source_type, interpolator_type> base_type;
+        using source_type = Source;
+        using interpolator_type = span_interpolator_linear<trans_affine>;
+        using base_type = span_image_filter<source_type, interpolator_type>;
 
         //--------------------------------------------------------------------
         span_image_resample_affine() : 
@@ -182,9 +197,9 @@ namespace agg
     public span_image_filter<Source, Interpolator>
     {
     public:
-        typedef Source source_type;
-        typedef Interpolator interpolator_type;
-        typedef span_image_filter<source_type, interpolator_type> base_type;
+        using source_type = Source;
+        using interpolator_type = Interpolator;
+        using base_type = span_image_filter<source_type, interpolator_type>;
 
         //--------------------------------------------------------------------
         span_image_resample() : 

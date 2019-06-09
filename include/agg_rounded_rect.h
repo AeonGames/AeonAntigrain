@@ -59,7 +59,7 @@ namespace agg
         AGGAPI void normalize_radius();
 
         void approximation_scale(double s) { m_arc.approximation_scale(s); }
-        double approximation_scale() const { return m_arc.approximation_scale(); }
+        [[nodiscard]] double approximation_scale() const { return m_arc.approximation_scale(); }
 
         AGGAPI void rewind(unsigned);
         AGGAPI unsigned vertex(double* x, double* y);

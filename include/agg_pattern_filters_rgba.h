@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -26,7 +41,7 @@ namespace agg
     //=======================================================pattern_filter_nn
     template<class ColorT> struct pattern_filter_nn
     {
-        typedef ColorT color_type;
+        using color_type = ColorT;
         static unsigned dilation() { return 0; }
 
         static void AGG_INLINE pixel_low_res(color_type const* const* buf, 
@@ -43,16 +58,16 @@ namespace agg
         }
     };
 
-    typedef pattern_filter_nn<rgba8>  pattern_filter_nn_rgba8;
-    typedef pattern_filter_nn<rgba16> pattern_filter_nn_rgba16;
+    using pattern_filter_nn_rgba8 = pattern_filter_nn<rgba8> ;
+    using pattern_filter_nn_rgba16 = pattern_filter_nn<rgba16>;
 
 
     //===========================================pattern_filter_bilinear_rgba
     template<class ColorT> struct pattern_filter_bilinear_rgba
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
 
 
         static unsigned dilation() { return 1; }
@@ -115,9 +130,9 @@ namespace agg
         }
     };
 
-    typedef pattern_filter_bilinear_rgba<rgba8>  pattern_filter_bilinear_rgba8;
-    typedef pattern_filter_bilinear_rgba<rgba16> pattern_filter_bilinear_rgba16;
-    typedef pattern_filter_bilinear_rgba<rgba32> pattern_filter_bilinear_rgba32;
+    using pattern_filter_bilinear_rgba8 = pattern_filter_bilinear_rgba<rgba8> ;
+    using pattern_filter_bilinear_rgba16 = pattern_filter_bilinear_rgba<rgba16>;
+    using pattern_filter_bilinear_rgba32 = pattern_filter_bilinear_rgba<rgba32>;
 }
 
 #endif

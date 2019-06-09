@@ -60,12 +60,12 @@ namespace agg
         };
 
     public:
-        typedef vertex_sequence<vertex_dist, 6> vertex_storage;
+        using vertex_storage = vertex_sequence<vertex_dist, 6>;
 
         AGGAPI vcgen_smooth_poly1();
 
         void   smooth_value(double v) { m_smooth_value = v * 0.5; }
-        double smooth_value() const { return m_smooth_value * 2.0; }
+        [[nodiscard]] double smooth_value() const { return m_smooth_value * 2.0; }
 
         // Vertex Generator Interface
         AGGAPI void remove_all();
@@ -75,9 +75,10 @@ namespace agg
         AGGAPI void     rewind(unsigned path_id);
         AGGAPI unsigned vertex(double* x, double* y);
 
+        vcgen_smooth_poly1(const vcgen_smooth_poly1&) = delete;
+        const vcgen_smooth_poly1& operator = (const vcgen_smooth_poly1&) = delete;
+
     private:
-        AGGAPI vcgen_smooth_poly1(const vcgen_smooth_poly1&);
-        AGGAPI const vcgen_smooth_poly1& operator = (const vcgen_smooth_poly1&);
 
         AGGAPI void calculate(const vertex_dist& v0, 
                        const vertex_dist& v1, 
@@ -85,10 +86,10 @@ namespace agg
                        const vertex_dist& v3);
 
         vertex_storage m_src_vertices;
-        double         m_smooth_value;
-        unsigned       m_closed;
-        status_e       m_status;
-        unsigned       m_src_vertex;
+        double         m_smooth_value{0.5};
+        unsigned       m_closed{0};
+        status_e       m_status{initial};
+        unsigned       m_src_vertex{0};
         double         m_ctrl1_x;
         double         m_ctrl1_y;
         double         m_ctrl2_x;

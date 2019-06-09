@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -16,9 +31,8 @@
 // Affine transformations
 //
 //----------------------------------------------------------------------------
+#include <array>
 #include "agg_trans_affine.h"
-
-
 
 namespace agg
 {
@@ -45,11 +59,13 @@ namespace agg
                                                    double x2, double y2, 
                                                    const double* parl)
     {
-        double src[6];
-        src[0] = x1; src[1] = y1;
-        src[2] = x2; src[3] = y1;
-        src[4] = x2; src[5] = y2;
-        parl_to_parl(src, parl);
+        std::array<double,6> src
+        {
+            x1, y1,
+            x2, y1,
+            x2, y2,
+        };
+        parl_to_parl(src.data(), parl);
         return *this;
     }
 
@@ -58,11 +74,13 @@ namespace agg
                                                    double x1, double y1, 
                                                    double x2, double y2)
     {
-        double dst[6];
-        dst[0] = x1; dst[1] = y1;
-        dst[2] = x2; dst[3] = y1;
-        dst[4] = x2; dst[5] = y2;
-        parl_to_parl(parl, dst);
+        std::array<double,6> dst
+        {
+            x1, y1,
+            x2, y1,
+            x2, y2,
+        };
+        parl_to_parl(parl, dst.data());
         return *this;
     }
 

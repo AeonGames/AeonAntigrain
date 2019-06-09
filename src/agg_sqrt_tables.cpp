@@ -32,11 +32,12 @@ limitations under the License.
 //
 //----------------------------------------------------------------------------
 
+#include <array>
 #include "agg_basics.h"
 
 namespace agg
 {
-    AGGAPI int16u g_sqrt_table[1024] =                       //----------g_sqrt_table
+    AGGAPI std::array<int16u,1024> g_sqrt_table                    //----------g_sqrt_table
     {
         0,
         2048,2896,3547,4096,4579,5017,5418,5793,6144,6476,6792,7094,7384,7663,7932,8192,8444,
@@ -115,7 +116,7 @@ namespace agg
     };
 
 
-    AGGAPI int8 g_elder_bit_table[256] =          //---------g_elder_bit_table
+    AGGAPI std::array<int8, 256> g_elder_bit_table //---------g_elder_bit_table
     {
         0,0,1,1,2,2,2,2,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
         5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,

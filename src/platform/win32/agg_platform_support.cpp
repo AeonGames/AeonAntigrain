@@ -254,7 +254,8 @@ namespace agg
             m_bpp = 128;
             m_sys_bpp = 24;
             break;
-
+        default:
+            break;
         }
         ::QueryPerformanceFrequency(&m_sw_freq);
         ::QueryPerformanceCounter(&m_sw_start);
@@ -405,6 +406,8 @@ namespace agg
 
         case pix_format_rgba128:
             convert<pixfmt_sbgr24, pixfmt_rgbx128>(dst, src);
+            break;
+        default:
             break;
         }
     }
@@ -731,17 +734,11 @@ namespace agg
             case 24: convert<pixfmt_rgba128, pixfmt_sbgr24>(dst, &rbuf_tmp); break;
             }
             break;
+        default:
+            break;
         }
-
         return true;
     }
-
-
-
-
-
-
-
 
     //------------------------------------------------------------------------
     unsigned platform_specific::translate(unsigned keycode)

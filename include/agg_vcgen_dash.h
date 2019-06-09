@@ -34,6 +34,7 @@ limitations under the License.
 #ifndef AGG_VCGEN_DASH_INCLUDED
 #define AGG_VCGEN_DASH_INCLUDED
 
+#include <array>
 #include "agg_basics.h"
 #include "agg_vertex_sequence.h"
 
@@ -60,7 +61,7 @@ namespace agg
         };
 
     public:
-        typedef vertex_sequence<vertex_dist, 6> vertex_storage;
+        using vertex_storage = vertex_sequence<vertex_dist, 6>;
 
         AGGAPI vcgen_dash();
 
@@ -69,7 +70,7 @@ namespace agg
         AGGAPI void dash_start(double ds);
 
         void shorten(double s) { m_shorten = s; }
-        double shorten() const { return m_shorten; }
+        [[nodiscard]] double shorten() const { return m_shorten; }
 
         // Vertex Generator Interface
         AGGAPI void remove_all();
@@ -79,27 +80,28 @@ namespace agg
         AGGAPI void     rewind(unsigned path_id);
         AGGAPI unsigned vertex(double* x, double* y);
 
+        vcgen_dash(const vcgen_dash&) = delete;
+        const vcgen_dash& operator = (const vcgen_dash&) = delete;
+
     private:
-        AGGAPI vcgen_dash(const vcgen_dash&);
-        AGGAPI const vcgen_dash& operator = (const vcgen_dash&);
 
         AGGAPI void calc_dash_start(double ds);
 
-        double             m_dashes[max_dashes];
-        double             m_total_dash_len;
-        unsigned           m_num_dashes;
-        double             m_dash_start;
-        double             m_shorten;
-        double             m_curr_dash_start;
-        unsigned           m_curr_dash;
+        std::array<double,max_dashes> m_dashes{};
+        double             m_total_dash_len{0.0};
+        unsigned           m_num_dashes{0};
+        double             m_dash_start{0.0};
+        double             m_shorten{0.0};
+        double             m_curr_dash_start{0.0};
+        unsigned           m_curr_dash{0};
         double             m_curr_rest;
         const vertex_dist* m_v1;
         const vertex_dist* m_v2;
 
         vertex_storage m_src_vertices;
-        unsigned       m_closed;
-        status_e       m_status;
-        unsigned       m_src_vertex;
+        unsigned       m_closed{0};
+        status_e       m_status{initial};
+        unsigned       m_src_vertex{0};
     };
 }
 

@@ -46,7 +46,7 @@ namespace agg
     class vcgen_markers_term
     {
     public:
-        vcgen_markers_term() : m_curr_id(0), m_curr_idx(0) {}
+        vcgen_markers_term()  = default;
 
         // Vertex Generator Interface
         AGGAPI void remove_all();
@@ -56,23 +56,24 @@ namespace agg
         AGGAPI void rewind(unsigned path_id);
         AGGAPI unsigned vertex(double* x, double* y);
 
+        vcgen_markers_term(const vcgen_markers_term&) = delete;
+        const vcgen_markers_term& operator = (const vcgen_markers_term&) = delete;
+
     private:
-        AGGAPI vcgen_markers_term(const vcgen_markers_term&);
-        AGGAPI const vcgen_markers_term& operator = (const vcgen_markers_term&);
 
         struct coord_type
         {
             double x, y;
 
-            coord_type() {}
+            coord_type() = default;
             coord_type(double x_, double y_) : x(x_), y(y_) {}
         };
 
-        typedef pod_bvector<coord_type, 6> coord_storage; 
+        using coord_storage = pod_bvector<coord_type, 6>; 
 
         coord_storage m_markers;
-        unsigned      m_curr_id;
-        unsigned      m_curr_idx;
+        unsigned      m_curr_id{0};
+        unsigned      m_curr_idx{0};
     };
 
 

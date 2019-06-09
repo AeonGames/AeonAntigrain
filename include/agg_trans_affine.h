@@ -101,13 +101,12 @@ namespace agg
     //----------------------------------------------------------------------
     struct trans_affine
     {
-        double sx, shy, shx, sy, tx, ty;
+        double sx{1.0}, shy{0.0}, shx{0.0}, sy{1.0}, tx{0.0}, ty{0.0};
 
         //------------------------------------------ Construction
         // Identity matrix
-        trans_affine() :
-            sx(1.0), shy(0.0), shx(0.0), sy(1.0), tx(0.0), ty(0.0)
-        {}
+        trans_affine()  
+        = default;
 
         // Custom matrix. Usually used in derived classes
         trans_affine(double v0, double v1, double v2, 
@@ -168,22 +167,22 @@ namespace agg
         AGGAPI const trans_affine& reset();
 
         // Direct transformations operations
-        AGGAPI const trans_affine& translate(double x, double y);
-        AGGAPI const trans_affine& rotate(double a);
-        AGGAPI const trans_affine& scale(double s);
-        AGGAPI const trans_affine& scale(double x, double y);
+        const trans_affine& translate(double x, double y);
+        const trans_affine& rotate(double a);
+        const trans_affine& scale(double s);
+        const trans_affine& scale(double x, double y);
 
         // Multiply matrix to another one
         AGGAPI const trans_affine& multiply(const trans_affine& m);
 
         // Multiply "m" to "this" and assign the result to "this"
-        AGGAPI const trans_affine& premultiply(const trans_affine& m);
+        const trans_affine& premultiply(const trans_affine& m);
 
         // Multiply matrix to inverse of another one
         const trans_affine& multiply_inv(const trans_affine& m);
 
         // Multiply inverse of "m" to "this" and assign the result to "this"
-        AGGAPI const trans_affine& premultiply_inv(const trans_affine& m);
+        const trans_affine& premultiply_inv(const trans_affine& m);
 
         // Invert matrix. Do not try to invert degenerate matrices, 
         // there's no check for validity. If you set scale to 0 and 
@@ -259,25 +258,25 @@ namespace agg
 
         //-------------------------------------------- Transformations
         // Direct transformation of x and y
-        AGGAPI void transform(double* x, double* y) const;
+        void transform(double* x, double* y) const;
 
         // Direct transformation of x and y, 2x2 matrix only, no translation
-        AGGAPI void transform_2x2(double* x, double* y) const;
+        void transform_2x2(double* x, double* y) const;
 
         // Inverse transformation of x and y. It works slower than the 
         // direct transformation. For massive operations it's better to 
         // invert() the matrix and then use direct transformations. 
-        AGGAPI void inverse_transform(double* x, double* y) const;
+        void inverse_transform(double* x, double* y) const;
 
         //-------------------------------------------- Auxiliary
         // Calculate the determinant of matrix
-        double determinant() const
+        [[nodiscard]] double determinant() const
         {
             return sx * sy - shy * shx;
         }
 
         // Calculate the reciprocal of the determinant
-        double determinant_reciprocal() const
+        [[nodiscard]] double determinant_reciprocal() const
         {
             return 1.0 / (sx * sy - shy * shx);
         }
@@ -285,23 +284,23 @@ namespace agg
         // Get the average scale (by X and Y). 
         // Basically used to calculate the approximation_scale when
         // decomposinting curves into line segments.
-        AGGAPI double scale() const;
+        [[nodiscard]] double scale() const;
 
         // Check to see if the matrix is not degenerate
-        AGGAPI bool is_valid(double epsilon = affine_epsilon) const;
+        [[nodiscard]] AGGAPI bool is_valid(double epsilon = affine_epsilon) const;
 
         // Check to see if it's an identity matrix
-        AGGAPI bool is_identity(double epsilon = affine_epsilon) const;
+        [[nodiscard]] AGGAPI bool is_identity(double epsilon = affine_epsilon) const;
 
         // Check to see if two matrices are equal
-        AGGAPI bool is_equal(const trans_affine& m, double epsilon = affine_epsilon) const;
+        [[nodiscard]] AGGAPI bool is_equal(const trans_affine& m, double epsilon = affine_epsilon) const;
 
         // Determine the major parameters. Use with caution considering 
         // possible degenerate cases.
-        AGGAPI double rotation() const;
+        [[nodiscard]] AGGAPI double rotation() const;
         AGGAPI void   translation(double* dx, double* dy) const;
         AGGAPI void   scaling(double* x, double* y) const;
-        AGGAPI void   scaling_abs(double* x, double* y) const;
+        void   scaling_abs(double* x, double* y) const;
     };
 
     //------------------------------------------------------------------------

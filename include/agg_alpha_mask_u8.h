@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -47,8 +62,8 @@ namespace agg
     class alpha_mask_u8
     {
     public:
-        typedef int8u cover_type;
-        typedef alpha_mask_u8<Step, Offset, MaskF> self_type;
+        using cover_type = int8u;
+        using self_type = alpha_mask_u8<Step, Offset, MaskF>;
         enum cover_scale_e
         { 
             cover_shift = 8,
@@ -307,42 +322,42 @@ namespace agg
     };
     
 
-    typedef alpha_mask_u8<1, 0> alpha_mask_gray8;   //----alpha_mask_gray8
+    using alpha_mask_gray8 = alpha_mask_u8<1, 0>;   //----alpha_mask_gray8
 
-    typedef alpha_mask_u8<3, 0> alpha_mask_rgb24r;  //----alpha_mask_rgb24r
-    typedef alpha_mask_u8<3, 1> alpha_mask_rgb24g;  //----alpha_mask_rgb24g
-    typedef alpha_mask_u8<3, 2> alpha_mask_rgb24b;  //----alpha_mask_rgb24b
+    using alpha_mask_rgb24r = alpha_mask_u8<3, 0>;  //----alpha_mask_rgb24r
+    using alpha_mask_rgb24g = alpha_mask_u8<3, 1>;  //----alpha_mask_rgb24g
+    using alpha_mask_rgb24b = alpha_mask_u8<3, 2>;  //----alpha_mask_rgb24b
 
-    typedef alpha_mask_u8<3, 2> alpha_mask_bgr24r;  //----alpha_mask_bgr24r
-    typedef alpha_mask_u8<3, 1> alpha_mask_bgr24g;  //----alpha_mask_bgr24g
-    typedef alpha_mask_u8<3, 0> alpha_mask_bgr24b;  //----alpha_mask_bgr24b
+    using alpha_mask_bgr24r = alpha_mask_u8<3, 2>;  //----alpha_mask_bgr24r
+    using alpha_mask_bgr24g = alpha_mask_u8<3, 1>;  //----alpha_mask_bgr24g
+    using alpha_mask_bgr24b = alpha_mask_u8<3, 0>;  //----alpha_mask_bgr24b
 
-    typedef alpha_mask_u8<4, 0> alpha_mask_rgba32r; //----alpha_mask_rgba32r
-    typedef alpha_mask_u8<4, 1> alpha_mask_rgba32g; //----alpha_mask_rgba32g
-    typedef alpha_mask_u8<4, 2> alpha_mask_rgba32b; //----alpha_mask_rgba32b
-    typedef alpha_mask_u8<4, 3> alpha_mask_rgba32a; //----alpha_mask_rgba32a
+    using alpha_mask_rgba32r = alpha_mask_u8<4, 0>; //----alpha_mask_rgba32r
+    using alpha_mask_rgba32g = alpha_mask_u8<4, 1>; //----alpha_mask_rgba32g
+    using alpha_mask_rgba32b = alpha_mask_u8<4, 2>; //----alpha_mask_rgba32b
+    using alpha_mask_rgba32a = alpha_mask_u8<4, 3>; //----alpha_mask_rgba32a
 
-    typedef alpha_mask_u8<4, 1> alpha_mask_argb32r; //----alpha_mask_argb32r
-    typedef alpha_mask_u8<4, 2> alpha_mask_argb32g; //----alpha_mask_argb32g
-    typedef alpha_mask_u8<4, 3> alpha_mask_argb32b; //----alpha_mask_argb32b
-    typedef alpha_mask_u8<4, 0> alpha_mask_argb32a; //----alpha_mask_argb32a
+    using alpha_mask_argb32r = alpha_mask_u8<4, 1>; //----alpha_mask_argb32r
+    using alpha_mask_argb32g = alpha_mask_u8<4, 2>; //----alpha_mask_argb32g
+    using alpha_mask_argb32b = alpha_mask_u8<4, 3>; //----alpha_mask_argb32b
+    using alpha_mask_argb32a = alpha_mask_u8<4, 0>; //----alpha_mask_argb32a
 
-    typedef alpha_mask_u8<4, 2> alpha_mask_bgra32r; //----alpha_mask_bgra32r
-    typedef alpha_mask_u8<4, 1> alpha_mask_bgra32g; //----alpha_mask_bgra32g
-    typedef alpha_mask_u8<4, 0> alpha_mask_bgra32b; //----alpha_mask_bgra32b
-    typedef alpha_mask_u8<4, 3> alpha_mask_bgra32a; //----alpha_mask_bgra32a
+    using alpha_mask_bgra32r = alpha_mask_u8<4, 2>; //----alpha_mask_bgra32r
+    using alpha_mask_bgra32g = alpha_mask_u8<4, 1>; //----alpha_mask_bgra32g
+    using alpha_mask_bgra32b = alpha_mask_u8<4, 0>; //----alpha_mask_bgra32b
+    using alpha_mask_bgra32a = alpha_mask_u8<4, 3>; //----alpha_mask_bgra32a
 
-    typedef alpha_mask_u8<4, 3> alpha_mask_abgr32r; //----alpha_mask_abgr32r
-    typedef alpha_mask_u8<4, 2> alpha_mask_abgr32g; //----alpha_mask_abgr32g
-    typedef alpha_mask_u8<4, 1> alpha_mask_abgr32b; //----alpha_mask_abgr32b
-    typedef alpha_mask_u8<4, 0> alpha_mask_abgr32a; //----alpha_mask_abgr32a
+    using alpha_mask_abgr32r = alpha_mask_u8<4, 3>; //----alpha_mask_abgr32r
+    using alpha_mask_abgr32g = alpha_mask_u8<4, 2>; //----alpha_mask_abgr32g
+    using alpha_mask_abgr32b = alpha_mask_u8<4, 1>; //----alpha_mask_abgr32b
+    using alpha_mask_abgr32a = alpha_mask_u8<4, 0>; //----alpha_mask_abgr32a
 
-    typedef alpha_mask_u8<3, 0, rgb_to_gray_mask_u8<0, 1, 2> > alpha_mask_rgb24gray;  //----alpha_mask_rgb24gray
-    typedef alpha_mask_u8<3, 0, rgb_to_gray_mask_u8<2, 1, 0> > alpha_mask_bgr24gray;  //----alpha_mask_bgr24gray
-    typedef alpha_mask_u8<4, 0, rgb_to_gray_mask_u8<0, 1, 2> > alpha_mask_rgba32gray; //----alpha_mask_rgba32gray
-    typedef alpha_mask_u8<4, 1, rgb_to_gray_mask_u8<0, 1, 2> > alpha_mask_argb32gray; //----alpha_mask_argb32gray
-    typedef alpha_mask_u8<4, 0, rgb_to_gray_mask_u8<2, 1, 0> > alpha_mask_bgra32gray; //----alpha_mask_bgra32gray
-    typedef alpha_mask_u8<4, 1, rgb_to_gray_mask_u8<2, 1, 0> > alpha_mask_abgr32gray; //----alpha_mask_abgr32gray
+    using alpha_mask_rgb24gray = alpha_mask_u8<3, 0, rgb_to_gray_mask_u8<0, 1, 2> >;  //----alpha_mask_rgb24gray
+    using alpha_mask_bgr24gray = alpha_mask_u8<3, 0, rgb_to_gray_mask_u8<2, 1, 0> >;  //----alpha_mask_bgr24gray
+    using alpha_mask_rgba32gray = alpha_mask_u8<4, 0, rgb_to_gray_mask_u8<0, 1, 2> >; //----alpha_mask_rgba32gray
+    using alpha_mask_argb32gray = alpha_mask_u8<4, 1, rgb_to_gray_mask_u8<0, 1, 2> >; //----alpha_mask_argb32gray
+    using alpha_mask_bgra32gray = alpha_mask_u8<4, 0, rgb_to_gray_mask_u8<2, 1, 0> >; //----alpha_mask_bgra32gray
+    using alpha_mask_abgr32gray = alpha_mask_u8<4, 1, rgb_to_gray_mask_u8<2, 1, 0> >; //----alpha_mask_abgr32gray
 
 
 
@@ -351,8 +366,8 @@ namespace agg
     class amask_no_clip_u8
     {
     public:
-        typedef int8u cover_type;
-        typedef amask_no_clip_u8<Step, Offset, MaskF> self_type;
+        using cover_type = int8u;
+        using self_type = amask_no_clip_u8<Step, Offset, MaskF>;
         enum cover_scale_e
         { 
             cover_shift = 8,
@@ -454,42 +469,42 @@ namespace agg
     };
     
 
-    typedef amask_no_clip_u8<1, 0> amask_no_clip_gray8;   //----amask_no_clip_gray8
+    using amask_no_clip_gray8 = amask_no_clip_u8<1, 0>;   //----amask_no_clip_gray8
 
-    typedef amask_no_clip_u8<3, 0> amask_no_clip_rgb24r;  //----amask_no_clip_rgb24r
-    typedef amask_no_clip_u8<3, 1> amask_no_clip_rgb24g;  //----amask_no_clip_rgb24g
-    typedef amask_no_clip_u8<3, 2> amask_no_clip_rgb24b;  //----amask_no_clip_rgb24b
+    using amask_no_clip_rgb24r = amask_no_clip_u8<3, 0>;  //----amask_no_clip_rgb24r
+    using amask_no_clip_rgb24g = amask_no_clip_u8<3, 1>;  //----amask_no_clip_rgb24g
+    using amask_no_clip_rgb24b = amask_no_clip_u8<3, 2>;  //----amask_no_clip_rgb24b
 
-    typedef amask_no_clip_u8<3, 2> amask_no_clip_bgr24r;  //----amask_no_clip_bgr24r
-    typedef amask_no_clip_u8<3, 1> amask_no_clip_bgr24g;  //----amask_no_clip_bgr24g
-    typedef amask_no_clip_u8<3, 0> amask_no_clip_bgr24b;  //----amask_no_clip_bgr24b
+    using amask_no_clip_bgr24r = amask_no_clip_u8<3, 2>;  //----amask_no_clip_bgr24r
+    using amask_no_clip_bgr24g = amask_no_clip_u8<3, 1>;  //----amask_no_clip_bgr24g
+    using amask_no_clip_bgr24b = amask_no_clip_u8<3, 0>;  //----amask_no_clip_bgr24b
 
-    typedef amask_no_clip_u8<4, 0> amask_no_clip_rgba32r; //----amask_no_clip_rgba32r
-    typedef amask_no_clip_u8<4, 1> amask_no_clip_rgba32g; //----amask_no_clip_rgba32g
-    typedef amask_no_clip_u8<4, 2> amask_no_clip_rgba32b; //----amask_no_clip_rgba32b
-    typedef amask_no_clip_u8<4, 3> amask_no_clip_rgba32a; //----amask_no_clip_rgba32a
+    using amask_no_clip_rgba32r = amask_no_clip_u8<4, 0>; //----amask_no_clip_rgba32r
+    using amask_no_clip_rgba32g = amask_no_clip_u8<4, 1>; //----amask_no_clip_rgba32g
+    using amask_no_clip_rgba32b = amask_no_clip_u8<4, 2>; //----amask_no_clip_rgba32b
+    using amask_no_clip_rgba32a = amask_no_clip_u8<4, 3>; //----amask_no_clip_rgba32a
 
-    typedef amask_no_clip_u8<4, 1> amask_no_clip_argb32r; //----amask_no_clip_argb32r
-    typedef amask_no_clip_u8<4, 2> amask_no_clip_argb32g; //----amask_no_clip_argb32g
-    typedef amask_no_clip_u8<4, 3> amask_no_clip_argb32b; //----amask_no_clip_argb32b
-    typedef amask_no_clip_u8<4, 0> amask_no_clip_argb32a; //----amask_no_clip_argb32a
+    using amask_no_clip_argb32r = amask_no_clip_u8<4, 1>; //----amask_no_clip_argb32r
+    using amask_no_clip_argb32g = amask_no_clip_u8<4, 2>; //----amask_no_clip_argb32g
+    using amask_no_clip_argb32b = amask_no_clip_u8<4, 3>; //----amask_no_clip_argb32b
+    using amask_no_clip_argb32a = amask_no_clip_u8<4, 0>; //----amask_no_clip_argb32a
 
-    typedef amask_no_clip_u8<4, 2> amask_no_clip_bgra32r; //----amask_no_clip_bgra32r
-    typedef amask_no_clip_u8<4, 1> amask_no_clip_bgra32g; //----amask_no_clip_bgra32g
-    typedef amask_no_clip_u8<4, 0> amask_no_clip_bgra32b; //----amask_no_clip_bgra32b
-    typedef amask_no_clip_u8<4, 3> amask_no_clip_bgra32a; //----amask_no_clip_bgra32a
+    using amask_no_clip_bgra32r = amask_no_clip_u8<4, 2>; //----amask_no_clip_bgra32r
+    using amask_no_clip_bgra32g = amask_no_clip_u8<4, 1>; //----amask_no_clip_bgra32g
+    using amask_no_clip_bgra32b = amask_no_clip_u8<4, 0>; //----amask_no_clip_bgra32b
+    using amask_no_clip_bgra32a = amask_no_clip_u8<4, 3>; //----amask_no_clip_bgra32a
 
-    typedef amask_no_clip_u8<4, 3> amask_no_clip_abgr32r; //----amask_no_clip_abgr32r
-    typedef amask_no_clip_u8<4, 2> amask_no_clip_abgr32g; //----amask_no_clip_abgr32g
-    typedef amask_no_clip_u8<4, 1> amask_no_clip_abgr32b; //----amask_no_clip_abgr32b
-    typedef amask_no_clip_u8<4, 0> amask_no_clip_abgr32a; //----amask_no_clip_abgr32a
+    using amask_no_clip_abgr32r = amask_no_clip_u8<4, 3>; //----amask_no_clip_abgr32r
+    using amask_no_clip_abgr32g = amask_no_clip_u8<4, 2>; //----amask_no_clip_abgr32g
+    using amask_no_clip_abgr32b = amask_no_clip_u8<4, 1>; //----amask_no_clip_abgr32b
+    using amask_no_clip_abgr32a = amask_no_clip_u8<4, 0>; //----amask_no_clip_abgr32a
 
-    typedef amask_no_clip_u8<3, 0, rgb_to_gray_mask_u8<0, 1, 2> > amask_no_clip_rgb24gray;  //----amask_no_clip_rgb24gray
-    typedef amask_no_clip_u8<3, 0, rgb_to_gray_mask_u8<2, 1, 0> > amask_no_clip_bgr24gray;  //----amask_no_clip_bgr24gray
-    typedef amask_no_clip_u8<4, 0, rgb_to_gray_mask_u8<0, 1, 2> > amask_no_clip_rgba32gray; //----amask_no_clip_rgba32gray
-    typedef amask_no_clip_u8<4, 1, rgb_to_gray_mask_u8<0, 1, 2> > amask_no_clip_argb32gray; //----amask_no_clip_argb32gray
-    typedef amask_no_clip_u8<4, 0, rgb_to_gray_mask_u8<2, 1, 0> > amask_no_clip_bgra32gray; //----amask_no_clip_bgra32gray
-    typedef amask_no_clip_u8<4, 1, rgb_to_gray_mask_u8<2, 1, 0> > amask_no_clip_abgr32gray; //----amask_no_clip_abgr32gray
+    using amask_no_clip_rgb24gray = amask_no_clip_u8<3, 0, rgb_to_gray_mask_u8<0, 1, 2> >;  //----amask_no_clip_rgb24gray
+    using amask_no_clip_bgr24gray = amask_no_clip_u8<3, 0, rgb_to_gray_mask_u8<2, 1, 0> >;  //----amask_no_clip_bgr24gray
+    using amask_no_clip_rgba32gray = amask_no_clip_u8<4, 0, rgb_to_gray_mask_u8<0, 1, 2> >; //----amask_no_clip_rgba32gray
+    using amask_no_clip_argb32gray = amask_no_clip_u8<4, 1, rgb_to_gray_mask_u8<0, 1, 2> >; //----amask_no_clip_argb32gray
+    using amask_no_clip_bgra32gray = amask_no_clip_u8<4, 0, rgb_to_gray_mask_u8<2, 1, 0> >; //----amask_no_clip_bgra32gray
+    using amask_no_clip_abgr32gray = amask_no_clip_u8<4, 1, rgb_to_gray_mask_u8<2, 1, 0> >; //----amask_no_clip_abgr32gray
 
 
 }

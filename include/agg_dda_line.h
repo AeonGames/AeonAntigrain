@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -31,7 +46,7 @@ namespace agg
     {
     public:
         //--------------------------------------------------------------------
-        dda_line_interpolator() {}
+        dda_line_interpolator() = default;
 
         //--------------------------------------------------------------------
         dda_line_interpolator(int y1, int y2, unsigned count) :
@@ -67,8 +82,8 @@ namespace agg
 
 
         //--------------------------------------------------------------------
-        int y()  const { return m_y + (m_dy >> (FractionShift-YShift)); }
-        int dy() const { return m_dy; }
+        [[nodiscard]] int y()  const { return m_y + (m_dy >> (FractionShift-YShift)); }
+        [[nodiscard]] int dy() const { return m_dy; }
 
 
     private:
@@ -85,11 +100,11 @@ namespace agg
     class dda2_line_interpolator
     {
     public:
-        typedef int save_data_type;
+        using save_data_type = int;
         enum save_size_e { save_size = 2 };
 
         //--------------------------------------------------------------------
-        dda2_line_interpolator() {}
+        dda2_line_interpolator() = default;
 
         //-------------------------------------------- Forward-adjusted line
         dda2_line_interpolator(int y1, int y2, int count) :
@@ -192,12 +207,12 @@ namespace agg
         }
 
         //--------------------------------------------------------------------
-        int mod() const { return m_mod; }
-        int rem() const { return m_rem; }
-        int lft() const { return m_lft; }
+        [[nodiscard]] int mod() const { return m_mod; }
+        [[nodiscard]] int rem() const { return m_rem; }
+        [[nodiscard]] int lft() const { return m_lft; }
 
         //--------------------------------------------------------------------
-        int y() const { return m_y; }
+        [[nodiscard]] int y() const { return m_y; }
 
     private:
         int m_cnt;
@@ -244,9 +259,9 @@ namespace agg
         }
     
         //--------------------------------------------------------------------
-        bool     is_ver() const { return m_ver; }
-        unsigned len()    const { return m_len; }
-        int      inc()    const { return m_inc; }
+        [[nodiscard]] bool     is_ver() const { return m_ver; }
+        [[nodiscard]] unsigned len()    const { return m_len; }
+        [[nodiscard]] int      inc()    const { return m_inc; }
 
         //--------------------------------------------------------------------
         void hstep()
@@ -263,12 +278,12 @@ namespace agg
         }
 
         //--------------------------------------------------------------------
-        int x1() const { return m_x1_lr; }
-        int y1() const { return m_y1_lr; }
-        int x2() const { return line_lr(m_interpolator.y()); }
-        int y2() const { return line_lr(m_interpolator.y()); }
-        int x2_hr() const { return m_interpolator.y(); }
-        int y2_hr() const { return m_interpolator.y(); }
+        [[nodiscard]] int x1() const { return m_x1_lr; }
+        [[nodiscard]] int y1() const { return m_y1_lr; }
+        [[nodiscard]] int x2() const { return line_lr(m_interpolator.y()); }
+        [[nodiscard]] int y2() const { return line_lr(m_interpolator.y()); }
+        [[nodiscard]] int x2_hr() const { return m_interpolator.y(); }
+        [[nodiscard]] int y2_hr() const { return m_interpolator.y(); }
 
     private:
         int                    m_x1_lr;

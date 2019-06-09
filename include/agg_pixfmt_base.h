@@ -53,9 +53,9 @@ namespace agg
     template<class ColorT, class Order = void> 
     struct blender_base
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
 
         static rgba get(value_type r, value_type g, value_type b, value_type a, cover_type cover = cover_full)
         {

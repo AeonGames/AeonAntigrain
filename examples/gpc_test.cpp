@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_conv_gpc.h"
 #include "agg_basics.h"
@@ -529,7 +544,7 @@ if(fd)
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt> base_ren_type;
+        using base_ren_type = agg::renderer_base<pixfmt>;
 
         pixfmt pf(rbuf_window());
         base_ren_type ren_base(pf);
@@ -562,8 +577,8 @@ if(fd)
         agg::scanline_u8 sl;
         agg::rasterizer_scanline_aa<> ras;
 
-        typedef agg::renderer_base<pixfmt> base_ren_type;
-        typedef agg::renderer_scanline_aa_solid<base_ren_type> renderer_solid;
+        using base_ren_type = agg::renderer_base<pixfmt>;
+        using renderer_solid = agg::renderer_scanline_aa_solid<base_ren_type>;
 
         pixfmt pf(rbuf_window());
         base_ren_type ren_base(pf);

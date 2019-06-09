@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -21,14 +36,14 @@ enum { flip_y = true };
 
 class the_application : public agg::platform_support
 {
-    typedef agg::renderer_base<pixfmt> renderer_base;
-    typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
-    typedef agg::gamma_lut<agg::int8u, agg::int8u> gamma_lut_type;
-    typedef agg::gradient_radial_focus gradient_func_type;
-    typedef agg::gradient_reflect_adaptor<gradient_func_type> gradient_adaptor_type;
-    typedef agg::gradient_lut<agg::color_interpolator<agg::srgba8>, 1024> color_func_type;
-    typedef agg::span_interpolator_linear<> interpolator_type;
-    typedef agg::span_allocator<color_type> span_allocator_type;
+    using renderer_base = agg::renderer_base<pixfmt>;
+    using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
+    using gamma_lut_type = agg::gamma_lut<agg::int8u, agg::int8u>;
+    using gradient_func_type = agg::gradient_radial_focus;
+    using gradient_adaptor_type = agg::gradient_reflect_adaptor<gradient_func_type>;
+    using color_func_type = agg::gradient_lut<agg::color_interpolator<agg::srgba8>, 1024>;
+    using interpolator_type = agg::span_interpolator_linear<>;
+    using span_allocator_type = agg::span_allocator<color_type>;
     typedef agg::span_gradient<color_type, 
                                interpolator_type, 
                                gradient_adaptor_type, 

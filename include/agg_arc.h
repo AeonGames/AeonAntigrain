@@ -60,7 +60,7 @@ namespace agg
 			bool ccw = true);
 
 		AGGAPI void approximation_scale(double s);
-		double approximation_scale() const { return m_scale; }
+		[[nodiscard]] double approximation_scale() const { return m_scale; }
 
 		AGGAPI void rewind(unsigned);
 		AGGAPI unsigned vertex(double* x, double* y);

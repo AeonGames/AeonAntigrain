@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -258,13 +273,13 @@ namespace agg
     template<class FontEngine> class font_cache_manager
     {
     public:
-        typedef FontEngine font_engine_type;
-        typedef font_cache_manager<FontEngine> self_type;
-        typedef typename font_engine_type::path_adaptor_type   path_adaptor_type;
-        typedef typename font_engine_type::gray8_adaptor_type  gray8_adaptor_type;
-        typedef typename gray8_adaptor_type::embedded_scanline gray8_scanline_type;
-        typedef typename font_engine_type::mono_adaptor_type   mono_adaptor_type;
-        typedef typename mono_adaptor_type::embedded_scanline  mono_scanline_type;
+        using font_engine_type = FontEngine;
+        using self_type = font_cache_manager<FontEngine>;
+        using path_adaptor_type = typename font_engine_type::path_adaptor_type  ;
+        using gray8_adaptor_type = typename font_engine_type::gray8_adaptor_type ;
+        using gray8_scanline_type = typename gray8_adaptor_type::embedded_scanline;
+        using mono_adaptor_type = typename font_engine_type::mono_adaptor_type  ;
+        using mono_scanline_type = typename mono_adaptor_type::embedded_scanline ;
 
         //--------------------------------------------------------------------
         font_cache_manager(font_engine_type& engine, unsigned max_fonts=32) :

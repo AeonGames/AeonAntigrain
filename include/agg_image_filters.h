@@ -65,7 +65,6 @@ namespace agg
         template<class FilterF> void calculate(const FilterF& filter,
                                                bool normalization=true)
         {
-			filter; // prevent erroneous C4100 in MSVC
             double r = filter.radius();
             realloc_lut(r);
             unsigned i;
@@ -85,7 +84,7 @@ namespace agg
             }
         }
 
-        image_filter_lut() : m_radius(0), m_diameter(0), m_start(0) {}
+        image_filter_lut()  = default;
 
         template<class FilterF> image_filter_lut(const FilterF& filter, 
                                                  bool normalization=true)
@@ -93,24 +92,23 @@ namespace agg
             calculate(filter, normalization);
         }
 
-        double       radius()       const { return m_radius;   }
-        unsigned     diameter()     const { return m_diameter; }
-        int          start()        const { return m_start;    }
-        const int16* weight_array() const { return &m_weight_array[0]; }
+        [[nodiscard]] double       radius()       const { return m_radius;   }
+        [[nodiscard]] unsigned     diameter()     const { return m_diameter; }
+        [[nodiscard]] int          start()        const { return m_start;    }
+        [[nodiscard]] const int16* weight_array() const { return &m_weight_array[0]; }
         AGGAPI void         normalize();
+
+        image_filter_lut(const image_filter_lut&) = delete;
+        const image_filter_lut& operator = (const image_filter_lut&) = delete;
 
     private:
         AGGAPI void realloc_lut(double radius);
-        AGGAPI image_filter_lut(const image_filter_lut&);
-        AGGAPI const image_filter_lut& operator = (const image_filter_lut&);
 
-        double           m_radius;
-        unsigned         m_diameter;
-        int              m_start;
+        double           m_radius{0};
+        unsigned         m_diameter{0};
+        int              m_start{0};
         pod_array<int16> m_weight_array;
     };
-
-
 
     //--------------------------------------------------------image_filter
     template<class FilterF> class image_filter : public image_filter_lut
@@ -203,23 +201,23 @@ namespace agg
     {
         double a;
         double i0a;
-        double epsilon;
+        double epsilon{1e-12};
 
     public:
         image_filter_kaiser(double b = 6.33) :
-            a(b), epsilon(1e-12)
+            a(b) 
         {
             i0a = 1.0 / bessel_i0(b);
         }
 
         static double radius() { return 1.0; }
-        double calc_weight(double x) const
+        [[nodiscard]] double calc_weight(double x) const
         {
             return bessel_i0(a * std::sqrt(1. - x * x)) * i0a;
         }
 
     private:
-        double bessel_i0(double x) const
+        [[nodiscard]] double bessel_i0(double x) const
         {
             int i;
             double sum, y, t;
@@ -267,7 +265,7 @@ namespace agg
         {}
 
         static double radius() { return 2.0; }
-        double calc_weight(double x) const
+        [[nodiscard]] double calc_weight(double x) const
         {
             if(x < 1.0) return p0 + x * x * (p2 + x * p3);
             if(x < 2.0) return q0 + x * (q1 + x * (q2 + x * q3));
@@ -337,8 +335,8 @@ namespace agg
     {
     public:
         image_filter_sinc(double r) : m_radius(r < 2.0 ? 2.0 : r) {}
-        double radius() const { return m_radius; }
-        double calc_weight(double x) const
+        [[nodiscard]] double radius() const { return m_radius; }
+        [[nodiscard]] double calc_weight(double x) const
         {
             if(x == 0.0) return 1.0;
             x *= pi;
@@ -354,8 +352,8 @@ namespace agg
     {
     public:
         image_filter_lanczos(double r) : m_radius(r < 2.0 ? 2.0 : r) {}
-        double radius() const { return m_radius; }
-        double calc_weight(double x) const
+        [[nodiscard]] double radius() const { return m_radius; }
+        [[nodiscard]] double calc_weight(double x) const
         {
            if(x == 0.0) return 1.0;
            if(x > m_radius) return 0.0;
@@ -373,8 +371,8 @@ namespace agg
     {
     public:
         image_filter_blackman(double r) : m_radius(r < 2.0 ? 2.0 : r) {}
-        double radius() const { return m_radius; }
-        double calc_weight(double x) const
+        [[nodiscard]] double radius() const { return m_radius; }
+        [[nodiscard]] double calc_weight(double x) const
         {
            if(x == 0.0) return 1.0;
            if(x > m_radius) return 0.0;

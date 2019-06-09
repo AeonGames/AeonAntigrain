@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -40,9 +55,9 @@ double            g_y2 = 0;
 class the_application : public agg::platform_support
 {
 public:
-    typedef agg::renderer_base<pixfmt>                     renderer_base;
-    typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
-    typedef agg::renderer_base<pixfmt_pre> renderer_base_pre;
+    using renderer_base = agg::renderer_base<pixfmt>                    ;
+    using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
+    using renderer_base_pre = agg::renderer_base<pixfmt_pre>;
 
     agg::interactive_polygon   m_quad;
     agg::rbox_ctrl<color_type> m_trans_type;
@@ -124,10 +139,10 @@ public:
         //                                 agg::wrap_mode_reflect> img_accessor_type;
         //img_accessor_type ia(pixf_img);
 
-        //typedef agg::image_accessor_clip<pixfmt> img_accessor_type;
+        //using img_accessor_type = agg::image_accessor_clip<pixfmt>;
         //img_accessor_type ia(pixf_img, agg::rgba(1,1,1));
 
-        typedef agg::image_accessor_clone<pixfmt> img_accessor_type;
+        using img_accessor_type = agg::image_accessor_clone<pixfmt>;
         img_accessor_type ia(pixf_img);
 
         start_timer();
@@ -145,7 +160,7 @@ public:
                 // Also note that we can use the linear interpolator instead of 
                 // arbitrary span_interpolator_trans. It works much faster, 
                 // but the transformations must be linear and parellel.
-                typedef agg::span_interpolator_linear<agg::trans_affine> interpolator_type;
+                using interpolator_type = agg::span_interpolator_linear<agg::trans_affine>;
                 interpolator_type interpolator(tr);
 
                 typedef agg::span_image_filter_rgba_nn<img_accessor_type,
@@ -160,7 +175,7 @@ public:
                 agg::trans_bilinear tr(m_quad.polygon(), g_x1, g_y1, g_x2, g_y2);
                 if(tr.is_valid())
                 {
-                    typedef agg::span_interpolator_linear<agg::trans_bilinear> interpolator_type;
+                    using interpolator_type = agg::span_interpolator_linear<agg::trans_bilinear>;
                     interpolator_type interpolator(tr);
 
                     typedef agg::span_image_filter_rgba_2x2<img_accessor_type,
@@ -178,8 +193,8 @@ public:
                 {
                     // Subdivision and linear interpolation (faster, but less accurate)
                     //-----------------------
-                    //typedef agg::span_interpolator_linear<agg::trans_perspective> interpolator_type;
-                    //typedef agg::span_subdiv_adaptor<interpolator_type> subdiv_adaptor_type;
+                    //using interpolator_type = agg::span_interpolator_linear<agg::trans_perspective>;
+                    //using subdiv_adaptor_type = agg::span_subdiv_adaptor<interpolator_type>;
                     //interpolator_type interpolator(tr);
                     //subdiv_adaptor_type subdiv_adaptor(interpolator);
                     //
@@ -190,7 +205,7 @@ public:
 
                     // Direct calculations of the coordinates
                     //-----------------------
-                    typedef agg::span_interpolator_trans<agg::trans_perspective> interpolator_type;
+                    using interpolator_type = agg::span_interpolator_trans<agg::trans_perspective>;
                     interpolator_type interpolator(tr);
                     typedef agg::span_image_filter_rgba_2x2<img_accessor_type,
                                                             interpolator_type> span_gen_type;

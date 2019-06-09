@@ -61,8 +61,8 @@ namespace agg
         };
 
     public:
-        typedef vertex_sequence<vertex_dist, 6> vertex_storage;
-        typedef pod_bvector<point_d, 6>         coord_storage;
+        using vertex_storage = vertex_sequence<vertex_dist, 6>;
+        using coord_storage = pod_bvector<point_d, 6>;
 
         AGGAPI vcgen_stroke();
 
@@ -70,9 +70,9 @@ namespace agg
         void line_join(line_join_e lj)   { m_stroker.line_join(lj); }
         void inner_join(inner_join_e ij) { m_stroker.inner_join(ij); }
 
-        line_cap_e   line_cap()   const { return m_stroker.line_cap(); }
-        line_join_e  line_join()  const { return m_stroker.line_join(); }
-        inner_join_e inner_join() const { return m_stroker.inner_join(); }
+        [[nodiscard]] line_cap_e   line_cap()   const { return m_stroker.line_cap(); }
+        [[nodiscard]] line_join_e  line_join()  const { return m_stroker.line_join(); }
+        [[nodiscard]] inner_join_e inner_join() const { return m_stroker.inner_join(); }
 
         void width(double w) { m_stroker.width(w); }
         void miter_limit(double ml) { m_stroker.miter_limit(ml); }
@@ -80,13 +80,13 @@ namespace agg
         void inner_miter_limit(double ml) { m_stroker.inner_miter_limit(ml); }
         void approximation_scale(double as) { m_stroker.approximation_scale(as); }
 
-        double width() const { return m_stroker.width(); }
-        double miter_limit() const { return m_stroker.miter_limit(); }
-        double inner_miter_limit() const { return m_stroker.inner_miter_limit(); }
-        double approximation_scale() const { return m_stroker.approximation_scale(); }
+        [[nodiscard]] double width() const { return m_stroker.width(); }
+        [[nodiscard]] double miter_limit() const { return m_stroker.miter_limit(); }
+        [[nodiscard]] double inner_miter_limit() const { return m_stroker.inner_miter_limit(); }
+        [[nodiscard]] double approximation_scale() const { return m_stroker.approximation_scale(); }
 
         void shorten(double s) { m_shorten = s; }
-        double shorten() const { return m_shorten; }
+        [[nodiscard]] double shorten() const { return m_shorten; }
 
         // Vertex Generator Interface
         AGGAPI void remove_all();
@@ -96,22 +96,21 @@ namespace agg
         AGGAPI void     rewind(unsigned path_id);
         AGGAPI unsigned vertex(double* x, double* y);
 
+        vcgen_stroke(const vcgen_stroke&) = delete;
+        const vcgen_stroke& operator = (const vcgen_stroke&) = delete;
+
     private:
-        vcgen_stroke(const vcgen_stroke&);
-        AGGAPI const vcgen_stroke& operator = (const vcgen_stroke&);
 
         math_stroke<coord_storage> m_stroker;
         vertex_storage             m_src_vertices;
         coord_storage              m_out_vertices;
-        double                     m_shorten;
-        unsigned                   m_closed;
-        status_e                   m_status;
+        double                     m_shorten{0.0};
+        unsigned                   m_closed{0};
+        status_e                   m_status{initial};
         status_e                   m_prev_status;
-        unsigned                   m_src_vertex;
-        unsigned                   m_out_vertex;
+        unsigned                   m_src_vertex{0};
+        unsigned                   m_out_vertex{0};
     };
-
-
 }
 
 #endif

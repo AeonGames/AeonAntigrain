@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -28,9 +43,9 @@ namespace agg
     class span_gradient_alpha
     {
     public:
-        typedef Interpolator interpolator_type;
-        typedef ColorT color_type;
-        typedef typename color_type::value_type alpha_type;
+        using interpolator_type = Interpolator;
+        using color_type = ColorT;
+        using alpha_type = typename color_type::value_type;
 
         enum downscale_shift_e
         {
@@ -103,21 +118,21 @@ namespace agg
     //=======================================================gradient_alpha_x
     template<class ColorT> struct gradient_alpha_x
     {
-        typedef typename ColorT::value_type alpha_type;
+        using alpha_type = typename ColorT::value_type;
         alpha_type operator [] (alpha_type x) const { return x; }
     };
 
     //====================================================gradient_alpha_x_u8
     struct gradient_alpha_x_u8
     {
-        typedef int8u alpha_type;
+        using alpha_type = int8u;
         alpha_type operator [] (alpha_type x) const { return x; }
     };
 
     //==========================================gradient_alpha_one_munus_x_u8
     struct gradient_alpha_one_munus_x_u8
     {
-        typedef int8u alpha_type;
+        using alpha_type = int8u;
         alpha_type operator [] (alpha_type x) const { return 255-x; }
     };
 

@@ -30,6 +30,7 @@ limitations under the License.
 #ifndef AGG_LINE_AA_BASICS_INCLUDED
 #define AGG_LINE_AA_BASICS_INCLUDED
 
+#include <array>
 #include <cstdlib>
 #include "agg_basics.h"
 
@@ -96,7 +97,7 @@ namespace agg
     struct line_parameters
     {
         //---------------------------------------------------------------------
-        line_parameters() {}
+        line_parameters() = default;
         line_parameters(int x1_, int y1_, int x2_, int y2_, int len_) :
             x1(x1_), y1(y1_), x2(x2_), y2(y2_), 
             dx(std::abs(x2_ - x1_)),
@@ -111,17 +112,17 @@ namespace agg
         }
 
         //---------------------------------------------------------------------
-        unsigned orthogonal_quadrant() const { return s_orthogonal_quadrant[octant]; }
-        unsigned diagonal_quadrant()   const { return s_diagonal_quadrant[octant];   }
+        [[nodiscard]] unsigned orthogonal_quadrant() const { return s_orthogonal_quadrant[octant]; }
+        [[nodiscard]] unsigned diagonal_quadrant()   const { return s_diagonal_quadrant[octant];   }
 
         //---------------------------------------------------------------------
-        bool same_orthogonal_quadrant(const line_parameters& lp) const
+        [[nodiscard]] bool same_orthogonal_quadrant(const line_parameters& lp) const
         {
             return s_orthogonal_quadrant[octant] == s_orthogonal_quadrant[lp.octant];
         }
 
         //---------------------------------------------------------------------
-        bool same_diagonal_quadrant(const line_parameters& lp) const
+        [[nodiscard]] bool same_diagonal_quadrant(const line_parameters& lp) const
         {
             return s_diagonal_quadrant[octant] == s_diagonal_quadrant[lp.octant];
         }
@@ -157,8 +158,8 @@ namespace agg
         int octant;
 
         //---------------------------------------------------------------------
-        AGGAPI static const int8u s_orthogonal_quadrant[8];
-        AGGAPI static const int8u s_diagonal_quadrant[8];
+        AGGAPI static std::array<const int8u,8> s_orthogonal_quadrant;
+        AGGAPI static std::array<const int8u,8> s_diagonal_quadrant;
     };
 
 

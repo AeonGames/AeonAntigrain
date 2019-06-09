@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -26,10 +41,10 @@ namespace agg
     class renderer_raster_htext_solid
     {
     public:
-        typedef BaseRenderer ren_type;
-        typedef GlyphGenerator glyph_gen_type;
-        typedef typename glyph_gen_type::glyph_rect glyph_rect;
-        typedef typename ren_type::color_type color_type;
+        using ren_type = BaseRenderer;
+        using glyph_gen_type = GlyphGenerator;
+        using glyph_rect = typename glyph_gen_type::glyph_rect;
+        using color_type = typename ren_type::color_type;
 
         renderer_raster_htext_solid(ren_type& ren, glyph_gen_type& glyph) :
             m_ren(&ren),
@@ -90,10 +105,10 @@ namespace agg
     class renderer_raster_vtext_solid
     {
     public:
-        typedef BaseRenderer ren_type;
-        typedef GlyphGenerator glyph_gen_type;
-        typedef typename glyph_gen_type::glyph_rect glyph_rect;
-        typedef typename ren_type::color_type color_type;
+        using ren_type = BaseRenderer;
+        using glyph_gen_type = GlyphGenerator;
+        using glyph_rect = typename glyph_gen_type::glyph_rect;
+        using color_type = typename ren_type::color_type;
 
         renderer_raster_vtext_solid(ren_type& ren, glyph_gen_type& glyph) :
             m_ren(&ren),
@@ -157,14 +172,14 @@ namespace agg
     class renderer_raster_htext
     {
     public:
-        typedef ScanlineRenderer ren_type;
-        typedef GlyphGenerator glyph_gen_type;
-        typedef typename glyph_gen_type::glyph_rect glyph_rect;
+        using ren_type = ScanlineRenderer;
+        using glyph_gen_type = GlyphGenerator;
+        using glyph_rect = typename glyph_gen_type::glyph_rect;
 
         class scanline_single_span
         {
         public:
-            typedef agg::cover_type cover_type;
+            using cover_type = agg::cover_type;
 
             //----------------------------------------------------------------
             struct const_span
@@ -179,7 +194,7 @@ namespace agg
                 {}
             };
 
-            typedef const const_span* const_iterator;
+            using const_iterator = const const_span*;
 
             //----------------------------------------------------------------
             scanline_single_span(int x, int y, unsigned len, 

@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "agg_rendering_buffer.h"
@@ -329,7 +344,7 @@ public:
     {
         agg::rasterizer_scanline_aa<> ras;
 
-        typedef agg::renderer_base<pixfmt> renderer_base;
+        using renderer_base = agg::renderer_base<pixfmt>;
         agg::scanline_u8 sl;
 
         pixfmt pixf(rbuf_window());
@@ -398,12 +413,12 @@ public:
             case 5: gr_ptr = &gr_conic;   break;
         }
 
-        typedef agg::span_interpolator_linear<> interpolator_type;
+        using interpolator_type = agg::span_interpolator_linear<>;
         typedef agg::span_gradient<color_type, 
                                    interpolator_type,
                                    gradient_polymorphic_wrapper_base,
                                    color_function_profile> gradient_span_gen;
-        typedef agg::span_allocator<gradient_span_gen::color_type> gradient_span_alloc;
+        using gradient_span_alloc = agg::span_allocator<gradient_span_gen::color_type>;
 
         gradient_span_alloc    span_alloc;
         color_function_profile colors(color_profile, m_profile.gamma());

@@ -49,17 +49,17 @@ namespace agg
         };
 
     public:
-        typedef vertex_sequence<vertex_dist, 6> vertex_storage;
+        using vertex_storage = vertex_sequence<vertex_dist, 6>;
 
         AGGAPI trans_single_path();
 
         //--------------------------------------------------------------------
         void   base_length(double v)  { m_base_length = v; }
-        double base_length() const { return m_base_length; }
+        [[nodiscard]] double base_length() const { return m_base_length; }
 
         //--------------------------------------------------------------------
         void preserve_x_scale(bool f) { m_preserve_x_scale = f;    }
-        bool preserve_x_scale() const { return m_preserve_x_scale; }
+        [[nodiscard]] bool preserve_x_scale() const { return m_preserve_x_scale; }
 
         //--------------------------------------------------------------------
         AGGAPI void reset();
@@ -94,15 +94,15 @@ namespace agg
         }
 
         //--------------------------------------------------------------------
-        AGGAPI double total_length() const;
+        [[nodiscard]] AGGAPI double total_length() const;
         AGGAPI void transform(double *x, double *y) const;
 
     private:
         vertex_storage m_src_vertices;
-        double         m_base_length;
-        double         m_kindex;
-        status_e       m_status;
-        bool           m_preserve_x_scale;
+        double         m_base_length{0.0};
+        double         m_kindex{0.0};
+        status_e       m_status{initial};
+        bool           m_preserve_x_scale{true};
     };
 
 

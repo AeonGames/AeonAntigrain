@@ -52,7 +52,7 @@ namespace agg
         };
 
     public:
-        typedef pod_bvector<point_d, 6> vertex_storage;
+        using vertex_storage = pod_bvector<point_d, 6>;
 
         AGGAPI vcgen_bspline();
 
@@ -67,17 +67,18 @@ namespace agg
         AGGAPI void     rewind(unsigned path_id);
         AGGAPI unsigned vertex(double* x, double* y);
 
-    private:
-        AGGAPI vcgen_bspline(const vcgen_bspline&);
-        AGGAPI const vcgen_bspline& operator = (const vcgen_bspline&);
+        vcgen_bspline(const vcgen_bspline&) = delete;
+        const vcgen_bspline& operator = (const vcgen_bspline&) = delete;
 
+    private:
+ 
         vertex_storage m_src_vertices;
         bspline        m_spline_x;
         bspline        m_spline_y;
         double         m_interpolation_step;
-        unsigned       m_closed;
-        status_e       m_status;
-        unsigned       m_src_vertex;
+        unsigned       m_closed{0};
+        status_e       m_status{initial};
+        unsigned       m_src_vertex{0};
         double         m_cur_abscissa;
         double         m_max_abscissa;
     };

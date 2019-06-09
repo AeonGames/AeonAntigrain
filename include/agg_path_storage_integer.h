@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -66,8 +81,8 @@ namespace agg
     template<class T, unsigned CoordShift=6> class path_storage_integer
     {
     public:
-        typedef T value_type;
-        typedef vertex_integer<T, CoordShift> vertex_integer_type;
+        using value_type = T;
+        using vertex_integer_type = vertex_integer<T, CoordShift>;
 
         //--------------------------------------------------------------------
         path_storage_integer() : m_storage(), m_vertex_idx(0), m_closed(true) {}
@@ -200,7 +215,7 @@ namespace agg
     template<class T, unsigned CoordShift=6> class serialized_integer_path_adaptor
     {
     public:
-        typedef vertex_integer<T, CoordShift> vertex_integer_type;
+        using vertex_integer_type = vertex_integer<T, CoordShift>;
 
         //--------------------------------------------------------------------
         serialized_integer_path_adaptor() :

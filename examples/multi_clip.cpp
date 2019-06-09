@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -78,7 +93,7 @@ namespace agg
     //========================================================================
     template<> struct gradient_linear_color<srgba8>
     {
-        typedef srgba8 color_type;
+        using color_type = srgba8;
 
         gradient_linear_color() {}
         gradient_linear_color(const color_type& c1, const color_type& c2) :
@@ -109,7 +124,7 @@ namespace agg
     //========================================================================
     template<> struct gradient_linear_color<sgray8>
     {
-        typedef sgray8 color_type;
+        using color_type = sgray8;
 
         gradient_linear_color() {}
         gradient_linear_color(const color_type& c1, const color_type& c2) :
@@ -163,7 +178,7 @@ public:
         int height = rbuf_window().height();
 
         pixfmt pf(rbuf_window());
-        typedef agg::renderer_mclip<pixfmt> base_ren_type;
+        using base_ren_type = agg::renderer_mclip<pixfmt>;
         
         base_ren_type r(pf);
         agg::renderer_scanline_aa_solid<base_ren_type> rs(r);
@@ -255,10 +270,10 @@ public:
         agg::line_profile_aa profile;
         profile.width(w);
 
-        typedef agg::renderer_outline_aa<base_ren_type> renderer_type;
+        using renderer_type = agg::renderer_outline_aa<base_ren_type>;
         renderer_type ren(r, profile);
 
-        typedef agg::rasterizer_outline_aa<renderer_type> rasterizer_type;
+        using rasterizer_type = agg::rasterizer_outline_aa<renderer_type>;
         rasterizer_type ras(ren);
         ras.round_cap(true);
 
@@ -275,9 +290,9 @@ public:
 
 
         // Render random circles with gradient
-        typedef agg::gradient_linear_color<color_type> grad_color;
-        typedef agg::gradient_circle grad_func;
-        typedef agg::span_interpolator_linear<> interpolator_type;
+        using grad_color = agg::gradient_linear_color<color_type>;
+        using grad_func = agg::gradient_circle;
+        using interpolator_type = agg::span_interpolator_linear<>;
         typedef agg::span_gradient<color_type, 
                                   interpolator_type, 
                                   grad_func, 

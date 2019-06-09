@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -48,8 +63,8 @@ private:
 class the_application : public agg::platform_support
 {
 public:
-    typedef agg::renderer_base<pixfmt> ren_base;
-    typedef agg::glyph_raster_bin<color_type> glyph_gen;
+    using ren_base = agg::renderer_base<pixfmt>;
+    using glyph_gen = agg::glyph_raster_bin<color_type>;
 
     the_application(agg::pix_format_e format, bool flip_y) :
         agg::platform_support(format, flip_y)
@@ -137,8 +152,8 @@ public:
 
         // Rendering raster text with a custom span generator, gradient
 
-        typedef agg::span_interpolator_linear<> interpolator_type;
-        typedef agg::span_allocator<color_type> span_alloc_type;
+        using interpolator_type = agg::span_interpolator_linear<>;
+        using span_alloc_type = agg::span_allocator<color_type>;
         typedef agg::span_gradient<color_type, 
                                    interpolator_type, 
                                    gradient_sine_repeat_adaptor<agg::gradient_circle>, 

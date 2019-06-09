@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -22,10 +37,10 @@
 enum flip_y_e { flip_y = false };
 
 
-typedef agg::renderer_base<pixfmt>                     renderer_base_type;
-typedef agg::renderer_scanline_aa_solid<renderer_base_type> renderer_scanline_type;
-typedef agg::scanline_u8                                    scanline_type;
-typedef agg::rasterizer_scanline_aa<>                       rasterizer_type;
+using renderer_base_type = agg::renderer_base<pixfmt>                    ;
+using renderer_scanline_type = agg::renderer_scanline_aa_solid<renderer_base_type>;
+using scanline_type = agg::scanline_u8                                   ;
+using rasterizer_type = agg::rasterizer_scanline_aa<>                      ;
 
 template<class T> T min(T a, T b) { return (a < b) ? a : b; }
 
@@ -253,10 +268,10 @@ public:
         }
 
 
-        typedef agg::gradient_x gradient_func_type;
-        typedef agg::span_interpolator_linear<> interpolator_type;
-        typedef agg::span_allocator<color_type> span_allocator_type;
-        typedef agg::pod_auto_array<agg::srgba8, 256> color_array_type;
+        using gradient_func_type = agg::gradient_x;
+        using interpolator_type = agg::span_interpolator_linear<>;
+        using span_allocator_type = agg::span_allocator<color_type>;
+        using color_array_type = agg::pod_auto_array<agg::srgba8, 256>;
         typedef agg::span_gradient<color_type, 
                                    interpolator_type, 
                                    gradient_func_type, 
@@ -470,10 +485,10 @@ public:
         }
         double t1 = elapsed_time();
 
-        typedef agg::gradient_x gradient_func_type;
-        typedef agg::span_interpolator_linear<> interpolator_type;
-        typedef agg::span_allocator<color_type> span_allocator_type;
-        typedef agg::pod_auto_array<color_type, 256> color_array_type;
+        using gradient_func_type = agg::gradient_x;
+        using interpolator_type = agg::span_interpolator_linear<>;
+        using span_allocator_type = agg::span_allocator<color_type>;
+        using color_array_type = agg::pod_auto_array<color_type, 256>;
         typedef agg::span_gradient<color_type, 
                                    interpolator_type, 
                                    gradient_func_type, 
@@ -518,7 +533,7 @@ public:
 
 
 
-        typedef agg::span_gouraud_rgba<color_type> gouraud_span_gen_type;
+        using gouraud_span_gen_type = agg::span_gouraud_rgba<color_type>;
         typedef agg::renderer_scanline_aa<renderer_base_type, 
                                           span_allocator_type,
                                           gouraud_span_gen_type> renderer_gouraud_type;

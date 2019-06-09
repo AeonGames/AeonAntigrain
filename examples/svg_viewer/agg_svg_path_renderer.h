@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.3
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -130,16 +145,16 @@ namespace svg
     class path_renderer
     {
     public:
-        typedef pod_bvector<path_attributes>   attr_storage;
+        using attr_storage = pod_bvector<path_attributes>  ;
 
-        typedef conv_curve<path_storage>       curved;
-        typedef conv_count<curved>             curved_count;
+        using curved = conv_curve<path_storage>      ;
+        using curved_count = conv_count<curved>            ;
 
-        typedef conv_stroke<curved_count>      curved_stroked;
-        typedef conv_transform<curved_stroked> curved_stroked_trans;
+        using curved_stroked = conv_stroke<curved_count>     ;
+        using curved_stroked_trans = conv_transform<curved_stroked>;
 
-        typedef conv_transform<curved_count>   curved_trans;
-        typedef conv_contour<curved_trans>     curved_trans_contour;
+        using curved_trans = conv_transform<curved_count>  ;
+        using curved_trans_contour = conv_contour<curved_trans>    ;
 
         path_renderer();
 

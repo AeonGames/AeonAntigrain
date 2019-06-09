@@ -33,14 +33,13 @@ limitations under the License.
 //----------------------------------------------------------------------------
 #include <cstring>
 #include <cstdio>
+#include <array>
 #include "agg_gsv_text.h"
 #include "agg_bounding_rect.h"
 
-
-
 namespace agg
 {
-    int8u gsv_default_font[] = 
+    std::array<int8u,4526> gsv_default_font
     {
         0x40,0x00,0x6c,0x0f,0x15,0x00,0x0e,0x00,0xf9,0xff,
         0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -499,21 +498,13 @@ namespace agg
 
     //-------------------------------------------------------------------------
     gsv_text::gsv_text() :
-      m_x(0.0),
-      m_y(0.0),
-      m_start_x(0.0),
-      m_width(10.0),
-      m_height(0.0),
-      m_space(0.0),
-      m_line_space(0.0),
-      m_text(m_chr),
+      
+      m_text(m_chr.data()),
       m_text_buf(),
-      m_cur_chr(m_chr),
-      m_font(gsv_default_font),
-      m_loaded_font(),
-      m_status(initial),
-      m_big_endian(false),
-      m_flip(false)
+      m_cur_chr(m_chr.data()),
+      m_font(gsv_default_font.data()),
+      m_loaded_font()
+      
     {
         m_chr[0] = m_chr[1] = 0;
 
@@ -525,7 +516,7 @@ namespace agg
     void gsv_text::font(const void* font)
     {
         m_font = font;
-        if(m_font == 0) m_font = &m_loaded_font[0];
+        if(m_font == nullptr) m_font = &m_loaded_font[0];
     }
 
     //-------------------------------------------------------------------------
@@ -573,7 +564,7 @@ namespace agg
                 if (std::fread(&m_loaded_font[0], 1, len, fd) == len)
                     m_font = &m_loaded_font[0];
                 else
-                    m_font = 0;
+                    m_font = nullptr;
             }
             std::fclose(fd);
         }
@@ -585,7 +576,7 @@ namespace agg
         if(text == nullptr)
         {
             m_chr[0] = 0;
-            m_text = m_chr;
+            m_text = m_chr.data();
             return;
         }
         size_t new_size = std::strlen(text) + 1;
@@ -601,7 +592,7 @@ namespace agg
     void gsv_text::rewind(unsigned)
     {
         m_status = initial;
-        if(m_font == 0) return;
+        if(m_font == nullptr) return;
         
         m_indices = (int8u*)m_font;
         double base_height = value(m_indices + 4);
@@ -626,7 +617,7 @@ namespace agg
             switch(m_status)
             {
             case initial:
-                if(m_font == 0) 
+                if(m_font == nullptr) 
                 {
                     quit = true;
                     break;

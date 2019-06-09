@@ -62,6 +62,13 @@ find_program(BASH_EXECUTABLE bash
         MSYS2_PATH
         ProgramFiles
     PATH_SUFFIXES bin usr/bin Git/usr/bin)
+find_program(CLANG_TIDY_EXECUTABLE
+    NAMES clang-tidy clang-tidy.exe
+    HINTS ENV
+        MINGW_PREFIX
+        MSYS2_PATH
+        ProgramFiles
+    PATH_SUFFIXES bin usr/bin Git/usr/bin)
 
 configure_file("${CMAKE_SOURCE_DIR}/cmake/pre-commit.in"
                "${CMAKE_SOURCE_DIR}/.git/hooks/pre-commit")
@@ -74,6 +81,7 @@ option( agg_USE_SDL_PLATFORM "Use SDL as platform" OFF)
 option( agg_USE_PACK "Package Agg" OFF)
 option( agg_USE_AGG2D "Agg 2D graphical context" OFF)
 option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
+option(USE_CLANG_TIDY "Use the clang-tidy tool to find and fix issues" OFF)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "Setting build type to 'Debug' as none was specified.")
@@ -86,6 +94,10 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
                             "MinSizeRel"
                             "RelWithDebInfo")
 endif()
+
+set(CLANG_TIDY_CHECKS
+    #"-warnings-as-errors=performance-*,modernize-*,-modernize-pass-by-value"
+    "-checks=performance-*,modernize-*,-modernize-pass-by-value")
 
 set(CMAKE_DEBUG_POSTFIX "d")
 

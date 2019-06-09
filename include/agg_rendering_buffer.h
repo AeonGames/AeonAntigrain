@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -30,15 +45,13 @@ namespace agg
     template<class T> class row_accessor
     {
     public:
-        typedef const_row_info<T> row_data;
+        using row_data = const_row_info<T>;
 
         //-------------------------------------------------------------------
         row_accessor() :
             m_buf(0),
-            m_start(0),
-            m_width(0),
-            m_height(0),
-            m_stride(0)
+            m_start(0)
+            
         {
         }
 
@@ -47,8 +60,8 @@ namespace agg
             m_buf(0),
             m_start(0),
             m_width(0),
-            m_height(0),
-            m_stride(0)
+            m_height(0)
+            
         {
             attach(buf, width, height, stride);
         }
@@ -70,10 +83,10 @@ namespace agg
         //--------------------------------------------------------------------
         AGG_INLINE       T* buf()          { return m_buf;    }
         AGG_INLINE const T* buf()    const { return m_buf;    }
-        AGG_INLINE unsigned width()  const { return m_width;  }
-        AGG_INLINE unsigned height() const { return m_height; }
-        AGG_INLINE int      stride() const { return m_stride; }
-        AGG_INLINE unsigned stride_abs() const 
+        [[nodiscard]] AGG_INLINE unsigned width()  const { return m_width;  }
+        [[nodiscard]] AGG_INLINE unsigned height() const { return m_height; }
+        [[nodiscard]] AGG_INLINE int      stride() const { return m_stride; }
+        [[nodiscard]] AGG_INLINE unsigned stride_abs() const 
         {
             return (m_stride < 0) ? unsigned(-m_stride) : unsigned(m_stride); 
         }
@@ -131,9 +144,9 @@ namespace agg
         //--------------------------------------------------------------------
         T*            m_buf;    // Pointer to renrdering buffer
         T*            m_start;  // Pointer to first pixel depending on stride 
-        unsigned      m_width;  // Width in pixels
-        unsigned      m_height; // Height in pixels
-        int           m_stride; // Number of bytes per row. Can be < 0
+        unsigned      m_width{0};  // Width in pixels
+        unsigned      m_height{0}; // Height in pixels
+        int           m_stride{0}; // Number of bytes per row. Can be < 0
     };
 
 
@@ -143,15 +156,13 @@ namespace agg
     template<class T> class row_ptr_cache
     {
     public:
-        typedef const_row_info<T> row_data;
+        using row_data = const_row_info<T>;
 
         //-------------------------------------------------------------------
         row_ptr_cache() :
             m_buf(0),
-            m_rows(),
-            m_width(0),
-            m_height(0),
-            m_stride(0)
+            m_rows()
+            
         {
         }
 
@@ -160,8 +171,8 @@ namespace agg
             m_buf(0),
             m_rows(),
             m_width(0),
-            m_height(0),
-            m_stride(0)
+            m_height(0)
+            
         {
             attach(buf, width, height, stride);
         }
@@ -197,10 +208,10 @@ namespace agg
         //--------------------------------------------------------------------
         AGG_INLINE       T* buf()          { return m_buf;    }
         AGG_INLINE const T* buf()    const { return m_buf;    }
-        AGG_INLINE unsigned width()  const { return m_width;  }
-        AGG_INLINE unsigned height() const { return m_height; }
-        AGG_INLINE int      stride() const { return m_stride; }
-        AGG_INLINE unsigned stride_abs() const 
+        [[nodiscard]] AGG_INLINE unsigned width()  const { return m_width;  }
+        [[nodiscard]] AGG_INLINE unsigned height() const { return m_height; }
+        [[nodiscard]] AGG_INLINE int      stride() const { return m_stride; }
+        [[nodiscard]] AGG_INLINE unsigned stride_abs() const 
         {
             return (m_stride < 0) ? unsigned(-m_stride) : unsigned(m_stride); 
         }
@@ -261,9 +272,9 @@ namespace agg
         //--------------------------------------------------------------------
         T*            m_buf;        // Pointer to renrdering buffer
         pod_array<T*> m_rows;       // Pointers to each row of the buffer
-        unsigned      m_width;      // Width in pixels
-        unsigned      m_height;     // Height in pixels
-        int           m_stride;     // Number of bytes per row. Can be < 0
+        unsigned      m_width{0};      // Width in pixels
+        unsigned      m_height{0};     // Height in pixels
+        int           m_stride{0};     // Number of bytes per row. Can be < 0
     };
 
 
@@ -289,10 +300,10 @@ namespace agg
     // In real applications you can use both, depending on your needs
     //------------------------------------------------------------------------
 #ifdef AGG_RENDERING_BUFFER
-    typedef AGG_RENDERING_BUFFER rendering_buffer;
+    using rendering_buffer = AGG_RENDERING_BUFFER;
 #else
-//  typedef row_ptr_cache<int8u> rendering_buffer;
-    typedef row_accessor<int8u> rendering_buffer;
+//  using rendering_buffer = row_ptr_cache<int8u>;
+    using rendering_buffer = row_accessor<int8u>;
 #endif
 
 }

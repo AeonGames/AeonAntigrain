@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <math.h>
 #include <stdio.h>
 #include <time.h>
@@ -119,10 +134,10 @@ class the_application : public agg::platform_support
     agg::slider_ctrl<color_type> m_start_x;
 
 public:
-    typedef agg::renderer_base<pixfmt> renderer_base;
-    typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_scanline;
-    typedef agg::rasterizer_scanline_aa<> rasterizer_scanline;
-    typedef agg::scanline_p8 scanline;
+    using renderer_base = agg::renderer_base<pixfmt>;
+    using renderer_scanline = agg::renderer_scanline_aa_solid<renderer_base>;
+    using rasterizer_scanline = agg::rasterizer_scanline_aa<>;
+    using scanline = agg::scanline_p8;
 
 
     the_application(agg::pix_format_e format, bool flip_y) :
@@ -239,10 +254,10 @@ public:
         // version agg::line_image_pattern_pow2 because it works about 15-25 percent
         // faster than agg::line_image_pattern (because of using simple masking instead 
         // of expensive '%' operation). 
-        typedef agg::line_image_pattern<agg::pattern_filter_bilinear_rgba<color_type> > pattern_type;
-        typedef agg::renderer_base<pixfmt> base_ren_type;
-        typedef agg::renderer_outline_image<base_ren_type, pattern_type> renderer_type;
-        typedef agg::rasterizer_outline_aa<renderer_type>                rasterizer_type;
+        using pattern_type = agg::line_image_pattern<agg::pattern_filter_bilinear_rgba<color_type> >;
+        using base_ren_type = agg::renderer_base<pixfmt>;
+        using renderer_type = agg::renderer_outline_image<base_ren_type, pattern_type>;
+        using rasterizer_type = agg::rasterizer_outline_aa<renderer_type>               ;
 
         //-- Create with specifying the source
         //pattern_type patt(fltr, src);   

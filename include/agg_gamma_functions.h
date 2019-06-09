@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -31,11 +46,11 @@ namespace agg
     class gamma_power
     {
     public:
-        gamma_power() : m_gamma(1.0) {}
+        gamma_power()  = default;
         gamma_power(double g) : m_gamma(g) {}
 
         void gamma(double g) { m_gamma = g; }
-        double gamma() const { return m_gamma; }
+        [[nodiscard]] double gamma() const { return m_gamma; }
 
         double operator() (double x) const
         {
@@ -43,7 +58,7 @@ namespace agg
         }
 
     private:
-        double m_gamma;
+        double m_gamma{1.0};
     };
 
 
@@ -51,11 +66,11 @@ namespace agg
     class gamma_threshold
     {
     public:
-        gamma_threshold() : m_threshold(0.5) {}
+        gamma_threshold()  = default;
         gamma_threshold(double t) : m_threshold(t) {}
 
         void threshold(double t) { m_threshold = t; }
-        double threshold() const { return m_threshold; }
+        [[nodiscard]] double threshold() const { return m_threshold; }
 
         double operator() (double x) const
         {
@@ -63,7 +78,7 @@ namespace agg
         }
 
     private:
-        double m_threshold;
+        double m_threshold{0.5};
     };
 
 
@@ -71,14 +86,14 @@ namespace agg
     class gamma_linear
     {
     public:
-        gamma_linear() : m_start(0.0), m_end(1.0) {}
+        gamma_linear()  = default;
         gamma_linear(double s, double e) : m_start(s), m_end(e) {}
 
         void set(double s, double e) { m_start = s; m_end = e; }
         void start(double s) { m_start = s; }
         void end(double e) { m_end = e; }
-        double start() const { return m_start; }
-        double end() const { return m_end; }
+        [[nodiscard]] double start() const { return m_start; }
+        [[nodiscard]] double end() const { return m_end; }
 
         double operator() (double x) const
         {
@@ -88,8 +103,8 @@ namespace agg
         }
 
     private:
-        double m_start;
-        double m_end;
+        double m_start{0.0};
+        double m_end{1.0};
     };
 
 
@@ -97,11 +112,11 @@ namespace agg
     class gamma_multiply
     {
     public:
-        gamma_multiply() : m_mul(1.0) {}
+        gamma_multiply()  = default;
         gamma_multiply(double v) : m_mul(v) {}
 
         void value(double v) { m_mul = v; }
-        double value() const { return m_mul; }
+        [[nodiscard]] double value() const { return m_mul; }
 
         double operator() (double x) const
         {
@@ -111,7 +126,7 @@ namespace agg
         }
 
     private:
-        double m_mul;
+        double m_mul{1.0};
     };
 
     inline double sRGB_to_linear(double x)

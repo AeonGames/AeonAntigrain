@@ -43,25 +43,25 @@ namespace agg
     class trans_warp_magnifier
     {
     public:
-        trans_warp_magnifier() : m_xc(0.0), m_yc(0.0), m_magn(1.0), m_radius(1.0) {}
+        trans_warp_magnifier()  = default;
  
         void center(double x, double y) { m_xc = x; m_yc = y; }
         void magnification(double m)    { m_magn = m;         }
         void radius(double r)           { m_radius = r;       }
 
-        double xc()            const { return m_xc; }
-        double yc()            const { return m_yc; }
-        double magnification() const { return m_magn;   }
-        double radius()        const { return m_radius; }
+        [[nodiscard]] double xc()            const { return m_xc; }
+        [[nodiscard]] double yc()            const { return m_yc; }
+        [[nodiscard]] double magnification() const { return m_magn;   }
+        [[nodiscard]] double radius()        const { return m_radius; }
 
         AGGAPI void transform(double* x, double* y) const;
         AGGAPI void inverse_transform(double* x, double* y) const;
 
     private:
-        double m_xc;
-        double m_yc;
-        double m_magn;
-        double m_radius;
+        double m_xc{0.0};
+        double m_yc{0.0};
+        double m_magn{1.0};
+        double m_radius{1.0};
     };
 
 

@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -88,8 +103,8 @@ public:
         int width = rbuf_window().width();
         int height = rbuf_window().height();
 
-        typedef agg::renderer_base<pixfmt> renderer_base;
-        typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
+        using renderer_base = agg::renderer_base<pixfmt>;
+        using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
 
         pixfmt pixf(rbuf_window());
         renderer_base rb(pixf);
@@ -113,8 +128,8 @@ public:
         }
         else
         {
-            typedef agg::renderer_outline_aa<renderer_base> renderer_type;
-            typedef agg::rasterizer_outline_aa<renderer_type> rasterizer_type;
+            using renderer_type = agg::renderer_outline_aa<renderer_base>;
+            using rasterizer_type = agg::rasterizer_outline_aa<renderer_type>;
 
             double w = m_width_slider.value() * mtx.scale();
 

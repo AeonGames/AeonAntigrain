@@ -34,6 +34,7 @@ limitations under the License.
 #ifndef AGG_ARROWHEAD_INCLUDED
 #define AGG_ARROWHEAD_INCLUDED
 
+#include <array>
 #include "agg_basics.h"
 
 namespace agg
@@ -76,20 +77,20 @@ namespace agg
         AGGAPI unsigned vertex(double* x, double* y);
 
     private:
-        double   m_head_d1;
-        double   m_head_d2;
-        double   m_head_d3;
-        double   m_head_d4;
-        double   m_tail_d1;
-        double   m_tail_d2;
-        double   m_tail_d3;
-        double   m_tail_d4;
-        bool     m_head_flag;
-        bool     m_tail_flag;
-        double   m_coord[16];
-        unsigned m_cmd[8];
-        unsigned m_curr_id;
-        unsigned m_curr_coord;
+        double   m_head_d1{1.0};
+        double   m_head_d2{1.0};
+        double   m_head_d3{1.0};
+        double   m_head_d4{0.0};
+        double   m_tail_d1{1.0};
+        double   m_tail_d2{1.0};
+        double   m_tail_d3{1.0};
+        double   m_tail_d4{0.0};
+        bool     m_head_flag{false};
+        bool     m_tail_flag{false};
+        std::array<double,16> m_coord{};
+        std::array<unsigned,8> m_cmd{};
+        unsigned m_curr_id{0};
+        unsigned m_curr_coord{0};
     };
 
 }

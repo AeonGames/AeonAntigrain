@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <math.h>
 #include <stdio.h>
 #include "agg_basics.h"
@@ -40,7 +55,7 @@ class the_application : public agg::platform_support
     agg::cbox_ctrl<color_type>    m_channel_b;
 
     agg::path_storage             m_path;
-    typedef agg::conv_curve<agg::path_storage> shape_type;
+    using shape_type = agg::conv_curve<agg::path_storage>;
     shape_type                    m_shape;
 
     agg::rasterizer_scanline_aa<> m_ras;
@@ -157,7 +172,7 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt> ren_base;
+        using ren_base = agg::renderer_base<pixfmt>;
 
         pixfmt pixf(rbuf_window());
         ren_base renb(pixf);

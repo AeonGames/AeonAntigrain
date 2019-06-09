@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -25,10 +40,10 @@ namespace agg
     template<class PixFmt> class image_accessor_clip
     {
     public:
-        typedef PixFmt   pixfmt_type;
-        typedef typename pixfmt_type::color_type color_type;
-        typedef typename pixfmt_type::order_type order_type;
-        typedef typename pixfmt_type::value_type value_type;
+        using pixfmt_type = PixFmt  ;
+        using color_type = typename pixfmt_type::color_type;
+        using order_type = typename pixfmt_type::order_type;
+        using value_type = typename pixfmt_type::value_type;
         enum pix_width_e { pix_width = pixfmt_type::pix_width };
 
         image_accessor_clip() {}
@@ -108,10 +123,10 @@ namespace agg
     template<class PixFmt> class image_accessor_no_clip
     {
     public:
-        typedef PixFmt   pixfmt_type;
-        typedef typename pixfmt_type::color_type color_type;
-        typedef typename pixfmt_type::order_type order_type;
-        typedef typename pixfmt_type::value_type value_type;
+        using pixfmt_type = PixFmt  ;
+        using color_type = typename pixfmt_type::color_type;
+        using order_type = typename pixfmt_type::order_type;
+        using value_type = typename pixfmt_type::value_type;
         enum pix_width_e { pix_width = pixfmt_type::pix_width };
 
         image_accessor_no_clip() {}
@@ -155,10 +170,10 @@ namespace agg
     template<class PixFmt> class image_accessor_clone
     {
     public:
-        typedef PixFmt   pixfmt_type;
-        typedef typename pixfmt_type::color_type color_type;
-        typedef typename pixfmt_type::order_type order_type;
-        typedef typename pixfmt_type::value_type value_type;
+        using pixfmt_type = PixFmt  ;
+        using color_type = typename pixfmt_type::color_type;
+        using order_type = typename pixfmt_type::order_type;
+        using value_type = typename pixfmt_type::value_type;
         enum pix_width_e { pix_width = pixfmt_type::pix_width };
 
         image_accessor_clone() {}
@@ -231,10 +246,10 @@ namespace agg
     template<class PixFmt, class WrapX, class WrapY> class image_accessor_wrap
     {
     public:
-        typedef PixFmt   pixfmt_type;
-        typedef typename pixfmt_type::color_type color_type;
-        typedef typename pixfmt_type::order_type order_type;
-        typedef typename pixfmt_type::value_type value_type;
+        using pixfmt_type = PixFmt  ;
+        using color_type = typename pixfmt_type::color_type;
+        using order_type = typename pixfmt_type::order_type;
+        using value_type = typename pixfmt_type::value_type;
         enum pix_width_e { pix_width = pixfmt_type::pix_width };
 
         image_accessor_wrap() {}

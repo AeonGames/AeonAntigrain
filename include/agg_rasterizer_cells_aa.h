@@ -74,8 +74,8 @@ namespace agg
         };
 
     public:
-        typedef Cell cell_type;
-        typedef rasterizer_cells_aa<Cell> self_type;
+        using cell_type = Cell;
+        using self_type = rasterizer_cells_aa<Cell>;
 
         ~rasterizer_cells_aa();
         rasterizer_cells_aa(unsigned cell_block_limit=1024);

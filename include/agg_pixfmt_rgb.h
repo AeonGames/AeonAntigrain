@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -35,7 +50,7 @@ namespace agg
     template<class ColorT, class Order, class GammaLut> class apply_gamma_dir_rgb
     {
     public:
-        typedef typename ColorT::value_type value_type;
+        using value_type = typename ColorT::value_type;
 
         apply_gamma_dir_rgb(const GammaLut& gamma) : m_gamma(gamma) {}
 
@@ -56,7 +71,7 @@ namespace agg
     template<class ColorT, class Order, class GammaLut> class apply_gamma_inv_rgb
     {
     public:
-        typedef typename ColorT::value_type value_type;
+        using value_type = typename ColorT::value_type;
 
         apply_gamma_inv_rgb(const GammaLut& gamma) : m_gamma(gamma) {}
 
@@ -76,11 +91,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct blender_rgb
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         // Blend pixels using the non-premultiplied form of Alvy-Ray Smith's
         // compositing function. Since the render buffer is opaque we skip the
@@ -107,11 +122,11 @@ namespace agg
     template<class ColorT, class Order> 
     struct blender_rgb_pre
     {
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         // Blend pixels using the premultiplied form of Alvy-Ray Smith's
         // compositing function. 
@@ -142,12 +157,12 @@ namespace agg
     class blender_rgb_gamma : public blender_base<ColorT, Order>
     {
     public:
-        typedef ColorT color_type;
-        typedef Order order_type;
-        typedef Gamma gamma_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using order_type = Order;
+        using gamma_type = Gamma;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         //--------------------------------------------------------------------
         blender_rgb_gamma() : m_gamma(0) {}
@@ -182,14 +197,14 @@ namespace agg
     class pixfmt_alpha_blend_rgb
     {
     public:
-        typedef pixfmt_rgb_tag pixfmt_category;
-        typedef RenBuf   rbuf_type;
-        typedef Blender  blender_type;
-        typedef typename rbuf_type::row_data row_data;
-        typedef typename blender_type::color_type color_type;
-        typedef typename blender_type::order_type order_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
+        using pixfmt_category = pixfmt_rgb_tag;
+        using rbuf_type = RenBuf  ;
+        using blender_type = Blender ;
+        using row_data = typename rbuf_type::row_data;
+        using color_type = typename blender_type::color_type;
+        using order_type = typename blender_type::order_type;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
         enum 
         {
             num_components = 3,
@@ -725,8 +740,8 @@ namespace agg
                         unsigned len,
                         int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
-            typedef typename SrcPixelFormatRenderer::order_type src_order;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
+            using src_order = typename SrcPixelFormatRenderer::order_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -782,8 +797,8 @@ namespace agg
                               unsigned len,
                               int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
-            typedef typename SrcPixelFormatRenderer::color_type src_color_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
+            using src_color_type = typename SrcPixelFormatRenderer::color_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -810,7 +825,7 @@ namespace agg
                             unsigned len,
                             int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -846,75 +861,75 @@ namespace agg
     };
     
     //-----------------------------------------------------------------------
-    typedef blender_rgb<rgba8, order_rgb> blender_rgb24;
-    typedef blender_rgb<rgba8, order_bgr> blender_bgr24;
-    typedef blender_rgb<srgba8, order_rgb> blender_srgb24;
-    typedef blender_rgb<srgba8, order_bgr> blender_sbgr24;
-    typedef blender_rgb<rgba16, order_rgb> blender_rgb48;
-    typedef blender_rgb<rgba16, order_bgr> blender_bgr48;
-    typedef blender_rgb<rgba32, order_rgb> blender_rgb96;
-    typedef blender_rgb<rgba32, order_bgr> blender_bgr96;
+    using blender_rgb24 = blender_rgb<rgba8, order_rgb>;
+    using blender_bgr24 = blender_rgb<rgba8, order_bgr>;
+    using blender_srgb24 = blender_rgb<srgba8, order_rgb>;
+    using blender_sbgr24 = blender_rgb<srgba8, order_bgr>;
+    using blender_rgb48 = blender_rgb<rgba16, order_rgb>;
+    using blender_bgr48 = blender_rgb<rgba16, order_bgr>;
+    using blender_rgb96 = blender_rgb<rgba32, order_rgb>;
+    using blender_bgr96 = blender_rgb<rgba32, order_bgr>;
 
-    typedef blender_rgb_pre<rgba8, order_rgb> blender_rgb24_pre;
-    typedef blender_rgb_pre<rgba8, order_bgr> blender_bgr24_pre;
-    typedef blender_rgb_pre<srgba8, order_rgb> blender_srgb24_pre;
-    typedef blender_rgb_pre<srgba8, order_bgr> blender_sbgr24_pre;
-    typedef blender_rgb_pre<rgba16, order_rgb> blender_rgb48_pre;
-    typedef blender_rgb_pre<rgba16, order_bgr> blender_bgr48_pre;
-    typedef blender_rgb_pre<rgba32, order_rgb> blender_rgb96_pre;
-    typedef blender_rgb_pre<rgba32, order_bgr> blender_bgr96_pre;
+    using blender_rgb24_pre = blender_rgb_pre<rgba8, order_rgb>;
+    using blender_bgr24_pre = blender_rgb_pre<rgba8, order_bgr>;
+    using blender_srgb24_pre = blender_rgb_pre<srgba8, order_rgb>;
+    using blender_sbgr24_pre = blender_rgb_pre<srgba8, order_bgr>;
+    using blender_rgb48_pre = blender_rgb_pre<rgba16, order_rgb>;
+    using blender_bgr48_pre = blender_rgb_pre<rgba16, order_bgr>;
+    using blender_rgb96_pre = blender_rgb_pre<rgba32, order_rgb>;
+    using blender_bgr96_pre = blender_rgb_pre<rgba32, order_bgr>;
 
-    typedef pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 3> pixfmt_rgb24;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr24, rendering_buffer, 3> pixfmt_bgr24;
-    typedef pixfmt_alpha_blend_rgb<blender_srgb24, rendering_buffer, 3> pixfmt_srgb24;
-    typedef pixfmt_alpha_blend_rgb<blender_sbgr24, rendering_buffer, 3> pixfmt_sbgr24;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb48, rendering_buffer, 3> pixfmt_rgb48;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr48, rendering_buffer, 3> pixfmt_bgr48;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb96, rendering_buffer, 3> pixfmt_rgb96;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr96, rendering_buffer, 3> pixfmt_bgr96;
+    using pixfmt_rgb24 = pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 3>;
+    using pixfmt_bgr24 = pixfmt_alpha_blend_rgb<blender_bgr24, rendering_buffer, 3>;
+    using pixfmt_srgb24 = pixfmt_alpha_blend_rgb<blender_srgb24, rendering_buffer, 3>;
+    using pixfmt_sbgr24 = pixfmt_alpha_blend_rgb<blender_sbgr24, rendering_buffer, 3>;
+    using pixfmt_rgb48 = pixfmt_alpha_blend_rgb<blender_rgb48, rendering_buffer, 3>;
+    using pixfmt_bgr48 = pixfmt_alpha_blend_rgb<blender_bgr48, rendering_buffer, 3>;
+    using pixfmt_rgb96 = pixfmt_alpha_blend_rgb<blender_rgb96, rendering_buffer, 3>;
+    using pixfmt_bgr96 = pixfmt_alpha_blend_rgb<blender_bgr96, rendering_buffer, 3>;
 
-    typedef pixfmt_alpha_blend_rgb<blender_rgb24_pre, rendering_buffer, 3> pixfmt_rgb24_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr24_pre, rendering_buffer, 3> pixfmt_bgr24_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_srgb24_pre, rendering_buffer, 3> pixfmt_srgb24_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_sbgr24_pre, rendering_buffer, 3> pixfmt_sbgr24_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb48_pre, rendering_buffer, 3> pixfmt_rgb48_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr48_pre, rendering_buffer, 3> pixfmt_bgr48_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb96_pre, rendering_buffer, 3> pixfmt_rgb96_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr96_pre, rendering_buffer, 3> pixfmt_bgr96_pre;
+    using pixfmt_rgb24_pre = pixfmt_alpha_blend_rgb<blender_rgb24_pre, rendering_buffer, 3>;
+    using pixfmt_bgr24_pre = pixfmt_alpha_blend_rgb<blender_bgr24_pre, rendering_buffer, 3>;
+    using pixfmt_srgb24_pre = pixfmt_alpha_blend_rgb<blender_srgb24_pre, rendering_buffer, 3>;
+    using pixfmt_sbgr24_pre = pixfmt_alpha_blend_rgb<blender_sbgr24_pre, rendering_buffer, 3>;
+    using pixfmt_rgb48_pre = pixfmt_alpha_blend_rgb<blender_rgb48_pre, rendering_buffer, 3>;
+    using pixfmt_bgr48_pre = pixfmt_alpha_blend_rgb<blender_bgr48_pre, rendering_buffer, 3>;
+    using pixfmt_rgb96_pre = pixfmt_alpha_blend_rgb<blender_rgb96_pre, rendering_buffer, 3>;
+    using pixfmt_bgr96_pre = pixfmt_alpha_blend_rgb<blender_bgr96_pre, rendering_buffer, 3>;
 
-    typedef pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 4, 0> pixfmt_rgbx32;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 4, 1> pixfmt_xrgb32;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr24, rendering_buffer, 4, 1> pixfmt_xbgr32;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr24, rendering_buffer, 4, 0> pixfmt_bgrx32;
-    typedef pixfmt_alpha_blend_rgb<blender_srgb24, rendering_buffer, 4, 0> pixfmt_srgbx32;
-    typedef pixfmt_alpha_blend_rgb<blender_srgb24, rendering_buffer, 4, 1> pixfmt_sxrgb32;
-    typedef pixfmt_alpha_blend_rgb<blender_sbgr24, rendering_buffer, 4, 1> pixfmt_sxbgr32;
-    typedef pixfmt_alpha_blend_rgb<blender_sbgr24, rendering_buffer, 4, 0> pixfmt_sbgrx32;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb48, rendering_buffer, 4, 0> pixfmt_rgbx64;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb48, rendering_buffer, 4, 1> pixfmt_xrgb64;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr48, rendering_buffer, 4, 1> pixfmt_xbgr64;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr48, rendering_buffer, 4, 0> pixfmt_bgrx64;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb96, rendering_buffer, 4, 0> pixfmt_rgbx128;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb96, rendering_buffer, 4, 1> pixfmt_xrgb128;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr96, rendering_buffer, 4, 1> pixfmt_xbgr128;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr96, rendering_buffer, 4, 0> pixfmt_bgrx128;
+    using pixfmt_rgbx32 = pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 4, 0>;
+    using pixfmt_xrgb32 = pixfmt_alpha_blend_rgb<blender_rgb24, rendering_buffer, 4, 1>;
+    using pixfmt_xbgr32 = pixfmt_alpha_blend_rgb<blender_bgr24, rendering_buffer, 4, 1>;
+    using pixfmt_bgrx32 = pixfmt_alpha_blend_rgb<blender_bgr24, rendering_buffer, 4, 0>;
+    using pixfmt_srgbx32 = pixfmt_alpha_blend_rgb<blender_srgb24, rendering_buffer, 4, 0>;
+    using pixfmt_sxrgb32 = pixfmt_alpha_blend_rgb<blender_srgb24, rendering_buffer, 4, 1>;
+    using pixfmt_sxbgr32 = pixfmt_alpha_blend_rgb<blender_sbgr24, rendering_buffer, 4, 1>;
+    using pixfmt_sbgrx32 = pixfmt_alpha_blend_rgb<blender_sbgr24, rendering_buffer, 4, 0>;
+    using pixfmt_rgbx64 = pixfmt_alpha_blend_rgb<blender_rgb48, rendering_buffer, 4, 0>;
+    using pixfmt_xrgb64 = pixfmt_alpha_blend_rgb<blender_rgb48, rendering_buffer, 4, 1>;
+    using pixfmt_xbgr64 = pixfmt_alpha_blend_rgb<blender_bgr48, rendering_buffer, 4, 1>;
+    using pixfmt_bgrx64 = pixfmt_alpha_blend_rgb<blender_bgr48, rendering_buffer, 4, 0>;
+    using pixfmt_rgbx128 = pixfmt_alpha_blend_rgb<blender_rgb96, rendering_buffer, 4, 0>;
+    using pixfmt_xrgb128 = pixfmt_alpha_blend_rgb<blender_rgb96, rendering_buffer, 4, 1>;
+    using pixfmt_xbgr128 = pixfmt_alpha_blend_rgb<blender_bgr96, rendering_buffer, 4, 1>;
+    using pixfmt_bgrx128 = pixfmt_alpha_blend_rgb<blender_bgr96, rendering_buffer, 4, 0>;
 
-    typedef pixfmt_alpha_blend_rgb<blender_rgb24_pre, rendering_buffer, 4, 0> pixfmt_rgbx32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb24_pre, rendering_buffer, 4, 1> pixfmt_xrgb32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr24_pre, rendering_buffer, 4, 1> pixfmt_xbgr32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr24_pre, rendering_buffer, 4, 0> pixfmt_bgrx32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_srgb24_pre, rendering_buffer, 4, 0> pixfmt_srgbx32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_srgb24_pre, rendering_buffer, 4, 1> pixfmt_sxrgb32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_sbgr24_pre, rendering_buffer, 4, 1> pixfmt_sxbgr32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_sbgr24_pre, rendering_buffer, 4, 0> pixfmt_sbgrx32_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb48_pre, rendering_buffer, 4, 0> pixfmt_rgbx64_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb48_pre, rendering_buffer, 4, 1> pixfmt_xrgb64_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr48_pre, rendering_buffer, 4, 1> pixfmt_xbgr64_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr48_pre, rendering_buffer, 4, 0> pixfmt_bgrx64_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb96_pre, rendering_buffer, 4, 0> pixfmt_rgbx128_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_rgb96_pre, rendering_buffer, 4, 1> pixfmt_xrgb128_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr96_pre, rendering_buffer, 4, 1> pixfmt_xbgr128_pre;
-    typedef pixfmt_alpha_blend_rgb<blender_bgr96_pre, rendering_buffer, 4, 0> pixfmt_bgrx128_pre;
+    using pixfmt_rgbx32_pre = pixfmt_alpha_blend_rgb<blender_rgb24_pre, rendering_buffer, 4, 0>;
+    using pixfmt_xrgb32_pre = pixfmt_alpha_blend_rgb<blender_rgb24_pre, rendering_buffer, 4, 1>;
+    using pixfmt_xbgr32_pre = pixfmt_alpha_blend_rgb<blender_bgr24_pre, rendering_buffer, 4, 1>;
+    using pixfmt_bgrx32_pre = pixfmt_alpha_blend_rgb<blender_bgr24_pre, rendering_buffer, 4, 0>;
+    using pixfmt_srgbx32_pre = pixfmt_alpha_blend_rgb<blender_srgb24_pre, rendering_buffer, 4, 0>;
+    using pixfmt_sxrgb32_pre = pixfmt_alpha_blend_rgb<blender_srgb24_pre, rendering_buffer, 4, 1>;
+    using pixfmt_sxbgr32_pre = pixfmt_alpha_blend_rgb<blender_sbgr24_pre, rendering_buffer, 4, 1>;
+    using pixfmt_sbgrx32_pre = pixfmt_alpha_blend_rgb<blender_sbgr24_pre, rendering_buffer, 4, 0>;
+    using pixfmt_rgbx64_pre = pixfmt_alpha_blend_rgb<blender_rgb48_pre, rendering_buffer, 4, 0>;
+    using pixfmt_xrgb64_pre = pixfmt_alpha_blend_rgb<blender_rgb48_pre, rendering_buffer, 4, 1>;
+    using pixfmt_xbgr64_pre = pixfmt_alpha_blend_rgb<blender_bgr48_pre, rendering_buffer, 4, 1>;
+    using pixfmt_bgrx64_pre = pixfmt_alpha_blend_rgb<blender_bgr48_pre, rendering_buffer, 4, 0>;
+    using pixfmt_rgbx128_pre = pixfmt_alpha_blend_rgb<blender_rgb96_pre, rendering_buffer, 4, 0>;
+    using pixfmt_xrgb128_pre = pixfmt_alpha_blend_rgb<blender_rgb96_pre, rendering_buffer, 4, 1>;
+    using pixfmt_xbgr128_pre = pixfmt_alpha_blend_rgb<blender_bgr96_pre, rendering_buffer, 4, 1>;
+    using pixfmt_bgrx128_pre = pixfmt_alpha_blend_rgb<blender_bgr96_pre, rendering_buffer, 4, 0>;
     
 
     //-----------------------------------------------------pixfmt_rgb24_gamma

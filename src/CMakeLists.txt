@@ -155,6 +155,15 @@ add_library(antigrain
     ${antigrain_HEADERS}
 )
 
+if(USE_CLANG_TIDY AND CLANG_TIDY_EXECUTABLE)
+  set_target_properties(
+    antigrain
+    PROPERTIES
+      CXX_CLANG_TIDY
+      "${CLANG_TIDY_EXECUTABLE};-fix-errors;-header-filter=${CMAKE_SOURCE_DIR}/include;${CLANG_TIDY_CHECKS}"
+    )
+endif()
+
 #controls code for interactive modifying samples
 SET(controls_HEADERS
     ${antigrain_SOURCE_DIR}/include/ctrl/agg_slider_ctrl.h

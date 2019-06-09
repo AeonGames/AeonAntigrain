@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -43,10 +58,10 @@ namespace agg
     {
     public:
         //--------------------------------------------------------------------
-        typedef serialized_scanlines_adaptor_aa<int8u>    gray8_adaptor_type;
-        typedef serialized_scanlines_adaptor_bin          mono_adaptor_type;
-        typedef scanline_storage_aa8                      scanlines_aa_type;
-        typedef scanline_storage_bin                      scanlines_bin_type;
+        using gray8_adaptor_type = serialized_scanlines_adaptor_aa<int8u>   ;
+        using mono_adaptor_type = serialized_scanlines_adaptor_bin         ;
+        using scanlines_aa_type = scanline_storage_aa8                     ;
+        using scanlines_bin_type = scanline_storage_bin                     ;
 
         //--------------------------------------------------------------------
         ~font_engine_freetype_base();
@@ -162,11 +177,11 @@ namespace agg
     class font_engine_freetype_int16 : public font_engine_freetype_base
     {
     public:
-        typedef serialized_integer_path_adaptor<int16, 6>     path_adaptor_type;
-        typedef font_engine_freetype_base::gray8_adaptor_type gray8_adaptor_type;
-        typedef font_engine_freetype_base::mono_adaptor_type  mono_adaptor_type;
-        typedef font_engine_freetype_base::scanlines_aa_type  scanlines_aa_type;
-        typedef font_engine_freetype_base::scanlines_bin_type scanlines_bin_type;
+        using path_adaptor_type = serialized_integer_path_adaptor<int16, 6>    ;
+        using gray8_adaptor_type = font_engine_freetype_base::gray8_adaptor_type;
+        using mono_adaptor_type = font_engine_freetype_base::mono_adaptor_type ;
+        using scanlines_aa_type = font_engine_freetype_base::scanlines_aa_type ;
+        using scanlines_bin_type = font_engine_freetype_base::scanlines_bin_type;
 
         font_engine_freetype_int16(unsigned max_faces = 32) : 
             font_engine_freetype_base(false, max_faces) {}
@@ -180,11 +195,11 @@ namespace agg
     class font_engine_freetype_int32 : public font_engine_freetype_base
     {
     public:
-        typedef serialized_integer_path_adaptor<int32, 6>     path_adaptor_type;
-        typedef font_engine_freetype_base::gray8_adaptor_type gray8_adaptor_type;
-        typedef font_engine_freetype_base::mono_adaptor_type  mono_adaptor_type;
-        typedef font_engine_freetype_base::scanlines_aa_type  scanlines_aa_type;
-        typedef font_engine_freetype_base::scanlines_bin_type scanlines_bin_type;
+        using path_adaptor_type = serialized_integer_path_adaptor<int32, 6>    ;
+        using gray8_adaptor_type = font_engine_freetype_base::gray8_adaptor_type;
+        using mono_adaptor_type = font_engine_freetype_base::mono_adaptor_type ;
+        using scanlines_aa_type = font_engine_freetype_base::scanlines_aa_type ;
+        using scanlines_bin_type = font_engine_freetype_base::scanlines_bin_type;
 
         font_engine_freetype_int32(unsigned max_faces = 32) : 
             font_engine_freetype_base(true, max_faces) {}

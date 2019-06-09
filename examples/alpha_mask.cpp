@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -81,8 +96,8 @@ public:
         m_alpha_buf = new unsigned char[cx * cy];
         g_alpha_mask_rbuf.attach(m_alpha_buf, cx, cy, cx);
 
-        typedef agg::renderer_base<agg::pixfmt_sgray8> ren_base;
-        typedef agg::renderer_scanline_aa_solid<ren_base> renderer;
+        using ren_base = agg::renderer_base<agg::pixfmt_sgray8>;
+        using renderer = agg::renderer_scanline_aa_solid<ren_base>;
 
         agg::pixfmt_sgray8 pixf(g_alpha_mask_rbuf);
         ren_base rb(pixf);
@@ -119,9 +134,9 @@ public:
         int width = rbuf_window().width();
         int height = rbuf_window().height();
 
-        typedef agg::scanline_u8_am<agg::alpha_mask_gray8> scanline_type;
-        typedef agg::renderer_base<pixfmt> ren_base;
-        typedef agg::renderer_scanline_aa_solid<ren_base> renderer;
+        using scanline_type = agg::scanline_u8_am<agg::alpha_mask_gray8>;
+        using ren_base = agg::renderer_base<pixfmt>;
+        using renderer = agg::renderer_scanline_aa_solid<ren_base>;
 
         pixfmt pixf(rbuf_window());
         ren_base rb(pixf);

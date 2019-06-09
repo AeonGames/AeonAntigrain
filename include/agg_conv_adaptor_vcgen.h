@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -52,10 +67,10 @@ namespace agg
         void attach(VertexSource& source) { m_source = &source; }
 
         Generator& generator() { return m_generator; }
-        const Generator& generator() const { return m_generator; }
+        [[nodiscard]] const Generator& generator() const { return m_generator; }
 
         Markers& markers() { return m_markers; }
-        const Markers& markers() const { return m_markers; }
+        [[nodiscard]] const Markers& markers() const { return m_markers; }
         
         void rewind(unsigned path_id) 
         { 
@@ -65,12 +80,11 @@ namespace agg
 
         unsigned vertex(double* x, double* y);
 
-    private:
-        // Prohibit copying
-        conv_adaptor_vcgen(const conv_adaptor_vcgen<VertexSource, Generator, Markers>&);
+        conv_adaptor_vcgen(const conv_adaptor_vcgen<VertexSource, Generator, Markers>&) = delete;
         const conv_adaptor_vcgen<VertexSource, Generator, Markers>& 
-            operator = (const conv_adaptor_vcgen<VertexSource, Generator, Markers>&);
+            operator = (const conv_adaptor_vcgen<VertexSource, Generator, Markers>&) = delete;
 
+    private:
         VertexSource* m_source;
         Generator     m_generator;
         Markers       m_markers;
@@ -79,10 +93,6 @@ namespace agg
         double        m_start_x;
         double        m_start_y;
     };
-
-
-
-
 
     //------------------------------------------------------------------------
     template<class VertexSource, class Generator, class Markers> 

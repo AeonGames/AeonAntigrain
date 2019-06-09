@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Agg2D - Version 1.0
 // Based on Anti-Grain Geometry
@@ -1420,12 +1435,12 @@ public:
     void static render(Agg2D& gr, BaseRenderer& renBase, SolidRenderer& renSolid, bool fillColor)
     {
 		// JME
-		typedef agg::span_allocator<Agg2D::ColorType> span_allocator_type;
-        //- typedef agg::renderer_scanline_aa<BaseRenderer, Agg2D::LinearGradientSpan> RendererLinearGradient;
+		using span_allocator_type = agg::span_allocator<Agg2D::ColorType>;
+        //- using RendererLinearGradient = agg::renderer_scanline_aa<BaseRenderer, Agg2D::LinearGradientSpan>;
         typedef agg::renderer_scanline_aa<BaseRenderer,
 										span_allocator_type,
 										Agg2D::LinearGradientSpan> RendererLinearGradient;
-        //- typedef agg::renderer_scanline_aa<BaseRenderer, Agg2D::RadialGradientSpan> RendererRadialGradient;
+        //- using RendererRadialGradient = agg::renderer_scanline_aa<BaseRenderer, Agg2D::RadialGradientSpan>;
 		typedef agg::renderer_scanline_aa<BaseRenderer,
 										span_allocator_type,
 										Agg2D::RadialGradientSpan> RendererRadialGradient;
@@ -1513,7 +1528,7 @@ public:
             {
                 l2 = len;
                 s2 = span;
-                typedef agg::comp_op_adaptor_clip_to_dst_rgba_pre<Agg2D::Color, agg::order_rgba> OpType;
+                using OpType = agg::comp_op_adaptor_clip_to_dst_rgba_pre<Agg2D::Color, agg::order_rgba>;
                 do
                 {
                     OpType::blend_pix(m_mode,
@@ -1556,9 +1571,9 @@ public:
     void static render(Agg2D& gr, BaseRenderer& renBase, SolidRenderer& renSolid, Rasterizer& ras, Scanline& sl)
     {
 		// JME
-		typedef agg::span_allocator<Agg2D::ColorType> span_allocator_type;
-        typedef agg::renderer_scanline_aa<BaseRenderer,span_allocator_type,Agg2D::LinearGradientSpan> RendererLinearGradient;
-        typedef agg::renderer_scanline_aa<BaseRenderer,span_allocator_type,Agg2D::RadialGradientSpan> RendererRadialGradient;
+		using span_allocator_type = agg::span_allocator<Agg2D::ColorType>;
+        using RendererLinearGradient = agg::renderer_scanline_aa<BaseRenderer,span_allocator_type,Agg2D::LinearGradientSpan>;
+        using RendererRadialGradient = agg::renderer_scanline_aa<BaseRenderer,span_allocator_type,Agg2D::RadialGradientSpan>;
 
         if(gr.m_fillGradientFlag == Agg2D::Linear)
         {
@@ -1604,16 +1619,16 @@ public:
 		// hence the cast.
 		Agg2D::Image& imgc = const_cast<Agg2D::Image&>(img);
 		Agg2D::PixFormat img_pixf(imgc.renBuf);
-		typedef agg::image_accessor_clone<Agg2D::PixFormat> img_source_type;
+		using img_source_type = agg::image_accessor_clone<Agg2D::PixFormat>;
 		img_source_type source(img_pixf);
 
         SpanConvImageBlend blend(gr.m_imageBlendMode, gr.m_imageBlendColor);
         if (gr.m_imageFilter == Agg2D::NoFilter)
         {
 
-			typedef agg::span_image_filter_rgba_nn<img_source_type,Interpolator> SpanGenType;
-			typedef agg::span_converter<SpanGenType,SpanConvImageBlend> SpanConvType;
-			typedef agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType> RendererType;
+			using SpanGenType = agg::span_image_filter_rgba_nn<img_source_type,Interpolator>;
+			using SpanConvType = agg::span_converter<SpanGenType,SpanConvImageBlend>;
+			using RendererType = agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType>;
 
 			SpanGenType sg(source,interpolator);
 			SpanConvType sc(sg, blend);
@@ -1635,9 +1650,9 @@ public:
 
             if (resample)
             {
-                typedef agg::span_image_resample_rgba_affine<img_source_type> SpanGenType;
-                typedef agg::span_converter<SpanGenType,SpanConvImageBlend> SpanConvType;
-                typedef agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType> RendererType;
+                using SpanGenType = agg::span_image_resample_rgba_affine<img_source_type>;
+                using SpanConvType = agg::span_converter<SpanGenType,SpanConvImageBlend>;
+                using RendererType = agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType>;
 
                 SpanGenType sg(source,interpolator,gr.m_imageFilterLut);
                 SpanConvType sc(sg, blend);
@@ -1649,9 +1664,9 @@ public:
 				// this is the AGG2D default
                 if (gr.m_imageFilter == Agg2D::Bilinear)
                 {
-                    typedef agg::span_image_filter_rgba_bilinear<img_source_type,Interpolator> SpanGenType;
-                    typedef agg::span_converter<SpanGenType,SpanConvImageBlend> SpanConvType;
-					typedef agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType> RendererType;
+                    using SpanGenType = agg::span_image_filter_rgba_bilinear<img_source_type,Interpolator>;
+                    using SpanConvType = agg::span_converter<SpanGenType,SpanConvImageBlend>;
+					using RendererType = agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType>;
 
 					SpanGenType sg(source,interpolator);
 					SpanConvType sc(sg, blend);
@@ -1662,9 +1677,9 @@ public:
                 {
                     if(gr.m_imageFilterLut.diameter() == 2)
                     {
-                        typedef agg::span_image_filter_rgba_2x2<img_source_type,Interpolator> SpanGenType;
-                        typedef agg::span_converter<SpanGenType,SpanConvImageBlend> SpanConvType;
-                        typedef agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType> RendererType;
+                        using SpanGenType = agg::span_image_filter_rgba_2x2<img_source_type,Interpolator>;
+                        using SpanConvType = agg::span_converter<SpanGenType,SpanConvImageBlend>;
+                        using RendererType = agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType>;
 
                         SpanGenType sg(source,interpolator,gr.m_imageFilterLut);
                         SpanConvType sc(sg,blend);
@@ -1673,9 +1688,9 @@ public:
                     }
                     else
                     {
-                        typedef agg::span_image_filter_rgba<img_source_type,Interpolator> SpanGenType;
-                        typedef agg::span_converter<SpanGenType,SpanConvImageBlend> SpanConvType;
-						typedef agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType> RendererType;
+                        using SpanGenType = agg::span_image_filter_rgba<img_source_type,Interpolator>;
+                        using SpanConvType = agg::span_converter<SpanGenType,SpanConvImageBlend>;
+						using RendererType = agg::renderer_scanline_aa<BaseRenderer,Agg2D::SpanAllocator,SpanGenType>;
                         SpanGenType sg(source,interpolator,gr.m_imageFilterLut);
                         SpanConvType sc(sg, blend);
 						RendererType ri(renBase,gr.m_allocator,sg);
@@ -1729,7 +1744,7 @@ void Agg2D::renderImage(const Image& img, int x1, int y1, int x2, int y2,
     m_rasterizer.reset();
     m_rasterizer.add_path(m_pathTransform);
 
-    typedef agg::span_interpolator_linear<agg::trans_affine> Interpolator;
+    using Interpolator = agg::span_interpolator_linear<agg::trans_affine>;
     Interpolator interpolator(mtx);
 
     if(m_blendMode == BlendAlpha)

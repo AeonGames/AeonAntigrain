@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <math.h> 
 #include <stdio.h>
 #include "agg_basics.h"
@@ -34,27 +49,27 @@
 
 enum flip_y_e { flip_y = true };
 
-typedef agg::renderer_base<pixfmt> base_renderer;
-typedef agg::renderer_primitives<base_renderer> primitives_renderer;
+using base_renderer = agg::renderer_base<pixfmt>;
+using primitives_renderer = agg::renderer_primitives<base_renderer>;
 
-typedef agg::renderer_scanline_aa_solid<base_renderer>  solid_renderer;
-typedef agg::renderer_scanline_bin_solid<base_renderer> draft_renderer;
+using solid_renderer = agg::renderer_scanline_aa_solid<base_renderer> ;
+using draft_renderer = agg::renderer_scanline_bin_solid<base_renderer>;
 
-typedef agg::gradient_radial_d gradient_function;
-typedef agg::span_interpolator_linear<> interpolator;
-typedef agg::pod_auto_array<color_type, 256> color_array_type;
+using gradient_function = agg::gradient_radial_d;
+using interpolator = agg::span_interpolator_linear<>;
+using color_array_type = agg::pod_auto_array<color_type, 256>;
 typedef agg::span_gradient<color_type, 
                            interpolator, 
                            gradient_function, 
                            color_array_type> gradient_span_gen;
-typedef agg::span_allocator<color_type> gradient_span_alloc;
+using gradient_span_alloc = agg::span_allocator<color_type>;
 
 typedef agg::renderer_scanline_aa<base_renderer, 
                                   gradient_span_alloc,
                                   gradient_span_gen> gradient_renderer;
 
-typedef agg::rasterizer_scanline_aa<> scanline_rasterizer;
-typedef agg::rasterizer_outline<primitives_renderer> outline_rasterizer;
+using scanline_rasterizer = agg::rasterizer_scanline_aa<>;
+using outline_rasterizer = agg::rasterizer_outline<primitives_renderer>;
 
 
 
@@ -209,9 +224,9 @@ template<class Source> struct stroke_draft_simple
 //============================================================================
 template<class Source> struct stroke_draft_arrow
 {
-    typedef agg::conv_marker_adaptor<Source, agg::vcgen_markers_term>           stroke_type;
-    typedef agg::conv_marker<typename stroke_type::marker_type, agg::arrowhead> marker_type;
-    typedef agg::conv_concat<stroke_type, marker_type>                          concat_type;
+    using stroke_type = agg::conv_marker_adaptor<Source, agg::vcgen_markers_term>          ;
+    using marker_type = agg::conv_marker<typename stroke_type::marker_type, agg::arrowhead>;
+    using concat_type = agg::conv_concat<stroke_type, marker_type>                         ;
 
     stroke_type    s;
     agg::arrowhead ah;
@@ -237,7 +252,7 @@ template<class Source> struct stroke_draft_arrow
 //============================================================================
 template<class Source> struct stroke_fine_simple
 {
-    typedef agg::conv_stroke<Source> stroke_type;
+    using stroke_type = agg::conv_stroke<Source>;
 
     stroke_type    s;
 
@@ -255,9 +270,9 @@ template<class Source> struct stroke_fine_simple
 //============================================================================
 template<class Source> struct stroke_fine_arrow
 {
-    typedef agg::conv_stroke<Source, agg::vcgen_markers_term>                   stroke_type;
-    typedef agg::conv_marker<typename stroke_type::marker_type, agg::arrowhead> marker_type;
-    typedef agg::conv_concat<stroke_type, marker_type>                          concat_type;
+    using stroke_type = agg::conv_stroke<Source, agg::vcgen_markers_term>                  ;
+    using marker_type = agg::conv_marker<typename stroke_type::marker_type, agg::arrowhead>;
+    using concat_type = agg::conv_concat<stroke_type, marker_type>                         ;
 
     stroke_type    s;
     agg::arrowhead ah;
@@ -284,7 +299,7 @@ template<class Source> struct stroke_fine_arrow
 //============================================================================
 template<class Source> struct dash_stroke_draft_simple
 {
-    typedef agg::conv_dash<Source, agg::vcgen_markers_term> dash_type;
+    using dash_type = agg::conv_dash<Source, agg::vcgen_markers_term>;
 
     dash_type d;
     
@@ -305,9 +320,9 @@ template<class Source> struct dash_stroke_draft_simple
 //============================================================================
 template<class Source> struct dash_stroke_draft_arrow
 {
-    typedef agg::conv_dash<Source, agg::vcgen_markers_term>                   dash_type;
-    typedef agg::conv_marker<typename dash_type::marker_type, agg::arrowhead> marker_type;
-    typedef agg::conv_concat<dash_type, marker_type>                          concat_type;
+    using dash_type = agg::conv_dash<Source, agg::vcgen_markers_term>                  ;
+    using marker_type = agg::conv_marker<typename dash_type::marker_type, agg::arrowhead>;
+    using concat_type = agg::conv_concat<dash_type, marker_type>                         ;
 
     dash_type      d;
     agg::arrowhead ah;
@@ -336,8 +351,8 @@ template<class Source> struct dash_stroke_draft_arrow
 //============================================================================
 template<class Source> struct dash_stroke_fine_simple
 {
-    typedef agg::conv_dash<Source>       dash_type;
-    typedef agg::conv_stroke<dash_type>  stroke_type;
+    using dash_type = agg::conv_dash<Source>      ;
+    using stroke_type = agg::conv_stroke<dash_type> ;
 
     dash_type      d;
     stroke_type    s;
@@ -363,10 +378,10 @@ template<class Source> struct dash_stroke_fine_simple
 //============================================================================
 template<class Source> struct dash_stroke_fine_arrow
 {
-    typedef agg::conv_dash<Source, agg::vcgen_markers_term>                   dash_type;
-    typedef agg::conv_stroke<dash_type>                                       stroke_type;
-    typedef agg::conv_marker<typename dash_type::marker_type, agg::arrowhead> marker_type;
-    typedef agg::conv_concat<stroke_type, marker_type>                        concat_type;
+    using dash_type = agg::conv_dash<Source, agg::vcgen_markers_term>                  ;
+    using stroke_type = agg::conv_stroke<dash_type>                                      ;
+    using marker_type = agg::conv_marker<typename dash_type::marker_type, agg::arrowhead>;
+    using concat_type = agg::conv_concat<stroke_type, marker_type>                       ;
 
     dash_type      d;
     stroke_type    s;

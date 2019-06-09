@@ -67,22 +67,23 @@ namespace agg
 
         AGGAPI double get(double x) const;
         AGGAPI double get_stateful(double x) const;
-    
+
+        bspline(const bspline&) = delete;
+        const bspline& operator = (const bspline&) = delete;
+
     private:
-        AGGAPI bspline(const bspline&);
-        AGGAPI const bspline& operator = (const bspline&);
 
         AGGAPI static void bsearch(int n, const double *x, double x0, int *i);
         AGGAPI double extrapolation_left(double x) const;
         AGGAPI double extrapolation_right(double x) const;
         AGGAPI double interpolation(double x, int i) const;
 
-        int               m_max;
-        int               m_num;
-        double*           m_x;
-        double*           m_y;
+        int               m_max{0};
+        int               m_num{0};
+        double*           m_x{nullptr};
+        double*           m_y{nullptr};
         pod_array<double> m_am;
-        mutable int       m_last_idx;
+        mutable int       m_last_idx{-1};
     };
 }
 

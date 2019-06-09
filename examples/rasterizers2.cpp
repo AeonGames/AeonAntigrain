@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <math.h>
 #include <stdio.h>
 #include <time.h>
@@ -51,7 +66,7 @@ namespace agg
     class pattern_pixmap_argb32
     {
     public:
-        typedef rgba color_type;
+        using color_type = rgba;
 
         pattern_pixmap_argb32(const int32u* pixmap) : m_pixmap(pixmap) {}
 
@@ -148,18 +163,18 @@ class the_application : public agg::platform_support
 
 
 public:
-    typedef agg::renderer_base<pixfmt_pre> renderer_base;
-    typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_aa;
-    typedef agg::renderer_primitives<renderer_base> renderer_prim;
-    typedef agg::rasterizer_outline<renderer_prim> rasterizer_outline;
-    typedef agg::rasterizer_scanline_aa<> rasterizer_scanline;
-    typedef agg::scanline_p8 scanline;
-    typedef agg::renderer_outline_aa<renderer_base> renderer_oaa;
-    typedef agg::pattern_filter_bilinear_rgba<color_type> pattern_filter;
-    typedef agg::line_image_pattern_pow2<pattern_filter> image_pattern;
-    typedef agg::renderer_outline_image<renderer_base, image_pattern> renderer_img;
-    typedef agg::rasterizer_outline_aa<renderer_oaa> rasterizer_outline_aa;
-    typedef agg::rasterizer_outline_aa<renderer_img> rasterizer_outline_img;
+    using renderer_base = agg::renderer_base<pixfmt_pre>;
+    using renderer_aa = agg::renderer_scanline_aa_solid<renderer_base>;
+    using renderer_prim = agg::renderer_primitives<renderer_base>;
+    using rasterizer_outline = agg::rasterizer_outline<renderer_prim>;
+    using rasterizer_scanline = agg::rasterizer_scanline_aa<>;
+    using scanline = agg::scanline_p8;
+    using renderer_oaa = agg::renderer_outline_aa<renderer_base>;
+    using pattern_filter = agg::pattern_filter_bilinear_rgba<color_type>;
+    using image_pattern = agg::line_image_pattern_pow2<pattern_filter>;
+    using renderer_img = agg::renderer_outline_image<renderer_base, image_pattern>;
+    using rasterizer_outline_aa = agg::rasterizer_outline_aa<renderer_oaa>;
+    using rasterizer_outline_img = agg::rasterizer_outline_aa<renderer_img>;
     
 
 
@@ -339,9 +354,9 @@ public:
 //#include "agg_renderer_outline_aa.h"
 //#include "agg_rasterizer_outline_aa.h"
 
-typedef agg::renderer_base<agg::pixfmt_bgr24> base_ren_type;
-typedef agg::renderer_outline_aa<base_ren_type> renderer_type;
-typedef agg::rasterizer_outline_aa<renderer_type> rasterizer_type;
+using base_ren_type = agg::renderer_base<agg::pixfmt_bgr24>;
+using renderer_type = agg::renderer_outline_aa<base_ren_type>;
+using rasterizer_type = agg::rasterizer_outline_aa<renderer_type>;
 
 double width = 5.0;
 //-- create with specifying width
@@ -405,11 +420,11 @@ agg::pattern_pixmap_argb32 patt_src(pixmap_chain); // Source. Must have an inter
 // version agg::line_image_pattern_pow2 because it works about 15-25 percent
 // faster than agg::line_image_pattern (because of using simple masking instead 
 // of expensive '%' operation). 
-typedef agg::line_image_pattern_pow2<agg::pattern_filter_bilinear_rgba8> pattern_type;
+using pattern_type = agg::line_image_pattern_pow2<agg::pattern_filter_bilinear_rgba8>;
 
-typedef agg::renderer_base<agg::pixfmt_bgr24> base_ren_type;
-typedef agg::renderer_outline_image<base_ren_type, pattern_type> renderer_type;
-typedef agg::rasterizer_outline_aa<renderer_type>                rasterizer_type;
+using base_ren_type = agg::renderer_base<agg::pixfmt_bgr24>;
+using renderer_type = agg::renderer_outline_image<base_ren_type, pattern_type>;
+using rasterizer_type = agg::rasterizer_outline_aa<renderer_type>               ;
 
 //-- Create with specifying the source
 pattern_type patt(fltr, src);   

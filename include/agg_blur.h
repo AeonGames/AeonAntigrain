@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -92,8 +107,8 @@ namespace agg
     template<class ColorT, class CalculatorT> class stack_blur
     {
     public:
-        typedef ColorT      color_type;
-        typedef CalculatorT calculator_type;
+        using color_type = ColorT     ;
+        using calculator_type = CalculatorT;
 
         //--------------------------------------------------------------------
         template<class Img> void blur_x(Img& img, unsigned radius)
@@ -207,7 +222,7 @@ namespace agg
     //====================================================stack_blur_calc_rgba
     template<class T=unsigned> struct stack_blur_calc_rgba
     {
-        typedef T value_type;
+        using value_type = T;
         value_type r,g,b,a;
 
         AGG_INLINE void clear() 
@@ -241,7 +256,7 @@ namespace agg
 
         template<class ArgT> AGG_INLINE void calc_pix(ArgT& v, unsigned div)
         {
-            typedef typename ArgT::value_type value_type;
+            using value_type = typename ArgT::value_type;
             v.r = value_type(r / div);
             v.g = value_type(g / div);
             v.b = value_type(b / div);
@@ -251,7 +266,7 @@ namespace agg
         template<class ArgT> 
         AGG_INLINE void calc_pix(ArgT& v, unsigned mul, unsigned shr)
         {
-            typedef typename ArgT::value_type value_type;
+            using value_type = typename ArgT::value_type;
             v.r = value_type((r * mul) >> shr);
             v.g = value_type((g * mul) >> shr);
             v.b = value_type((b * mul) >> shr);
@@ -263,7 +278,7 @@ namespace agg
     //=====================================================stack_blur_calc_rgb
     template<class T=unsigned> struct stack_blur_calc_rgb
     {
-        typedef T value_type;
+        using value_type = T;
         value_type r,g,b;
 
         AGG_INLINE void clear() 
@@ -294,7 +309,7 @@ namespace agg
 
         template<class ArgT> AGG_INLINE void calc_pix(ArgT& v, unsigned div)
         {
-            typedef typename ArgT::value_type value_type;
+            using value_type = typename ArgT::value_type;
             v.r = value_type(r / div);
             v.g = value_type(g / div);
             v.b = value_type(b / div);
@@ -303,7 +318,7 @@ namespace agg
         template<class ArgT> 
         AGG_INLINE void calc_pix(ArgT& v, unsigned mul, unsigned shr)
         {
-            typedef typename ArgT::value_type value_type;
+            using value_type = typename ArgT::value_type;
             v.r = value_type((r * mul) >> shr);
             v.g = value_type((g * mul) >> shr);
             v.b = value_type((b * mul) >> shr);
@@ -314,7 +329,7 @@ namespace agg
     //====================================================stack_blur_calc_gray
     template<class T=unsigned> struct stack_blur_calc_gray
     {
-        typedef T value_type;
+        using value_type = T;
         value_type v;
 
         AGG_INLINE void clear() 
@@ -339,14 +354,14 @@ namespace agg
 
         template<class ArgT> AGG_INLINE void calc_pix(ArgT& a, unsigned div)
         {
-            typedef typename ArgT::value_type value_type;
+            using value_type = typename ArgT::value_type;
             a.v = value_type(v / div);
         }
 
         template<class ArgT> 
         AGG_INLINE void calc_pix(ArgT& a, unsigned mul, unsigned shr)
         {
-            typedef typename ArgT::value_type value_type;
+            using value_type = typename ArgT::value_type;
             a.v = value_type((v * mul) >> shr);
         }
     };
@@ -522,8 +537,8 @@ namespace agg
     template<class Img> 
     void stack_blur_rgb24(Img& img, unsigned rx, unsigned ry)
     {
-        typedef typename Img::color_type color_type;
-        typedef typename Img::order_type order_type;
+        using color_type = typename Img::color_type;
+        using order_type = typename Img::order_type;
         enum order_e 
         { 
             R = order_type::R, 
@@ -776,8 +791,8 @@ namespace agg
     template<class Img> 
     void stack_blur_rgba32(Img& img, unsigned rx, unsigned ry)
     {
-        typedef typename Img::color_type color_type;
-        typedef typename Img::order_type order_type;
+        using color_type = typename Img::color_type;
+        using order_type = typename Img::order_type;
         enum order_e 
         { 
             R = order_type::R, 
@@ -1068,10 +1083,10 @@ namespace agg
     template<class ColorT, class CalculatorT> class recursive_blur
     {
     public:
-        typedef ColorT color_type;
-        typedef CalculatorT calculator_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename calculator_type::value_type calc_type;
+        using color_type = ColorT;
+        using calculator_type = CalculatorT;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename calculator_type::value_type;
 
         //--------------------------------------------------------------------
         template<class Img> void blur_x(Img& img, double radius)
@@ -1173,8 +1188,8 @@ namespace agg
     //=================================================recursive_blur_calc_rgba
     template<class T=double> struct recursive_blur_calc_rgba
     {
-        typedef T value_type;
-        typedef recursive_blur_calc_rgba<T> self_type;
+        using value_type = T;
+        using self_type = recursive_blur_calc_rgba<T>;
 
         value_type r,g,b,a;
 
@@ -1205,7 +1220,7 @@ namespace agg
         template<class ColorT> 
         AGG_INLINE void to_pix(ColorT& c) const
         {
-            typedef typename ColorT::value_type cv_type;
+            using cv_type = typename ColorT::value_type;
             c.r = cv_type(r);
             c.g = cv_type(g);
             c.b = cv_type(b);
@@ -1217,8 +1232,8 @@ namespace agg
     //=================================================recursive_blur_calc_rgb
     template<class T=double> struct recursive_blur_calc_rgb
     {
-        typedef T value_type;
-        typedef recursive_blur_calc_rgb<T> self_type;
+        using value_type = T;
+        using self_type = recursive_blur_calc_rgb<T>;
 
         value_type r,g,b;
 
@@ -1247,7 +1262,7 @@ namespace agg
         template<class ColorT> 
         AGG_INLINE void to_pix(ColorT& c) const
         {
-            typedef typename ColorT::value_type cv_type;
+            using cv_type = typename ColorT::value_type;
             c.r = cv_type(r);
             c.g = cv_type(g);
             c.b = cv_type(b);
@@ -1258,8 +1273,8 @@ namespace agg
     //================================================recursive_blur_calc_gray
     template<class T=double> struct recursive_blur_calc_gray
     {
-        typedef T value_type;
-        typedef recursive_blur_calc_gray<T> self_type;
+        using value_type = T;
+        using self_type = recursive_blur_calc_gray<T>;
 
         value_type v;
 
@@ -1284,7 +1299,7 @@ namespace agg
         template<class ColorT> 
         AGG_INLINE void to_pix(ColorT& c) const
         {
-            typedef typename ColorT::value_type cv_type;
+            using cv_type = typename ColorT::value_type;
             c.v = cv_type(v);
         }
     };
@@ -1303,9 +1318,9 @@ namespace agg
     class slight_blur
     {
     public:
-        typedef typename PixFmt::pixel_type pixel_type;
-        typedef typename PixFmt::value_type value_type;
-        typedef typename PixFmt::order_type order_type;
+        using pixel_type = typename PixFmt::pixel_type;
+        using value_type = typename PixFmt::value_type;
+        using order_type = typename PixFmt::order_type;
 
         slight_blur(double r = 1.33)
         {

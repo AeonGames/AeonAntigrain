@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -28,7 +43,7 @@ namespace agg
     template<class ColorT> struct color_interpolator
     {
     public:
-        typedef ColorT color_type;
+        using color_type = ColorT;
 
         color_interpolator(const color_type& c1, 
                            const color_type& c2, 
@@ -61,7 +76,7 @@ namespace agg
     template<> struct color_interpolator<rgba8>
     {
     public:
-        typedef rgba8 color_type;
+        using color_type = rgba8;
 
         color_interpolator(const color_type& c1, 
                            const color_type& c2, 
@@ -91,7 +106,7 @@ namespace agg
     template<> struct color_interpolator<gray8>
     {
     public:
-        typedef gray8 color_type;
+        using color_type = gray8;
 
         color_interpolator(const color_type& c1, 
                            const color_type& c2, 
@@ -119,8 +134,8 @@ namespace agg
              unsigned ColorLutSize=256> class gradient_lut
     {
     public:
-        typedef ColorInterpolator interpolator_type;
-        typedef typename interpolator_type::color_type color_type;
+        using interpolator_type = ColorInterpolator;
+        using color_type = typename interpolator_type::color_type;
         enum { color_lut_size = ColorLutSize };
 
         //--------------------------------------------------------------------
@@ -167,8 +182,8 @@ namespace agg
                 if(offset > 1.0) offset = 1.0;
             }
         };
-        typedef agg::pod_bvector<color_point, 4> color_profile_type;
-        typedef agg::pod_array<color_type>       color_lut_type;
+        using color_profile_type = agg::pod_bvector<color_point, 4>;
+        using color_lut_type = agg::pod_array<color_type>      ;
 
         static bool offset_less(const color_point& a, const color_point& b)
         {

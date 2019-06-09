@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -39,8 +54,8 @@ namespace agg
             block_pool  = BlockPool
         };
 
-        typedef T value_type;
-        typedef vertex_block_storage<T, BlockShift, BlockPool> self_type;
+        using value_type = T;
+        using self_type = vertex_block_storage<T, BlockShift, BlockPool>;
 
         ~vertex_block_storage();
         vertex_block_storage();
@@ -351,7 +366,7 @@ namespace agg
     template<class T> class poly_plain_adaptor
     {
     public:
-        typedef T value_type;
+        using value_type = T;
 
         poly_plain_adaptor() : 
             m_data(0), 
@@ -418,7 +433,7 @@ namespace agg
     template<class Container> class poly_container_adaptor
     {
     public:
-        typedef typename Container::value_type vertex_type;
+        using vertex_type = typename Container::value_type;
 
         poly_container_adaptor() : 
             m_container(0), 
@@ -480,7 +495,7 @@ namespace agg
     template<class Container> class poly_container_reverse_adaptor
     {
     public:
-        typedef typename Container::value_type vertex_type;
+        using vertex_type = typename Container::value_type;
 
         poly_container_reverse_adaptor() : 
             m_container(0), 
@@ -544,7 +559,7 @@ namespace agg
     class line_adaptor
     {
     public:
-        typedef double value_type;
+        using value_type = double;
 
         line_adaptor() : m_line(m_coord, 2, false) {}
         line_adaptor(double x1, double y1, double x2, double y2) :
@@ -607,8 +622,8 @@ namespace agg
     template<class VertexContainer> class path_base
     {
     public:
-        typedef VertexContainer            container_type;
-        typedef path_base<VertexContainer> self_type;
+        using container_type = VertexContainer           ;
+        using self_type = path_base<VertexContainer>;
 
         //--------------------------------------------------------------------
         path_base() : m_vertices(), m_iterator(0) {}
@@ -1457,8 +1472,8 @@ namespace agg
     template<class Container> class vertex_stl_storage
     {
     public:
-        typedef typename Container::value_type vertex_type;
-        typedef typename vertex_type::value_type value_type;
+        using vertex_type = typename Container::value_type;
+        using value_type = typename vertex_type::value_type;
 
         void remove_all() { m_vertices.clear(); }
         void free_all()   { m_vertices.clear(); }
@@ -1557,11 +1572,11 @@ namespace agg
     };
 
     //-----------------------------------------------------------path_storage
-    typedef path_base<vertex_block_storage<double> > path_storage;
+    using path_storage = path_base<vertex_block_storage<double> >;
 
     // Example of declarations path_storage with pod_bvector as a container
     //-----------------------------------------------------------------------
-    //typedef path_base<vertex_stl_storage<pod_bvector<vertex_d> > > path_storage;
+    //using path_storage = path_base<vertex_stl_storage<pod_bvector<vertex_d> > >;
 
 }
 
@@ -1572,7 +1587,7 @@ namespace agg
 //#include <vector>
 //namespace agg
 //{
-//    typedef path_base<vertex_stl_storage<std::vector<vertex_d> > > stl_path_storage; 
+//    using stl_path_storage = path_base<vertex_stl_storage<std::vector<vertex_d> > >; 
 //}
 
 

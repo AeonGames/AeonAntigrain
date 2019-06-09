@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -72,9 +87,9 @@ void generate_circles(agg::path_storage& ps,
 class the_application : public agg::platform_support
 {
 public:
-    typedef agg::renderer_base<pixfmt> renderer_base;
-    typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
-    typedef agg::scanline_p8 scanline_type;
+    using renderer_base = agg::renderer_base<pixfmt>;
+    using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
+    using scanline_type = agg::scanline_p8;
 
     agg::interactive_polygon     m_quad1;
     agg::interactive_polygon     m_quad2;
@@ -173,8 +188,8 @@ public:
 
 
         
-        typedef agg::scanline_p8                               sbool_scanline_type;
-        typedef agg::renderer_scanline_aa_solid<renderer_base> sbool_renderer_type;
+        using sbool_scanline_type = agg::scanline_p8                              ;
+        using sbool_renderer_type = agg::renderer_scanline_aa_solid<renderer_base>;
 
         sbool_scanline_type sl_result;
         sbool_scanline_type sl1;

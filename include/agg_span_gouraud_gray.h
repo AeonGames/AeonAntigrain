@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -38,10 +53,10 @@ namespace agg
     template<class ColorT> class span_gouraud_gray : public span_gouraud<ColorT>
     {
     public:
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
-        typedef span_gouraud<color_type> base_type;
-        typedef typename base_type::coord_type coord_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
+        using base_type = span_gouraud<color_type>;
+        using coord_type = typename base_type::coord_type;
         enum subpixel_scale_e
         { 
             subpixel_shift = 4, 

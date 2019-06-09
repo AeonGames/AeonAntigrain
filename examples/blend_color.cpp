@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <math.h>
 #include <stdio.h>
 #include "agg_basics.h"
@@ -317,7 +332,7 @@ class the_application : public agg::platform_support
     agg::polygon_ctrl<color_type> m_shadow_ctrl;
 
     agg::path_storage             m_path;
-    typedef agg::conv_curve<agg::path_storage> shape_type;
+    using shape_type = agg::conv_curve<agg::path_storage>;
     shape_type                    m_shape;
 
     agg::rasterizer_scanline_aa<> m_ras;
@@ -439,8 +454,8 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::pixfmt_sgray8 pixfmt_gray8;
-        typedef agg::renderer_base<pixfmt_gray8> ren_base_gray8;
+        using pixfmt_gray8 = agg::pixfmt_sgray8;
+        using ren_base_gray8 = agg::renderer_base<pixfmt_gray8>;
 
         m_ras.clip_box(0,0, width(), height());
 
@@ -451,10 +466,10 @@ public:
         // Testing enhanced compositing operations. 
         // Uncomment and replace renb.blend_from_* to renb_blend.blend_from_*
         //----------------
-        //typedef agg::comp_op_rgba_minus<color_type, component_order> blender_type;
-        //typedef agg::comp_adaptor_rgba<blender_type> blend_adaptor_type;
-        //typedef agg::pixfmt_custom_blend_rgba<blend_adaptor_type, agg::rendering_buffer> pixfmt_type;
-        //typedef agg::renderer_base<pixfmt_type> ren_base;
+        //using blender_type = agg::comp_op_rgba_minus<color_type, component_order>;
+        //using blend_adaptor_type = agg::comp_adaptor_rgba<blender_type>;
+        //using pixfmt_type = agg::pixfmt_custom_blend_rgba<blend_adaptor_type, agg::rendering_buffer>;
+        //using ren_base = agg::renderer_base<pixfmt_type>;
         //pixfmt_type pixf_blend(rbuf_window());
         //agg::renderer_base<pixfmt_type> renb_blend(pixf_blend);
 

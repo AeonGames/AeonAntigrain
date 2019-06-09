@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -28,11 +43,11 @@ namespace agg
     template<class PixFmt, class AlphaMask> class pixfmt_amask_adaptor
     {
     public:
-        typedef PixFmt pixfmt_type;
-        typedef typename pixfmt_type::color_type color_type;
-        typedef typename pixfmt_type::row_data row_data;
-        typedef AlphaMask amask_type;
-        typedef typename amask_type::cover_type cover_type;
+        using pixfmt_type = PixFmt;
+        using color_type = typename pixfmt_type::color_type;
+        using row_data = typename pixfmt_type::row_data;
+        using amask_type = AlphaMask;
+        using cover_type = typename amask_type::cover_type;
 
     private:
         enum span_extra_tail_e { span_extra_tail = 256 };

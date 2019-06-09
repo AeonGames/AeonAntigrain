@@ -50,21 +50,21 @@ namespace agg
         };
 
     public:
-        typedef vertex_sequence<vertex_dist, 6> vertex_storage;
+        using vertex_storage = vertex_sequence<vertex_dist, 6>;
 
         AGGAPI trans_double_path();
 
         //--------------------------------------------------------------------
         void   base_length(double v)  { m_base_length = v; }
-        double base_length() const { return m_base_length; }
+        [[nodiscard]] double base_length() const { return m_base_length; }
 
         //--------------------------------------------------------------------
         void   base_height(double v)  { m_base_height = v; }
-        double base_height() const { return m_base_height; }
+        [[nodiscard]] double base_height() const { return m_base_height; }
 
         //--------------------------------------------------------------------
         void preserve_x_scale(bool f) { m_preserve_x_scale = f;    }
-        bool preserve_x_scale() const { return m_preserve_x_scale; }
+        [[nodiscard]] bool preserve_x_scale() const { return m_preserve_x_scale; }
 
         //--------------------------------------------------------------------
         AGGAPI void reset();
@@ -119,8 +119,8 @@ namespace agg
         }
 
         //--------------------------------------------------------------------
-        AGGAPI double total_length1() const;
-        AGGAPI double total_length2() const;
+        [[nodiscard]] AGGAPI double total_length1() const;
+        [[nodiscard]] AGGAPI double total_length2() const;
         AGGAPI void transform(double *x, double *y) const;
 
     private:
@@ -131,13 +131,13 @@ namespace agg
 
         vertex_storage m_src_vertices1;
         vertex_storage m_src_vertices2;
-        double         m_base_length;
-        double         m_base_height;
-        double         m_kindex1;
-        double         m_kindex2;
-        status_e       m_status1;
-        status_e       m_status2;
-        bool           m_preserve_x_scale;
+        double         m_base_length{0.0};
+        double         m_base_height{1.0};
+        double         m_kindex1{0.0};
+        double         m_kindex2{0.0};
+        status_e       m_status1{initial};
+        status_e       m_status2{initial};
+        bool           m_preserve_x_scale{true};
     };
 }
 #endif

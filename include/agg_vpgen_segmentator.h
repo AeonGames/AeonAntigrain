@@ -43,10 +43,10 @@ namespace agg
     class vpgen_segmentator
     {
     public:
-        vpgen_segmentator() : m_approximation_scale(1.0) {}
+        vpgen_segmentator()  = default;
 
         void approximation_scale(double s) { m_approximation_scale = s;     }
-        double approximation_scale() const { return m_approximation_scale;  }
+        [[nodiscard]] double approximation_scale() const { return m_approximation_scale;  }
 
         static bool auto_close()   { return false; }
         static bool auto_unclose() { return false; }
@@ -57,7 +57,7 @@ namespace agg
         AGGAPI unsigned vertex(double* x, double* y);
 
     private:
-        double   m_approximation_scale;
+        double   m_approximation_scale{1.0};
         double   m_x1;
         double   m_y1;
         double   m_dx;

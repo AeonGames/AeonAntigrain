@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -109,8 +124,8 @@ namespace agg
     template<class BaseRenderer> class renderer_scanline_aa_solid
     {
     public:
-        typedef BaseRenderer base_ren_type;
-        typedef typename base_ren_type::color_type color_type;
+        using base_ren_type = BaseRenderer;
+        using color_type = typename base_ren_type::color_type;
 
         //--------------------------------------------------------------------
         renderer_scanline_aa_solid() : m_ren(0) {}
@@ -199,9 +214,9 @@ namespace agg
     class renderer_scanline_aa
     {
     public:
-        typedef BaseRenderer  base_ren_type;
-        typedef SpanAllocator alloc_type;
-        typedef SpanGenerator span_gen_type;
+        using base_ren_type = BaseRenderer ;
+        using alloc_type = SpanAllocator;
+        using span_gen_type = SpanGenerator;
 
         //--------------------------------------------------------------------
         renderer_scanline_aa() : m_ren(0), m_alloc(0), m_span_gen(0) {}
@@ -309,8 +324,8 @@ namespace agg
     template<class BaseRenderer> class renderer_scanline_bin_solid
     {
     public:
-        typedef BaseRenderer base_ren_type;
-        typedef typename base_ren_type::color_type color_type;
+        using base_ren_type = BaseRenderer;
+        using color_type = typename base_ren_type::color_type;
 
         //--------------------------------------------------------------------
         renderer_scanline_bin_solid() : m_ren(0) {}
@@ -390,9 +405,9 @@ namespace agg
     class renderer_scanline_bin
     {
     public:
-        typedef BaseRenderer  base_ren_type;
-        typedef SpanAllocator alloc_type;
-        typedef SpanGenerator span_gen_type;
+        using base_ren_type = BaseRenderer ;
+        using alloc_type = SpanAllocator;
+        using span_gen_type = SpanGenerator;
 
         //--------------------------------------------------------------------
         renderer_scanline_bin() : m_ren(0), m_alloc(0), m_span_gen(0) {}
@@ -497,7 +512,7 @@ namespace agg
             sl_aa.reset(min_x, ras.max_x());
             sl_bin.reset(min_x, ras.max_x());
 
-            typedef typename BaseRenderer::color_type color_type;
+            using color_type = typename BaseRenderer::color_type;
             color_type* color_span = alloc.allocate(len * 2);
             color_type* mix_buffer = color_span + len;
             unsigned num_spans;
@@ -682,7 +697,7 @@ namespace agg
             int len = ras.max_x() - min_x + 2;
             sl_aa.reset(min_x, ras.max_x());
 
-            typedef typename BaseRenderer::color_type color_type;
+            using color_type = typename BaseRenderer::color_type;
             color_type* color_span   = alloc.allocate(len * 2);
             color_type* mix_buffer   = color_span + len;
             cover_type* cover_buffer = ras.allocate_cover_buffer(len);

@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -43,7 +58,7 @@ namespace agg
         };
 
     public:
-        typedef T value_type;
+        using value_type = T;
 
         //---------------------------------------------------------------
         ~scanline_cell_storage()
@@ -162,7 +177,7 @@ namespace agg
     template<class T> class scanline_storage_aa
     {
     public:
-        typedef T cover_type;
+        using cover_type = T;
 
         //---------------------------------------------------------------
         struct span_data
@@ -526,9 +541,9 @@ namespace agg
     };
 
 
-    typedef scanline_storage_aa<int8u>  scanline_storage_aa8;  //--------scanline_storage_aa8
-    typedef scanline_storage_aa<int16u> scanline_storage_aa16; //--------scanline_storage_aa16
-    typedef scanline_storage_aa<int32u> scanline_storage_aa32; //--------scanline_storage_aa32
+    using scanline_storage_aa8 = scanline_storage_aa<int8u> ;  //--------scanline_storage_aa8
+    using scanline_storage_aa16 = scanline_storage_aa<int16u>; //--------scanline_storage_aa16
+    using scanline_storage_aa32 = scanline_storage_aa<int32u>; //--------scanline_storage_aa32
 
 
 
@@ -537,13 +552,13 @@ namespace agg
     template<class T> class serialized_scanlines_adaptor_aa
     {
     public:
-        typedef T cover_type;
+        using cover_type = T;
 
         //---------------------------------------------------------------------
         class embedded_scanline
         {
         public:
-            typedef T cover_type;
+            using cover_type = T;
 
             //-----------------------------------------------------------------
             class const_iterator
@@ -804,9 +819,9 @@ namespace agg
 
 
 
-    typedef serialized_scanlines_adaptor_aa<int8u>  serialized_scanlines_adaptor_aa8;  //----serialized_scanlines_adaptor_aa8
-    typedef serialized_scanlines_adaptor_aa<int16u> serialized_scanlines_adaptor_aa16; //----serialized_scanlines_adaptor_aa16
-    typedef serialized_scanlines_adaptor_aa<int32u> serialized_scanlines_adaptor_aa32; //----serialized_scanlines_adaptor_aa32
+    using serialized_scanlines_adaptor_aa8 = serialized_scanlines_adaptor_aa<int8u> ;  //----serialized_scanlines_adaptor_aa8
+    using serialized_scanlines_adaptor_aa16 = serialized_scanlines_adaptor_aa<int16u>; //----serialized_scanlines_adaptor_aa16
+    using serialized_scanlines_adaptor_aa32 = serialized_scanlines_adaptor_aa<int32u>; //----serialized_scanlines_adaptor_aa32
 
 }
 

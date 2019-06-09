@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -162,11 +177,11 @@ template<class VS> void dump_path(VS& path)
 
 class the_application : public agg::platform_support
 {
-    typedef agg::renderer_base<pixfmt> base_ren_type;
-    typedef agg::renderer_scanline_aa_solid<base_ren_type> renderer_solid;
-    typedef agg::renderer_scanline_bin_solid<base_ren_type> renderer_bin;
-    typedef agg::font_engine_freetype_int32 font_engine_type;
-    typedef agg::font_cache_manager<font_engine_type> font_manager_type;
+    using base_ren_type = agg::renderer_base<pixfmt>;
+    using renderer_solid = agg::renderer_scanline_aa_solid<base_ren_type>;
+    using renderer_bin = agg::renderer_scanline_bin_solid<base_ren_type>;
+    using font_engine_type = agg::font_engine_freetype_int32;
+    using font_manager_type = agg::font_cache_manager<font_engine_type>;
 
     agg::rbox_ctrl<color_type>   m_ren_type;
     agg::slider_ctrl<color_type> m_height;

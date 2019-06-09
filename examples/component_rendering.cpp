@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
 #include "agg_rasterizer_scanline_aa.h"
@@ -14,7 +29,7 @@
 //#define AGG_BGR96
 #include "pixel_formats.h"
 
-typedef agg::blender_gray<gray_type> gray_blender;
+using gray_blender = agg::blender_gray<gray_type>;
 
 enum flip_y_e { flip_y = true };
 
@@ -38,9 +53,9 @@ public:
     {
         pixfmt pf(rbuf_window());
 
-        typedef agg::pixfmt_alpha_blend_gray<gray_blender, agg::rendering_buffer, 3, 2> pixfmt_r;
-        typedef agg::pixfmt_alpha_blend_gray<gray_blender, agg::rendering_buffer, 3, 1> pixfmt_g;
-        typedef agg::pixfmt_alpha_blend_gray<gray_blender, agg::rendering_buffer, 3, 0> pixfmt_b;
+        using pixfmt_r = agg::pixfmt_alpha_blend_gray<gray_blender, agg::rendering_buffer, 3, 2>;
+        using pixfmt_g = agg::pixfmt_alpha_blend_gray<gray_blender, agg::rendering_buffer, 3, 1>;
+        using pixfmt_b = agg::pixfmt_alpha_blend_gray<gray_blender, agg::rendering_buffer, 3, 0>;
 
         pixfmt_r pfr(rbuf_window());
         pixfmt_g pfg(rbuf_window());

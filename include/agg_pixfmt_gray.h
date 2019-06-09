@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -34,10 +49,10 @@ namespace agg
     //============================================================blender_gray
     template<class ColorT> struct blender_gray
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         // Blend pixels using the non-premultiplied form of Alvy-Ray Smith's
         // compositing function. Since the render buffer is opaque we skip the
@@ -60,10 +75,10 @@ namespace agg
     //======================================================blender_gray_pre
     template<class ColorT> struct blender_gray_pre
     {
-        typedef ColorT color_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using color_type = ColorT;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         // Blend pixels using the premultiplied form of Alvy-Ray Smith's
         // compositing function. 
@@ -87,7 +102,7 @@ namespace agg
     template<class ColorT, class GammaLut> class apply_gamma_dir_gray
     {
     public:
-        typedef typename ColorT::value_type value_type;
+        using value_type = typename ColorT::value_type;
 
         apply_gamma_dir_gray(const GammaLut& gamma) : m_gamma(gamma) {}
 
@@ -106,7 +121,7 @@ namespace agg
     template<class ColorT, class GammaLut> class apply_gamma_inv_gray
     {
     public:
-        typedef typename ColorT::value_type value_type;
+        using value_type = typename ColorT::value_type;
 
         apply_gamma_inv_gray(const GammaLut& gamma) : m_gamma(gamma) {}
 
@@ -126,14 +141,14 @@ namespace agg
     class pixfmt_alpha_blend_gray
     {
     public:
-        typedef pixfmt_gray_tag pixfmt_category;
-        typedef RenBuf   rbuf_type;
-        typedef typename rbuf_type::row_data row_data;
-        typedef Blender  blender_type;
-        typedef typename blender_type::color_type color_type;
-        typedef int                               order_type; // A fake one
-        typedef typename color_type::value_type   value_type;
-        typedef typename color_type::calc_type    calc_type;
+        using pixfmt_category = pixfmt_gray_tag;
+        using rbuf_type = RenBuf  ;
+        using row_data = typename rbuf_type::row_data;
+        using blender_type = Blender ;
+        using color_type = typename blender_type::color_type;
+        using order_type = int                              ; // A fake one
+        using value_type = typename color_type::value_type  ;
+        using calc_type = typename color_type::calc_type   ;
         enum 
         {
             num_components = 1,
@@ -665,8 +680,8 @@ namespace agg
                               unsigned len,
                               int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
-            typedef typename SrcPixelFormatRenderer::color_type src_color_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
+            using src_color_type = typename SrcPixelFormatRenderer::color_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -693,7 +708,7 @@ namespace agg
                             unsigned len,
                             int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::pixel_type src_pixel_type;
+            using src_pixel_type = typename SrcPixelFormatRenderer::pixel_type;
 
             if (const src_pixel_type* psrc = from.pix_value_ptr(xsrc, ysrc))
             {
@@ -713,25 +728,25 @@ namespace agg
         rbuf_type* m_rbuf;
     };
 
-    typedef blender_gray<gray8> blender_gray8;
-    typedef blender_gray<sgray8> blender_sgray8;
-    typedef blender_gray<gray16> blender_gray16;
-    typedef blender_gray<gray32> blender_gray32;
+    using blender_gray8 = blender_gray<gray8>;
+    using blender_sgray8 = blender_gray<sgray8>;
+    using blender_gray16 = blender_gray<gray16>;
+    using blender_gray32 = blender_gray<gray32>;
 
-    typedef blender_gray_pre<gray8> blender_gray8_pre;
-    typedef blender_gray_pre<sgray8> blender_sgray8_pre;
-    typedef blender_gray_pre<gray16> blender_gray16_pre;
-    typedef blender_gray_pre<gray32> blender_gray32_pre;
+    using blender_gray8_pre = blender_gray_pre<gray8>;
+    using blender_sgray8_pre = blender_gray_pre<sgray8>;
+    using blender_gray16_pre = blender_gray_pre<gray16>;
+    using blender_gray32_pre = blender_gray_pre<gray32>;
 
-    typedef pixfmt_alpha_blend_gray<blender_gray8, rendering_buffer> pixfmt_gray8;
-    typedef pixfmt_alpha_blend_gray<blender_sgray8, rendering_buffer> pixfmt_sgray8;
-    typedef pixfmt_alpha_blend_gray<blender_gray16, rendering_buffer> pixfmt_gray16;
-    typedef pixfmt_alpha_blend_gray<blender_gray32, rendering_buffer> pixfmt_gray32;
+    using pixfmt_gray8 = pixfmt_alpha_blend_gray<blender_gray8, rendering_buffer>;
+    using pixfmt_sgray8 = pixfmt_alpha_blend_gray<blender_sgray8, rendering_buffer>;
+    using pixfmt_gray16 = pixfmt_alpha_blend_gray<blender_gray16, rendering_buffer>;
+    using pixfmt_gray32 = pixfmt_alpha_blend_gray<blender_gray32, rendering_buffer>;
 
-    typedef pixfmt_alpha_blend_gray<blender_gray8_pre, rendering_buffer> pixfmt_gray8_pre;
-    typedef pixfmt_alpha_blend_gray<blender_sgray8_pre, rendering_buffer> pixfmt_sgray8_pre;
-    typedef pixfmt_alpha_blend_gray<blender_gray16_pre, rendering_buffer> pixfmt_gray16_pre;
-    typedef pixfmt_alpha_blend_gray<blender_gray32_pre, rendering_buffer> pixfmt_gray32_pre;
+    using pixfmt_gray8_pre = pixfmt_alpha_blend_gray<blender_gray8_pre, rendering_buffer>;
+    using pixfmt_sgray8_pre = pixfmt_alpha_blend_gray<blender_sgray8_pre, rendering_buffer>;
+    using pixfmt_gray16_pre = pixfmt_alpha_blend_gray<blender_gray16_pre, rendering_buffer>;
+    using pixfmt_gray32_pre = pixfmt_alpha_blend_gray<blender_gray32_pre, rendering_buffer>;
 }
 
 #endif

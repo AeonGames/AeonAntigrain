@@ -157,14 +157,14 @@ namespace agg
 namespace agg
 {
     //-------------------------------------------------------------------------
-    typedef AGG_INT8   int8;         //----int8
-    typedef AGG_INT8U  int8u;        //----int8u
-    typedef AGG_INT16  int16;        //----int16
-    typedef AGG_INT16U int16u;       //----int16u
-    typedef AGG_INT32  int32;        //----int32
-    typedef AGG_INT32U int32u;       //----int32u
-    typedef AGG_INT64  int64;        //----int64
-    typedef AGG_INT64U int64u;       //----int64u
+    using int8 = signed char;         //----int8
+    using int8u = unsigned char;        //----int8u
+    using int16 = short;        //----int16
+    using int16u = unsigned short;       //----int16u
+    using int32 = int;        //----int32
+    using int32u = unsigned int;       //----int32u
+    using int64 = long long;        //----int64
+    using int64u = unsigned long long;       //----int64u
 
 #if defined(AGG_FISTP)
 #pragma warning(push)
@@ -275,7 +275,7 @@ namespace agg
     };
 
     //-------------------------------------------------------------------------
-    typedef unsigned char cover_type;    //----cover_type
+    using cover_type = unsigned char;    //----cover_type
     enum cover_scale_e
     {
         cover_shift = 8,                 //----cover_shift
@@ -323,11 +323,11 @@ namespace agg
     //----------------------------------------------------------------rect_base
     template<class T> struct rect_base
     {
-        typedef T            value_type;
-        typedef rect_base<T> self_type;
+        using value_type = T;
+        using self_type = rect_base<T>;
         T x1, y1, x2, y2;
 
-        rect_base() {}
+        rect_base() = default;
         rect_base(T x1_, T y1_, T x2_, T y2_) :
             x1(x1_), y1(y1_), x2(x2_), y2(y2_) {}
 
@@ -353,17 +353,17 @@ namespace agg
             return x1 <= x2 && y1 <= y2;
         }
 
-        bool is_valid() const
+        [[nodiscard]] bool is_valid() const
         {
             return x1 <= x2 && y1 <= y2;
         }
 
-        bool hit_test(T x, T y) const
+        [[nodiscard]] bool hit_test(T x, T y) const
         {
             return (x >= x1 && x <= x2 && y >= y1 && y <= y2);
         }
         
-        bool overlaps(const self_type& r) const
+        [[nodiscard]] bool overlaps(const self_type& r) const
         {
             return !(r.x1 > x2 || r.x2 < x1
                   || r.y1 > y2 || r.y2 < y1);
@@ -401,9 +401,9 @@ namespace agg
         return r;
     }
 
-    typedef rect_base<int>    rect_i; //----rect_i
-    typedef rect_base<float>  rect_f; //----rect_f
-    typedef rect_base<double> rect_d; //----rect_d
+    using rect_i = rect_base<int>; //----rect_i
+    using rect_f = rect_base<float>; //----rect_f
+    using rect_d = rect_base<double>; //----rect_d
 
     //---------------------------------------------------------path_commands_e
     enum path_commands_e
@@ -548,34 +548,34 @@ namespace agg
     //--------------------------------------------------------------point_base
     template<class T> struct point_base
     {
-        typedef T value_type;
+        using value_type = T;
         T x,y;
-        point_base() {}
+        point_base() = default;
         point_base(T x_, T y_) : x(x_), y(y_) {}
     };
-    typedef point_base<int>    point_i; //-----point_i
-    typedef point_base<float>  point_f; //-----point_f
-    typedef point_base<double> point_d; //-----point_d
+    using point_i = point_base<int>; //-----point_i
+    using point_f = point_base<float>; //-----point_f
+    using point_d = point_base<double>; //-----point_d
 
     //-------------------------------------------------------------vertex_base
     template<class T> struct vertex_base
     {
-        typedef T value_type;
+        using value_type = T;
         T x,y;
         unsigned cmd;
-        vertex_base() {}
+        vertex_base() = default;
         vertex_base(T x_, T y_, unsigned cmd_) : x(x_), y(y_), cmd(cmd_) {}
     };
-    typedef vertex_base<int>    vertex_i; //-----vertex_i
-    typedef vertex_base<float>  vertex_f; //-----vertex_f
-    typedef vertex_base<double> vertex_d; //-----vertex_d
+    using vertex_i = vertex_base<int>; //-----vertex_i
+    using vertex_f = vertex_base<float>; //-----vertex_f
+    using vertex_d = vertex_base<double>; //-----vertex_d
 
     //----------------------------------------------------------------row_info
     template<class T> struct row_info
     {
         int x1, x2;
         T* ptr;
-        row_info() {}
+        row_info() = default;
         row_info(int x1_, int x2_, T* ptr_) : x1(x1_), x2(x2_), ptr(ptr_) {}
     };
 
@@ -584,7 +584,7 @@ namespace agg
     {
         int x1, x2;
         const T* ptr;
-        const_row_info() {}
+        const_row_info() = default;
         const_row_info(int x1_, int x2_, const T* ptr_) : 
             x1(x1_), x2(x2_), ptr(ptr_) {}
     };

@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -40,8 +55,8 @@ enum flip_y_e { flip_y = true };
 
 class the_application : public agg::platform_support
 {
-    typedef agg::renderer_base<pixfmt> renderer_base;
-    typedef agg::renderer_base<pixfmt_pre> renderer_base_pre;
+    using renderer_base = agg::renderer_base<pixfmt>;
+    using renderer_base_pre = agg::renderer_base<pixfmt_pre>;
 
     agg::slider_ctrl<agg::rgba> m_radius;
     agg::slider_ctrl<agg::rgba> m_step;
@@ -213,13 +228,13 @@ public:
 
         m_num_pix += r * r * agg::pi;
 
-        typedef agg::span_interpolator_linear<> interpolator_type;
+        using interpolator_type = agg::span_interpolator_linear<>;
         interpolator_type interpolator(img_mtx); 
 
         agg::image_filter_lut filter;
         bool norm = m_normalize.status();
 
-        typedef agg::image_accessor_clip<pixfmt> source_type;
+        using source_type = agg::image_accessor_clip<pixfmt>;
         pixfmt pixf_img(rbuf_img(1));
         source_type source(pixf_img, agg::rgba_pre(0,0,0,0));
 
@@ -227,7 +242,7 @@ public:
         {
         case 0:
             {
-                typedef agg::span_image_filter_nn<source_type, interpolator_type> span_gen_type;
+                using span_gen_type = agg::span_image_filter_nn<source_type, interpolator_type>;
                 span_gen_type sg(source, interpolator);
                 ras.add_path(tr);
                 agg::render_scanlines_aa(ras, sl, rb_pre, sa, sg);
@@ -236,7 +251,7 @@ public:
 
         case 1:
             {
-                typedef agg::span_image_filter_bilinear<pixfmt, interpolator_type> span_gen_type;
+                using span_gen_type = agg::span_image_filter_bilinear<pixfmt, interpolator_type>;
                 span_gen_type sg(pixf_img, agg::rgba_pre(0,0,0,0), interpolator);
                 ras.add_path(tr);
                 agg::render_scanlines_aa(ras, sl, rb_pre, sa, sg);
@@ -254,7 +269,7 @@ public:
                 case 7:  filter.calculate(agg::image_filter_hermite(),  norm); break; 
                 }
 
-                typedef agg::span_image_filter_2x2<source_type, interpolator_type> span_gen_type;
+                using span_gen_type = agg::span_image_filter_2x2<source_type, interpolator_type>;
                 span_gen_type sg(source, interpolator, filter);
                 ras.add_path(tr);
                 agg::render_scanlines_aa(ras, sl, rb_pre, sa, sg);
@@ -290,7 +305,7 @@ public:
                 case 16: filter.calculate(agg::image_filter_blackman(m_radius.value()), norm); break; 
                 }
 
-                typedef agg::span_image_filter<source_type, interpolator_type> span_gen_type;
+                using span_gen_type = agg::span_image_filter<source_type, interpolator_type>;
                 span_gen_type sg(source, interpolator, filter);
                 ras.add_path(tr);
                 agg::render_scanlines_aa(ras, sl, rb_pre, sa, sg);

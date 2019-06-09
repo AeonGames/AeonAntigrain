@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -30,9 +45,9 @@ namespace agg
     template<class PixelFormat> class renderer_base
     {
     public:
-        typedef PixelFormat pixfmt_type;
-        typedef typename pixfmt_type::color_type color_type;
-        typedef typename pixfmt_type::row_data row_data;
+        using pixfmt_type = PixelFormat;
+        using color_type = typename pixfmt_type::color_type;
+        using row_data = typename pixfmt_type::row_data;
 
         //--------------------------------------------------------------------
         renderer_base() : m_ren(0), m_clip_box(1, 1, 0, 0) {}
@@ -51,8 +66,8 @@ namespace agg
         pixfmt_type& ren() { return *m_ren;  }
           
         //--------------------------------------------------------------------
-        unsigned width()  const { return m_ren->width();  }
-        unsigned height() const { return m_ren->height(); }
+        [[nodiscard]] unsigned width()  const { return m_ren->width();  }
+        [[nodiscard]] unsigned height() const { return m_ren->height(); }
 
         //--------------------------------------------------------------------
         bool clip_box(int x1, int y1, int x2, int y2)
@@ -100,25 +115,25 @@ namespace agg
         }
 
         //--------------------------------------------------------------------
-        bool inbox(int x, int y) const
+        [[nodiscard]] bool inbox(int x, int y) const
         {
             return x >= m_clip_box.x1 && y >= m_clip_box.y1 &&
                    x <= m_clip_box.x2 && y <= m_clip_box.y2;
         }
 
         //--------------------------------------------------------------------
-        const rect_i& clip_box() const { return m_clip_box;    }
-        int           xmin()     const { return m_clip_box.x1; }
-        int           ymin()     const { return m_clip_box.y1; }
-        int           xmax()     const { return m_clip_box.x2; }
-        int           ymax()     const { return m_clip_box.y2; }
+        [[nodiscard]] const rect_i& clip_box() const { return m_clip_box;    }
+        [[nodiscard]] int           xmin()     const { return m_clip_box.x1; }
+        [[nodiscard]] int           ymin()     const { return m_clip_box.y1; }
+        [[nodiscard]] int           xmax()     const { return m_clip_box.x2; }
+        [[nodiscard]] int           ymax()     const { return m_clip_box.y2; }
 
         //--------------------------------------------------------------------
-        const rect_i& bounding_clip_box() const { return m_clip_box;    }
-        int           bounding_xmin()     const { return m_clip_box.x1; }
-        int           bounding_ymin()     const { return m_clip_box.y1; }
-        int           bounding_xmax()     const { return m_clip_box.x2; }
-        int           bounding_ymax()     const { return m_clip_box.y2; }
+        [[nodiscard]] const rect_i& bounding_clip_box() const { return m_clip_box;    }
+        [[nodiscard]] int           bounding_xmin()     const { return m_clip_box.x1; }
+        [[nodiscard]] int           bounding_ymin()     const { return m_clip_box.y1; }
+        [[nodiscard]] int           bounding_xmax()     const { return m_clip_box.x2; }
+        [[nodiscard]] int           bounding_ymax()     const { return m_clip_box.y2; }
 
         //--------------------------------------------------------------------
         void clear(const color_type& c)
@@ -463,7 +478,7 @@ namespace agg
         //--------------------------------------------------------------------
         template<class RenBuf>
         void copy_from(const RenBuf& src, 
-                       const rect_i* rect_src_ptr = 0, 
+                       const rect_i* rect_src_ptr = nullptr, 
                        int dx = 0, 
                        int dy = 0)
         {
@@ -509,7 +524,7 @@ namespace agg
         //--------------------------------------------------------------------
         template<class SrcPixelFormatRenderer>
         void blend_from(const SrcPixelFormatRenderer& src, 
-                        const rect_i* rect_src_ptr = 0, 
+                        const rect_i* rect_src_ptr = nullptr, 
                         int dx = 0, 
                         int dy = 0,
                         cover_type cover = agg::cover_full)
@@ -580,7 +595,7 @@ namespace agg
         template<class SrcPixelFormatRenderer>
         void blend_from_color(const SrcPixelFormatRenderer& src, 
                               const color_type& color,
-                              const rect_i* rect_src_ptr = 0, 
+                              const rect_i* rect_src_ptr = nullptr, 
                               int dx = 0, 
                               int dy = 0,
                               cover_type cover = agg::cover_full)
@@ -652,7 +667,7 @@ namespace agg
         template<class SrcPixelFormatRenderer>
         void blend_from_lut(const SrcPixelFormatRenderer& src, 
                             const color_type* color_lut,
-                            const rect_i* rect_src_ptr = 0, 
+                            const rect_i* rect_src_ptr = nullptr, 
                             int dx = 0, 
                             int dy = 0,
                             cover_type cover = agg::cover_full)

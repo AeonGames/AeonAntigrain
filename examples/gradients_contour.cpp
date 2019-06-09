@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // AGG Contribution Pack - Gradients 1 (AGG CP - Gradients 1)
 // http://milan.marusinec.sk/aggcp
@@ -974,7 +989,7 @@ void make_arrows(agg::path_storage& ps);
 //==========================================================the_application
 class the_application : public agg::platform_support
 {
-	typedef agg::gradient_lut<agg::color_interpolator<color_type>, 1024> color_func_type;
+	using color_func_type = agg::gradient_lut<agg::color_interpolator<color_type>, 1024>;
 
     agg::rbox_ctrl<color_type> m_polygons;
     agg::rbox_ctrl<color_type> m_gradient;
@@ -1229,7 +1244,7 @@ public:
     template<class VertexSource>
 	void perform_rendering(VertexSource& vs, agg::path_storage& contour)
     {
-		typedef agg::renderer_base<pixfmt> ren_base;
+		using ren_base = agg::renderer_base<pixfmt>;
 		
 		pixfmt pf(rbuf_window());
 		ren_base rb(pf);
@@ -1295,7 +1310,7 @@ public:
 				return;
 			}
 
-			typedef agg::conv_transform<agg::conv_transform<VertexSource>,agg::trans_perspective> t2_type;
+			using t2_type = agg::conv_transform<agg::conv_transform<VertexSource>,agg::trans_perspective>;
 
 			t2_type t2(t1, trpp);
 
@@ -1490,7 +1505,7 @@ public:
 
 					agg::span_interpolator_trans<agg::trans_perspective> span_interpolator(trpg );
 
-					typedef agg::one_color_function<agg::srgba8> color_func_type;
+					using color_func_type = agg::one_color_function<agg::srgba8>;
 					typedef agg::span_gradient<color_type, 
                             agg::span_interpolator_trans<agg::trans_perspective>, 
 							agg::gradient_image<agg::srgba8>, 
@@ -1628,7 +1643,7 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt> base_ren_type;
+        using base_ren_type = agg::renderer_base<pixfmt>;
 
         pixfmt pf(rbuf_window());
         base_ren_type ren_base(pf);

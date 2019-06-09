@@ -51,7 +51,7 @@ namespace agg
 	template<class ColorT> class one_color_function
 	{
 	public:
-		typedef ColorT color_type;
+		using color_type = ColorT;
 
 		color_type m_color;
 
@@ -78,8 +78,8 @@ namespace agg
 	{
 	private:
 		//------------ fields
-		typedef ColorT color_type;
-		typedef agg::pixfmt_rgba32 pixfmt_type;
+		using color_type = ColorT;
+		using pixfmt_type = agg::pixfmt_rgba32;
 
 		agg::rgba8* m_buffer;
 

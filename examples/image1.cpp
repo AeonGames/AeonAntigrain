@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -52,8 +67,8 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt>     renderer_base;
-        typedef agg::renderer_base<pixfmt_pre> renderer_base_pre;
+        using renderer_base = agg::renderer_base<pixfmt>    ;
+        using renderer_base_pre = agg::renderer_base<pixfmt_pre>;
        
         pixfmt            pixf(rbuf_window());
         pixfmt_pre        pixf_pre(rbuf_window());
@@ -79,10 +94,10 @@ public:
 
         agg::span_allocator<color_type> sa;
 
-        typedef agg::span_interpolator_linear<> interpolator_type;
+        using interpolator_type = agg::span_interpolator_linear<>;
         interpolator_type interpolator(img_mtx);
 
-        typedef agg::image_accessor_clip<pixfmt> img_source_type;
+        using img_source_type = agg::image_accessor_clip<pixfmt>;
 
         pixfmt img_pixf(rbuf_img(0));
         img_source_type img_src(img_pixf, agg::rgba_pre(0, 0.4, 0, 0.5));
@@ -178,8 +193,8 @@ int agg_main(int argc, char* argv[])
 
 // Test the plain/premultiplied issue
 //-------------------
-//typedef agg::pixfmt_bgra32         pixfmt; 
-//typedef agg::renderer_base<pixfmt> renderer_base;
+//using pixfmt = agg::pixfmt_bgra32        ; 
+//using renderer_base = agg::renderer_base<pixfmt>;
 //pixfmt        pixf(app.rbuf_img(0));
 //renderer_base rb(pixf);
 //for(unsigned i = 0; i < app.rbuf_img(0).height(); i += 2)

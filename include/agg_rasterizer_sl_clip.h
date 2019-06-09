@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -28,7 +43,7 @@ namespace agg
     //------------------------------------------------------------ras_conv_int
     struct ras_conv_int
     {
-        typedef int coord_type;
+        using coord_type = int;
         static AGG_INLINE int mul_div(double a, double b, double c)
         {
             return iround(a * b / c);
@@ -42,7 +57,7 @@ namespace agg
     //--------------------------------------------------------ras_conv_int_sat
     struct ras_conv_int_sat
     {
-        typedef int coord_type;
+        using coord_type = int;
         static AGG_INLINE int mul_div(double a, double b, double c)
         {
             return saturation<poly_max_coord>::iround(a * b / c);
@@ -59,7 +74,7 @@ namespace agg
     //---------------------------------------------------------ras_conv_int_3x
     struct ras_conv_int_3x
     {
-        typedef int coord_type;
+        using coord_type = int;
         static AGG_INLINE int mul_div(double a, double b, double c)
         {
             return iround(a * b / c);
@@ -73,7 +88,7 @@ namespace agg
     //-----------------------------------------------------------ras_conv_dbl
     struct ras_conv_dbl
     {
-        typedef double coord_type;
+        using coord_type = double;
         static AGG_INLINE double mul_div(double a, double b, double c)
         {
             return a * b / c;
@@ -87,7 +102,7 @@ namespace agg
     //--------------------------------------------------------ras_conv_dbl_3x
     struct ras_conv_dbl_3x
     {
-        typedef double coord_type;
+        using coord_type = double;
         static AGG_INLINE double mul_div(double a, double b, double c)
         {
             return a * b / c;
@@ -106,9 +121,9 @@ namespace agg
     template<class Conv> class rasterizer_sl_clip
     {
     public:
-        typedef Conv                      conv_type;
-        typedef typename Conv::coord_type coord_type;
-        typedef rect_base<coord_type>     rect_type;
+        using conv_type = Conv                     ;
+        using coord_type = typename Conv::coord_type;
+        using rect_type = rect_base<coord_type>    ;
 
         //--------------------------------------------------------------------
         rasterizer_sl_clip() :  
@@ -311,8 +326,8 @@ namespace agg
     class rasterizer_sl_no_clip
     {
     public:
-        typedef ras_conv_int conv_type;
-        typedef int          coord_type;
+        using conv_type = ras_conv_int;
+        using coord_type = int         ;
 
         rasterizer_sl_no_clip() : m_x1(0), m_y1(0) {}
 
@@ -339,11 +354,11 @@ namespace agg
     //                                         -----rasterizer_sl_clip_dbl
     //                                         -----rasterizer_sl_clip_dbl_3x
     //------------------------------------------------------------------------
-    typedef rasterizer_sl_clip<ras_conv_int>     rasterizer_sl_clip_int;
-    typedef rasterizer_sl_clip<ras_conv_int_sat> rasterizer_sl_clip_int_sat;
-    typedef rasterizer_sl_clip<ras_conv_int_3x>  rasterizer_sl_clip_int_3x;
-    typedef rasterizer_sl_clip<ras_conv_dbl>     rasterizer_sl_clip_dbl;
-    typedef rasterizer_sl_clip<ras_conv_dbl_3x>  rasterizer_sl_clip_dbl_3x;
+    using rasterizer_sl_clip_int = rasterizer_sl_clip<ras_conv_int>    ;
+    using rasterizer_sl_clip_int_sat = rasterizer_sl_clip<ras_conv_int_sat>;
+    using rasterizer_sl_clip_int_3x = rasterizer_sl_clip<ras_conv_int_3x> ;
+    using rasterizer_sl_clip_dbl = rasterizer_sl_clip<ras_conv_dbl>    ;
+    using rasterizer_sl_clip_dbl_3x = rasterizer_sl_clip<ras_conv_dbl_3x> ;
 
 
 }

@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_rendering_buffer.h"
 #include "agg_rasterizer_scanline_aa.h"
@@ -19,11 +34,11 @@
 
 enum flip_y_e { flip_y = true };
 
-typedef color_type color;
-typedef component_order order;
-typedef agg::blender_rgba<color, order> prim_blender_type; 
-typedef agg::pixfmt_alpha_blend_rgba<prim_blender_type, agg::rendering_buffer> prim_pixfmt_type;
-typedef agg::renderer_base<prim_pixfmt_type> prim_ren_base_type;
+using color = color_type;
+using order = component_order;
+using prim_blender_type = agg::blender_rgba<color, order>; 
+using prim_pixfmt_type = agg::pixfmt_alpha_blend_rgba<prim_blender_type, agg::rendering_buffer>;
+using prim_ren_base_type = agg::renderer_base<prim_pixfmt_type>;
 
 
 void force_comp_op_link()
@@ -147,11 +162,11 @@ public:
     void radial_shape(RenBase& rbase, ColorRamp& colors,
                       double x1, double y1, double x2, double y2)
     {
-        typedef RenBase renderer_base_type;
-        typedef agg::gradient_radial gradient_func_type;
-        typedef ColorRamp color_func_type;
-        typedef agg::span_interpolator_linear<> interpolator_type;
-        typedef agg::span_allocator<color> span_allocator_type;
+        using renderer_base_type = RenBase;
+        using gradient_func_type = agg::gradient_radial;
+        using color_func_type = ColorRamp;
+        using interpolator_type = agg::span_interpolator_linear<>;
+        using span_allocator_type = agg::span_allocator<color>;
         typedef agg::span_gradient<color, 
                                    interpolator_type, 
                                    gradient_func_type, 
@@ -185,9 +200,9 @@ public:
 
     template<class RenBase> void render_scene(RenBase& rb)
     {
-        typedef agg::comp_op_adaptor_rgba<color, order> blender_type;
-        typedef agg::pixfmt_custom_blend_rgba<blender_type, agg::rendering_buffer> pixfmt_type;
-        typedef agg::renderer_base<pixfmt_type> renderer_type;
+        using blender_type = agg::comp_op_adaptor_rgba<color, order>;
+        using pixfmt_type = agg::pixfmt_custom_blend_rgba<blender_type, agg::rendering_buffer>;
+        using renderer_type = agg::renderer_base<pixfmt_type>;
 
         pixfmt_type pixf(rbuf_window());
         renderer_type ren(pixf);

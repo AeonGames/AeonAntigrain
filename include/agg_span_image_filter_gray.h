@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -37,13 +52,13 @@ namespace agg
     public span_image_filter<Source, Interpolator>
     {
     public:
-        typedef Source source_type;
-        typedef typename source_type::color_type color_type;
-        typedef Interpolator interpolator_type;
-        typedef span_image_filter<source_type, interpolator_type> base_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using source_type = Source;
+        using color_type = typename source_type::color_type;
+        using interpolator_type = Interpolator;
+        using base_type = span_image_filter<source_type, interpolator_type>;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         //--------------------------------------------------------------------
         span_image_filter_gray_nn() {}
@@ -79,13 +94,13 @@ namespace agg
     public span_image_filter<Source, Interpolator>
     {
     public:
-        typedef Source source_type;
-        typedef typename source_type::color_type color_type;
-        typedef Interpolator interpolator_type;
-        typedef span_image_filter<source_type, interpolator_type> base_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using source_type = Source;
+        using color_type = typename source_type::color_type;
+        using interpolator_type = Interpolator;
+        using base_type = span_image_filter<source_type, interpolator_type>;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         //--------------------------------------------------------------------
         span_image_filter_gray_bilinear() {}
@@ -148,13 +163,13 @@ namespace agg
     public span_image_filter<Source, Interpolator>
     {
     public:
-        typedef Source source_type;
-        typedef typename source_type::color_type color_type;
-        typedef Interpolator interpolator_type;
-        typedef span_image_filter<source_type, interpolator_type> base_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using source_type = Source;
+        using color_type = typename source_type::color_type;
+        using interpolator_type = Interpolator;
+        using base_type = span_image_filter<source_type, interpolator_type>;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         //--------------------------------------------------------------------
         span_image_filter_gray_bilinear_clip() {}
@@ -320,13 +335,13 @@ namespace agg
     public span_image_filter<Source, Interpolator>
     {
     public:
-        typedef Source source_type;
-        typedef typename source_type::color_type color_type;
-        typedef Interpolator interpolator_type;
-        typedef span_image_filter<source_type, interpolator_type> base_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using source_type = Source;
+        using color_type = typename source_type::color_type;
+        using interpolator_type = Interpolator;
+        using base_type = span_image_filter<source_type, interpolator_type>;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         //--------------------------------------------------------------------
         span_image_filter_gray_2x2() {}
@@ -415,13 +430,13 @@ namespace agg
     public span_image_filter<Source, Interpolator>
     {
     public:
-        typedef Source source_type;
-        typedef typename source_type::color_type color_type;
-        typedef Interpolator interpolator_type;
-        typedef span_image_filter<source_type, interpolator_type> base_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::calc_type calc_type;
-        typedef typename color_type::long_type long_type;
+        using source_type = Source;
+        using color_type = typename source_type::color_type;
+        using interpolator_type = Interpolator;
+        using base_type = span_image_filter<source_type, interpolator_type>;
+        using value_type = typename color_type::value_type;
+        using calc_type = typename color_type::calc_type;
+        using long_type = typename color_type::long_type;
 
         //--------------------------------------------------------------------
         span_image_filter_gray() {}
@@ -511,12 +526,12 @@ namespace agg
     public span_image_resample_affine<Source>
     {
     public:
-        typedef Source source_type;
-        typedef typename source_type::color_type color_type;
-        typedef span_image_resample_affine<source_type> base_type;
-        typedef typename base_type::interpolator_type interpolator_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::long_type long_type;
+        using source_type = Source;
+        using color_type = typename source_type::color_type;
+        using base_type = span_image_resample_affine<source_type>;
+        using interpolator_type = typename base_type::interpolator_type;
+        using value_type = typename color_type::value_type;
+        using long_type = typename color_type::long_type;
         enum base_scale_e
         {
             downscale_shift = image_filter_shift
@@ -613,12 +628,12 @@ namespace agg
     public span_image_resample<Source, Interpolator>
     {
     public:
-        typedef Source source_type;
-        typedef typename source_type::color_type color_type;
-        typedef Interpolator interpolator_type;
-        typedef span_image_resample<source_type, interpolator_type> base_type;
-        typedef typename color_type::value_type value_type;
-        typedef typename color_type::long_type long_type;
+        using source_type = Source;
+        using color_type = typename source_type::color_type;
+        using interpolator_type = Interpolator;
+        using base_type = span_image_resample<source_type, interpolator_type>;
+        using value_type = typename color_type::value_type;
+        using long_type = typename color_type::long_type;
         enum base_scale_e
         {
             downscale_shift = image_filter_shift

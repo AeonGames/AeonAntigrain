@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -26,16 +41,9 @@ namespace agg
 
     //------------------------------------------------------------------------
     vcgen_dash::vcgen_dash() :
-        m_total_dash_len(0.0),
-        m_num_dashes(0),
-        m_dash_start(0.0),
-        m_shorten(0.0),
-        m_curr_dash_start(0.0),
-        m_curr_dash(0),
-        m_src_vertices(),
-        m_closed(0),
-        m_status(initial),
-        m_src_vertex(0)
+        
+        m_src_vertices()
+        
     {
     }
 

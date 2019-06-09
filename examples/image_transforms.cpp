@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -150,8 +165,8 @@ public:
     //------------------------------------------------------------------------
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt> renderer_base;
-        typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
+        using renderer_base = agg::renderer_base<pixfmt>;
+        using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
        
         pixfmt pixf(rbuf_window());
         pixfmt pixf_img(rbuf_img(0));
@@ -246,7 +261,7 @@ public:
 
         }
 
-        typedef agg::span_interpolator_linear<> interpolator_type;
+        using interpolator_type = agg::span_interpolator_linear<>;
         interpolator_type interpolator(image_mtx);
         agg::span_allocator<color_type> sa;
 

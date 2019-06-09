@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -43,9 +58,9 @@ namespace agg
     class scanline_p8
     {
     public:
-        typedef scanline_p8 self_type;
-        typedef int8u       cover_type;
-        typedef int16       coord_type;
+        using self_type = scanline_p8;
+        using cover_type = int8u      ;
+        using coord_type = int16      ;
 
         //--------------------------------------------------------------------
         struct span
@@ -55,8 +70,8 @@ namespace agg
             const cover_type* covers;
         };
 
-        typedef span* iterator;
-        typedef const span* const_iterator;
+        using iterator = span*;
+        using const_iterator = const span*;
 
         scanline_p8() :
             m_last_x(0x7FFFFFF0),
@@ -183,9 +198,9 @@ namespace agg
     class scanline32_p8
     {
     public:
-        typedef scanline32_p8 self_type;
-        typedef int8u         cover_type;
-        typedef int32         coord_type;
+        using self_type = scanline32_p8;
+        using cover_type = int8u        ;
+        using coord_type = int32        ;
 
         struct span
         {
@@ -197,7 +212,7 @@ namespace agg
             coord_type len; // If negative, it's a solid span, covers is valid
             const cover_type* covers;
         };
-        typedef pod_bvector<span, 4> span_array_type;
+        using span_array_type = pod_bvector<span, 4>;
 
 
         //--------------------------------------------------------------------

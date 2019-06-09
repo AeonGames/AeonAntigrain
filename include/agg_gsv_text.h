@@ -35,6 +35,7 @@ limitations under the License.
 #ifndef AGG_GSV_TEXT_INCLUDED
 #define AGG_GSV_TEXT_INCLUDED
 
+#include <array>
 #include "agg_array.h"
 #include "agg_conv_stroke.h"
 #include "agg_conv_transform.h"
@@ -71,11 +72,10 @@ namespace agg
         AGGAPI void rewind(unsigned path_id);
         AGGAPI unsigned vertex(double* x, double* y);
 
-    private:
-        // not supposed to be copied
-        gsv_text(const gsv_text&);
-        const gsv_text& operator = (const gsv_text&);
+        gsv_text(const gsv_text&) = delete;
+        const gsv_text& operator = (const gsv_text&) = delete;
 
+    private:
         int16u value(const int8u* p) const
         {
             int16u v;
@@ -93,22 +93,22 @@ namespace agg
         }
 
     private:
-        double          m_x;
-        double          m_y;
-        double          m_start_x;
-        double          m_width;
-        double          m_height;
-        double          m_space;
-        double          m_line_space;
-        char            m_chr[2];
+        double          m_x{0.0};
+        double          m_y{0.0};
+        double          m_start_x{0.0};
+        double          m_width{10.0};
+        double          m_height{0.0};
+        double          m_space{0.0};
+        double          m_line_space{0.0};
+        std::array<char,2> m_chr{};
         char*           m_text;
         pod_array<char> m_text_buf;
         char*           m_cur_chr;
         const void*     m_font;
         pod_array<char> m_loaded_font;
-        status          m_status;
-        bool            m_big_endian;
-        bool            m_flip;
+        status          m_status{initial};
+        bool            m_big_endian{false};
+        bool            m_flip{false};
         int8u*          m_indices;
         int8*           m_glyphs;
         int8*           m_bglyph;
@@ -153,10 +153,6 @@ namespace agg
         conv_stroke<gsv_text> m_polyline;
         conv_transform<conv_stroke<gsv_text>, Transformer> m_trans;
     };
-
-
-
 }
-
 
 #endif

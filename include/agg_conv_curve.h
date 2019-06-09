@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -56,9 +71,9 @@ namespace agg
              class Curve4=curve4> class conv_curve
     {
     public:
-        typedef Curve3 curve3_type;
-        typedef Curve4 curve4_type;
-        typedef conv_curve<VertexSource, Curve3, Curve4> self_type;
+        using curve3_type = Curve3;
+        using curve4_type = Curve4;
+        using self_type = conv_curve<VertexSource, Curve3, Curve4>;
 
         explicit conv_curve(VertexSource& source) :
           m_source(&source), m_last_x(0.0), m_last_y(0.0) {}

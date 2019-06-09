@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -176,7 +191,7 @@ public:
                 case 6: op = agg::sbool_b_minus_a; break;
             }
 
-            typedef agg::renderer_base<pixfmt> renderer_base;
+            using renderer_base = agg::renderer_base<pixfmt>;
             pixfmt pixf(rbuf_window());
             renderer_base rb(pixf);
 
@@ -188,8 +203,8 @@ public:
             {
                 case 0:
                 {
-                    typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
-                    typedef agg::scanline_p8 scanline_type;
+                    using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
+                    using scanline_type = agg::scanline_p8;
 
                     renderer_solid ren(rb);
 
@@ -228,8 +243,8 @@ public:
 
                 case 1:
                 {
-                    typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
-                    typedef agg::scanline_u8 scanline_type;
+                    using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
+                    using scanline_type = agg::scanline_u8;
 
                     renderer_solid ren(rb);
 
@@ -262,8 +277,8 @@ public:
 
                 case 2:
                 {
-                    typedef agg::renderer_scanline_bin_solid<renderer_base> renderer_solid;
-                    typedef agg::scanline_bin scanline_type;
+                    using renderer_solid = agg::renderer_scanline_bin_solid<renderer_base>;
+                    using scanline_type = agg::scanline_bin;
 
                     renderer_solid ren(rb);
 
@@ -602,8 +617,8 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt> base_ren_type;
-        typedef agg::renderer_scanline_aa_solid<base_ren_type> renderer_solid;
+        using base_ren_type = agg::renderer_base<pixfmt>;
+        using renderer_solid = agg::renderer_scanline_aa_solid<base_ren_type>;
 
         pixfmt pf(rbuf_window());
         base_ren_type ren_base(pf);

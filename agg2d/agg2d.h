@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Agg2D - Version 1.0
 // Based on Anti-Grain Geometry
@@ -62,48 +77,48 @@
 class Agg2D
 {
 #ifdef AGG2D_USE_FLOAT_FORMAT
-    typedef agg::rgba32 ColorType;
+    using ColorType = agg::rgba32;
 #else
-    typedef agg::rgba8  ColorType;
+    using ColorType = agg::rgba8 ;
 #endif
-    typedef agg::order_bgra ComponentOrder; // Platform dependent!
-    typedef agg::blender_rgba<ColorType, ComponentOrder>             Blender;
-    typedef agg::comp_op_adaptor_rgba<ColorType, ComponentOrder>     BlenderComp;
-    typedef agg::blender_rgba_pre<ColorType, ComponentOrder>         BlenderPre;
-    typedef agg::comp_op_adaptor_rgba_pre<ColorType, ComponentOrder> BlenderCompPre;
+    using ComponentOrder = agg::order_bgra; // Platform dependent!
+    using Blender = agg::blender_rgba<ColorType, ComponentOrder>            ;
+    using BlenderComp = agg::comp_op_adaptor_rgba<ColorType, ComponentOrder>    ;
+    using BlenderPre = agg::blender_rgba_pre<ColorType, ComponentOrder>        ;
+    using BlenderCompPre = agg::comp_op_adaptor_rgba_pre<ColorType, ComponentOrder>;
 
-    typedef agg::pixfmt_alpha_blend_rgba<Blender, agg::rendering_buffer>         PixFormat;
-    typedef agg::pixfmt_custom_blend_rgba<BlenderComp, agg::rendering_buffer>    PixFormatComp;
-    typedef agg::pixfmt_alpha_blend_rgba<BlenderPre, agg::rendering_buffer>      PixFormatPre;
-    typedef agg::pixfmt_custom_blend_rgba<BlenderCompPre, agg::rendering_buffer> PixFormatCompPre;
+    using PixFormat = agg::pixfmt_alpha_blend_rgba<Blender, agg::rendering_buffer>        ;
+    using PixFormatComp = agg::pixfmt_custom_blend_rgba<BlenderComp, agg::rendering_buffer>   ;
+    using PixFormatPre = agg::pixfmt_alpha_blend_rgba<BlenderPre, agg::rendering_buffer>     ;
+    using PixFormatCompPre = agg::pixfmt_custom_blend_rgba<BlenderCompPre, agg::rendering_buffer>;
 
-    typedef agg::renderer_base<PixFormat>        RendererBase;
-    typedef agg::renderer_base<PixFormatComp>    RendererBaseComp;
-    typedef agg::renderer_base<PixFormatPre>     RendererBasePre;
-    typedef agg::renderer_base<PixFormatCompPre> RendererBaseCompPre;
+    using RendererBase = agg::renderer_base<PixFormat>       ;
+    using RendererBaseComp = agg::renderer_base<PixFormatComp>   ;
+    using RendererBasePre = agg::renderer_base<PixFormatPre>    ;
+    using RendererBaseCompPre = agg::renderer_base<PixFormatCompPre>;
 
-    typedef agg::renderer_scanline_aa_solid<RendererBase>     RendererSolid;
-    typedef agg::renderer_scanline_aa_solid<RendererBaseComp> RendererSolidComp;
+    using RendererSolid = agg::renderer_scanline_aa_solid<RendererBase>    ;
+    using RendererSolidComp = agg::renderer_scanline_aa_solid<RendererBaseComp>;
 
-    typedef agg::span_allocator<ColorType> SpanAllocator;
-    typedef agg::pod_auto_array<ColorType, 256> GradientArray;
+    using SpanAllocator = agg::span_allocator<ColorType>;
+    using GradientArray = agg::pod_auto_array<ColorType, 256>;
 
-    typedef agg::span_gradient<ColorType, agg::span_interpolator_linear<>, agg::gradient_x,      GradientArray> LinearGradientSpan;
-    typedef agg::span_gradient<ColorType, agg::span_interpolator_linear<>, agg::gradient_circle, GradientArray> RadialGradientSpan;
+    using LinearGradientSpan = agg::span_gradient<ColorType, agg::span_interpolator_linear<>, agg::gradient_x,      GradientArray>;
+    using RadialGradientSpan = agg::span_gradient<ColorType, agg::span_interpolator_linear<>, agg::gradient_circle, GradientArray>;
 
 #ifdef AGG2D_USE_FREETYPE
-    typedef agg::font_engine_freetype_int32       FontEngine;
+    using FontEngine = agg::font_engine_freetype_int32      ;
 #else
-    typedef agg::font_engine_win32_tt_int32       FontEngine;
+    using FontEngine = agg::font_engine_win32_tt_int32      ;
 #endif
-    typedef agg::font_cache_manager<FontEngine>   FontCacheManager;
-    typedef FontCacheManager::gray8_adaptor_type  FontRasterizer;
-    typedef FontCacheManager::gray8_scanline_type FontScanline;
+    using FontCacheManager = agg::font_cache_manager<FontEngine>  ;
+    using FontRasterizer = FontCacheManager::gray8_adaptor_type ;
+    using FontScanline = FontCacheManager::gray8_scanline_type;
 
-    typedef agg::conv_curve<agg::path_storage>    ConvCurve;
-    typedef agg::conv_stroke<ConvCurve>           ConvStroke;
-    typedef agg::conv_transform<ConvCurve>        PathTransform;
-    typedef agg::conv_transform<ConvStroke>       StrokeTransform;
+    using ConvCurve = agg::conv_curve<agg::path_storage>   ;
+    using ConvStroke = agg::conv_stroke<ConvCurve>          ;
+    using PathTransform = agg::conv_transform<ConvCurve>       ;
+    using StrokeTransform = agg::conv_transform<ConvStroke>      ;
 
     enum Gradient
     {
@@ -118,10 +133,10 @@ public:
     // Use srgba8 as the "user" color type, even though the underlying color type 
     // might be something else, such as rgba32. This allows code based on 
     // 8-bit sRGB values to carry on working as before.
-    typedef agg::srgba8       Color;
-    typedef agg::rect_i       Rect;
-    typedef agg::rect_d       RectD;
-    typedef agg::trans_affine Affine;
+    using Color = agg::srgba8      ;
+    using Rect = agg::rect_i      ;
+    using RectD = agg::rect_d      ;
+    using Affine = agg::trans_affine;
 
     enum LineJoin
     {

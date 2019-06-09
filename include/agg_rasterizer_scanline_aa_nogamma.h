@@ -123,9 +123,9 @@ namespace agg
         };
 
     public:
-        typedef Clip                      clip_type;
-        typedef typename Clip::conv_type  conv_type;
-        typedef typename Clip::coord_type coord_type;
+        using clip_type = Clip                     ;
+        using conv_type = typename Clip::conv_type ;
+        using coord_type = typename Clip::coord_type;
 
         enum aa_scale_e
         {

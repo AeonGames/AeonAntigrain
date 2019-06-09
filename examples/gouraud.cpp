@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -78,13 +93,13 @@ public:
         double alpha = m_alpha.value();
         double brc = 1;
 
-        typedef agg::renderer_base<pixfmt> base_ren_type;
+        using base_ren_type = agg::renderer_base<pixfmt>;
 #ifdef AGG_GRAY8
-        typedef agg::span_gouraud_gray<color_type> span_gen_type;
+        using span_gen_type = agg::span_gouraud_gray<color_type>;
 #else
-        typedef agg::span_gouraud_rgba<color_type> span_gen_type;
+        using span_gen_type = agg::span_gouraud_rgba<color_type>;
 #endif
-        typedef agg::span_allocator<color_type> span_alloc_type;
+        using span_alloc_type = agg::span_allocator<color_type>;
         
         pixfmt pf(rbuf_window());
         base_ren_type ren_base(pf);
@@ -176,7 +191,7 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt> base_ren_type;
+        using base_ren_type = agg::renderer_base<pixfmt>;
 
         pixfmt pf(rbuf_window());
         base_ren_type ren_base(pf);

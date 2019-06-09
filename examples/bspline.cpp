@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -33,8 +48,8 @@ enum flip_y_e { flip_y = true };
 class the_application : public agg::platform_support
 {
 public:
-    typedef agg::renderer_base<pixfmt> renderer_base;
-    typedef agg::scanline_p8 scanline_type;
+    using renderer_base = agg::renderer_base<pixfmt>;
+    using scanline_type = agg::scanline_p8;
 
     agg::interactive_polygon     m_poly;
     agg::slider_ctrl<color_type> m_num_points;
@@ -104,11 +119,11 @@ public:
                                                false, 
                                                m_close.status());
 
-        typedef agg::conv_bspline<agg::simple_polygon_vertex_source> conv_bspline_type;
+        using conv_bspline_type = agg::conv_bspline<agg::simple_polygon_vertex_source>;
         conv_bspline_type bspline(path);
         bspline.interpolation_step(1.0 / m_num_points.value());
 
-        typedef agg::conv_stroke<conv_bspline_type> conv_stroke_type;
+        using conv_stroke_type = agg::conv_stroke<conv_bspline_type>;
         conv_stroke_type stroke(bspline);
 
         stroke.width(2.0);

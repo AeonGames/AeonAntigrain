@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -34,10 +49,10 @@ namespace agg
     //=========================================================blender_rgb555
     struct blender_rgb555
     {
-        typedef rgba8 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int16u pixel_type;
+        using color_type = rgba8;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int16u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -73,10 +88,10 @@ namespace agg
     //=====================================================blender_rgb555_pre
     struct blender_rgb555_pre
     {
-        typedef rgba8 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int16u pixel_type;
+        using color_type = rgba8;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int16u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -116,11 +131,11 @@ namespace agg
     template<class Gamma> class blender_rgb555_gamma
     {
     public:
-        typedef rgba8 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int16u pixel_type;
-        typedef Gamma gamma_type;
+        using color_type = rgba8;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int16u;
+        using gamma_type = Gamma;
 
         blender_rgb555_gamma() : m_gamma(0) {}
         void gamma(const gamma_type& g) { m_gamma = &g; }
@@ -165,10 +180,10 @@ namespace agg
     //=========================================================blender_rgb565
     struct blender_rgb565
     {
-        typedef rgba8 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int16u pixel_type;
+        using color_type = rgba8;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int16u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -203,10 +218,10 @@ namespace agg
     //=====================================================blender_rgb565_pre
     struct blender_rgb565_pre
     {
-        typedef rgba8 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int16u pixel_type;
+        using color_type = rgba8;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int16u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -243,11 +258,11 @@ namespace agg
     template<class Gamma> class blender_rgb565_gamma
     {
     public:
-        typedef rgba8 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int16u pixel_type;
-        typedef Gamma gamma_type;
+        using color_type = rgba8;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int16u;
+        using gamma_type = Gamma;
 
         blender_rgb565_gamma() : m_gamma(0) {}
         void gamma(const gamma_type& g) { m_gamma = &g; }
@@ -288,10 +303,10 @@ namespace agg
     //=====================================================blender_rgbAAA
     struct blender_rgbAAA
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -328,10 +343,10 @@ namespace agg
     //==================================================blender_rgbAAA_pre
     struct blender_rgbAAA_pre
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -371,11 +386,11 @@ namespace agg
     template<class Gamma> class blender_rgbAAA_gamma
     {
     public:
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
-        typedef Gamma gamma_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
+        using gamma_type = Gamma;
 
         blender_rgbAAA_gamma() : m_gamma(0) {}
         void gamma(const gamma_type& g) { m_gamma = &g; }
@@ -416,10 +431,10 @@ namespace agg
     //=====================================================blender_bgrAAA
     struct blender_bgrAAA
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -456,10 +471,10 @@ namespace agg
     //=================================================blender_bgrAAA_pre
     struct blender_bgrAAA_pre
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -499,11 +514,11 @@ namespace agg
     template<class Gamma> class blender_bgrAAA_gamma
     {
     public:
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
-        typedef Gamma gamma_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
+        using gamma_type = Gamma;
 
         blender_bgrAAA_gamma() : m_gamma(0) {}
         void gamma(const gamma_type& g) { m_gamma = &g; }
@@ -546,10 +561,10 @@ namespace agg
     //=====================================================blender_rgbBBA
     struct blender_rgbBBA
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -583,10 +598,10 @@ namespace agg
     //=================================================blender_rgbBBA_pre
     struct blender_rgbBBA_pre
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -624,11 +639,11 @@ namespace agg
     template<class Gamma> class blender_rgbBBA_gamma
     {
     public:
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
-        typedef Gamma gamma_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
+        using gamma_type = Gamma;
 
         blender_rgbBBA_gamma() : m_gamma(0) {}
         void gamma(const gamma_type& g) { m_gamma = &g; }
@@ -668,10 +683,10 @@ namespace agg
     //=====================================================blender_bgrABB
     struct blender_bgrABB
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -705,10 +720,10 @@ namespace agg
     //=================================================blender_bgrABB_pre
     struct blender_bgrABB_pre
     {
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -746,11 +761,11 @@ namespace agg
     template<class Gamma> class blender_bgrABB_gamma
     {
     public:
-        typedef rgba16 color_type;
-        typedef color_type::value_type value_type;
-        typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
-        typedef Gamma gamma_type;
+        using color_type = rgba16;
+        using value_type = color_type::value_type;
+        using calc_type = color_type::calc_type;
+        using pixel_type = int32u;
+        using gamma_type = Gamma;
 
         blender_bgrABB_gamma() : m_gamma(0) {}
         void gamma(const gamma_type& g) { m_gamma = &g; }
@@ -792,14 +807,14 @@ namespace agg
     template<class Blender,  class RenBuf> class pixfmt_alpha_blend_rgb_packed
     {
     public:
-        typedef RenBuf   rbuf_type;
-        typedef typename rbuf_type::row_data row_data;
-        typedef Blender  blender_type;
-        typedef typename blender_type::color_type color_type;
-        typedef typename blender_type::pixel_type pixel_type;
-        typedef int                               order_type; // A fake one
-        typedef typename color_type::value_type   value_type;
-        typedef typename color_type::calc_type    calc_type;
+        using rbuf_type = RenBuf  ;
+        using row_data = typename rbuf_type::row_data;
+        using blender_type = Blender ;
+        using color_type = typename blender_type::color_type;
+        using pixel_type = typename blender_type::pixel_type;
+        using order_type = int                              ; // A fake one
+        using value_type = typename color_type::value_type  ;
+        using calc_type = typename color_type::calc_type   ;
         enum base_scale_e 
         {
             base_shift = color_type::base_shift,
@@ -1098,7 +1113,7 @@ namespace agg
                         unsigned len,
                         int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::order_type src_order;
+            using src_order = typename SrcPixelFormatRenderer::order_type;
 
             const value_type* psrc = (const value_type*)from.row_ptr(ysrc);
             if(psrc)
@@ -1143,8 +1158,8 @@ namespace agg
                               unsigned len,
                               int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::value_type src_value_type;
-            typedef typename SrcPixelFormatRenderer::color_type src_color_type;
+            using src_value_type = typename SrcPixelFormatRenderer::value_type;
+            using src_color_type = typename SrcPixelFormatRenderer::color_type;
             const src_value_type* psrc = (src_value_type*)from.row_ptr(ysrc);
             if(psrc)
             {
@@ -1173,7 +1188,7 @@ namespace agg
                             unsigned len,
                             int8u cover)
         {
-            typedef typename SrcPixelFormatRenderer::value_type src_value_type;
+            using src_value_type = typename SrcPixelFormatRenderer::value_type;
             const src_value_type* psrc = (src_value_type*)from.row_ptr(ysrc);
             if(psrc)
             {
@@ -1201,21 +1216,21 @@ namespace agg
         Blender    m_blender;
     };
 
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgb555, rendering_buffer> pixfmt_rgb555; //----pixfmt_rgb555
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgb565, rendering_buffer> pixfmt_rgb565; //----pixfmt_rgb565
+    using pixfmt_rgb555 = pixfmt_alpha_blend_rgb_packed<blender_rgb555, rendering_buffer>; //----pixfmt_rgb555
+    using pixfmt_rgb565 = pixfmt_alpha_blend_rgb_packed<blender_rgb565, rendering_buffer>; //----pixfmt_rgb565
 
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgb555_pre, rendering_buffer> pixfmt_rgb555_pre; //----pixfmt_rgb555_pre
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgb565_pre, rendering_buffer> pixfmt_rgb565_pre; //----pixfmt_rgb565_pre
+    using pixfmt_rgb555_pre = pixfmt_alpha_blend_rgb_packed<blender_rgb555_pre, rendering_buffer>; //----pixfmt_rgb555_pre
+    using pixfmt_rgb565_pre = pixfmt_alpha_blend_rgb_packed<blender_rgb565_pre, rendering_buffer>; //----pixfmt_rgb565_pre
 
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgbAAA, rendering_buffer> pixfmt_rgbAAA; //----pixfmt_rgbAAA
-    typedef pixfmt_alpha_blend_rgb_packed<blender_bgrAAA, rendering_buffer> pixfmt_bgrAAA; //----pixfmt_bgrAAA
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgbBBA, rendering_buffer> pixfmt_rgbBBA; //----pixfmt_rgbBBA
-    typedef pixfmt_alpha_blend_rgb_packed<blender_bgrABB, rendering_buffer> pixfmt_bgrABB; //----pixfmt_bgrABB
+    using pixfmt_rgbAAA = pixfmt_alpha_blend_rgb_packed<blender_rgbAAA, rendering_buffer>; //----pixfmt_rgbAAA
+    using pixfmt_bgrAAA = pixfmt_alpha_blend_rgb_packed<blender_bgrAAA, rendering_buffer>; //----pixfmt_bgrAAA
+    using pixfmt_rgbBBA = pixfmt_alpha_blend_rgb_packed<blender_rgbBBA, rendering_buffer>; //----pixfmt_rgbBBA
+    using pixfmt_bgrABB = pixfmt_alpha_blend_rgb_packed<blender_bgrABB, rendering_buffer>; //----pixfmt_bgrABB
 
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgbAAA_pre, rendering_buffer> pixfmt_rgbAAA_pre; //----pixfmt_rgbAAA_pre
-    typedef pixfmt_alpha_blend_rgb_packed<blender_bgrAAA_pre, rendering_buffer> pixfmt_bgrAAA_pre; //----pixfmt_bgrAAA_pre
-    typedef pixfmt_alpha_blend_rgb_packed<blender_rgbBBA_pre, rendering_buffer> pixfmt_rgbBBA_pre; //----pixfmt_rgbBBA_pre
-    typedef pixfmt_alpha_blend_rgb_packed<blender_bgrABB_pre, rendering_buffer> pixfmt_bgrABB_pre; //----pixfmt_bgrABB_pre
+    using pixfmt_rgbAAA_pre = pixfmt_alpha_blend_rgb_packed<blender_rgbAAA_pre, rendering_buffer>; //----pixfmt_rgbAAA_pre
+    using pixfmt_bgrAAA_pre = pixfmt_alpha_blend_rgb_packed<blender_bgrAAA_pre, rendering_buffer>; //----pixfmt_bgrAAA_pre
+    using pixfmt_rgbBBA_pre = pixfmt_alpha_blend_rgb_packed<blender_rgbBBA_pre, rendering_buffer>; //----pixfmt_rgbBBA_pre
+    using pixfmt_bgrABB_pre = pixfmt_alpha_blend_rgb_packed<blender_bgrABB_pre, rendering_buffer>; //----pixfmt_bgrABB_pre
 
 
     //-----------------------------------------------------pixfmt_rgb555_gamma

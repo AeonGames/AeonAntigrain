@@ -149,13 +149,13 @@ namespace fman {
   template<class FontEngine> class font_cache_manager
   {
   public:
-    typedef FontEngine font_engine_type;
-    typedef font_cache_manager<FontEngine> self_type;
-    typedef typename font_engine_type::path_adaptor_type   path_adaptor_type;
-    typedef typename font_engine_type::gray8_adaptor_type  gray8_adaptor_type;
-    typedef typename gray8_adaptor_type::embedded_scanline gray8_scanline_type;
-    typedef typename font_engine_type::mono_adaptor_type   mono_adaptor_type;
-    typedef typename mono_adaptor_type::embedded_scanline  mono_scanline_type;
+    using font_engine_type = FontEngine;
+    using self_type = font_cache_manager<FontEngine>;
+    using path_adaptor_type = typename font_engine_type::path_adaptor_type  ;
+    using gray8_adaptor_type = typename font_engine_type::gray8_adaptor_type ;
+    using gray8_scanline_type = typename gray8_adaptor_type::embedded_scanline;
+    using mono_adaptor_type = typename font_engine_type::mono_adaptor_type  ;
+    using mono_scanline_type = typename mono_adaptor_type::embedded_scanline ;
 
     struct cached_font
     {

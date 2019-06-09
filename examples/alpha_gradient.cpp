@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -80,7 +95,7 @@ public:
 
     virtual void on_draw()
     {
-        typedef agg::renderer_base<pixfmt> base_ren_type;
+        using base_ren_type = agg::renderer_base<pixfmt>;
 
         pixfmt pf(rbuf_window());
         base_ren_type ren_base(pf);
@@ -120,17 +135,17 @@ public:
 
         // Gradient shape function (linear, radial, custom, etc)
         //-----------------
-        typedef agg::gradient_circle gradient_func_type;   
+        using gradient_func_type = agg::gradient_circle;   
 
         // Alpha gradient shape function (linear, radial, custom, etc)
         //-----------------
-        typedef agg::gradient_xy gradient_alpha_func_type;
+        using gradient_alpha_func_type = agg::gradient_xy;
 
         // Span interpolator. This object is used in all span generators 
         // that operate with transformations during iterating of the spans,
         // for example, image transformers use the interpolator too.
         //-----------------
-        typedef agg::span_interpolator_linear<> interpolator_type;
+        using interpolator_type = agg::span_interpolator_linear<>;
 
 
         // Span allocator is an object that allocates memory for 
@@ -138,12 +153,12 @@ public:
         // color spans. One object can be shared between different 
         // span generators.
         //-----------------
-        typedef agg::span_allocator<color_type> span_allocator_type;
+        using span_allocator_type = agg::span_allocator<color_type>;
 
 
         // Gradient colors array adaptor
         //-----------------
-        typedef agg::pod_auto_array<color_type, 256> gradient_colors_type;
+        using gradient_colors_type = agg::pod_auto_array<color_type, 256>;
 
 
         // Finally, the gradient span generator working with the color_type 
@@ -157,7 +172,7 @@ public:
 
         // Gradient alpha array adaptor
         //-----------------
-        typedef agg::pod_auto_array<color_type::value_type, 256> gradient_alpha_type;
+        using gradient_alpha_type = agg::pod_auto_array<color_type::value_type, 256>;
 
         // The alpha gradient span converter working with the color_type 
         // color type. 

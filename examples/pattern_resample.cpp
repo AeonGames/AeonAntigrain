@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -36,17 +51,17 @@ double            g_y2 = 0;
 #include "agg_pixfmt_rgb.h"
 #include "agg_span_image_filter_rgb.h"
 #define pix_format agg::pix_format_bgr24
-typedef agg::pixfmt_bgr24     pixfmt;
-typedef agg::pixfmt_bgr24_pre pixfmt_pre;
+using pixfmt = agg::pixfmt_bgr24    ;
+using pixfmt_pre = agg::pixfmt_bgr24_pre;
 #define span_image_filter_2x2      agg::span_image_filter_rgb_2x2
 #define span_image_resample_affine agg::span_image_resample_rgb_affine
 #define span_image_resample        agg::span_image_resample_rgb
 
-typedef pixfmt::color_type                             color_type;
-typedef color_type::value_type                         value_type;
-typedef agg::renderer_base<pixfmt>                     renderer_base;
-typedef agg::renderer_base<pixfmt_pre>                 renderer_base_pre;
-typedef agg::renderer_scanline_aa_solid<renderer_base> renderer_solid;
+using color_type = pixfmt::color_type                            ;
+using value_type = color_type::value_type                        ;
+using renderer_base = agg::renderer_base<pixfmt>                    ;
+using renderer_base_pre = agg::renderer_base<pixfmt_pre>                ;
+using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
 enum base_scale_e { base_shift = color_type::base_shift };
 
 class the_application : public agg::platform_support
@@ -161,13 +176,13 @@ public:
         g_rasterizer.line_to_d(m_quad.xn(2)+b, m_quad.yn(2)+b);
         g_rasterizer.line_to_d(m_quad.xn(3)-b, m_quad.yn(3)+b);
 
-        typedef agg::span_allocator<color_type> span_alloc_type;
+        using span_alloc_type = agg::span_allocator<color_type>;
         span_alloc_type sa;
         agg::image_filter_hanning filter_kernel;
         agg::image_filter_lut filter(filter_kernel, true);
 
-        typedef agg::wrap_mode_reflect_auto_pow2 wrap_type;
-        typedef agg::image_accessor_wrap<pixfmt, wrap_type, wrap_type> img_source_type;
+        using wrap_type = agg::wrap_mode_reflect_auto_pow2;
+        using img_source_type = agg::image_accessor_wrap<pixfmt, wrap_type, wrap_type>;
 
         pixfmt img_pixf(rbuf_img(0));
         img_source_type img_src(img_pixf);
@@ -179,7 +194,7 @@ public:
             {
                 agg::trans_affine tr(m_quad.polygon(), g_x1, g_y1, g_x2, g_y2);
 
-                typedef agg::span_interpolator_linear<agg::trans_affine> interpolator_type;
+                using interpolator_type = agg::span_interpolator_linear<agg::trans_affine>;
                 interpolator_type interpolator(tr);
 
                 typedef span_image_filter_2x2<img_source_type, 
@@ -193,8 +208,8 @@ public:
             {
                 agg::trans_affine tr(m_quad.polygon(), g_x1, g_y1, g_x2, g_y2);
 
-                typedef agg::span_interpolator_linear<agg::trans_affine> interpolator_type;
-                typedef span_image_resample_affine<img_source_type> span_gen_type;
+                using interpolator_type = agg::span_interpolator_linear<agg::trans_affine>;
+                using span_gen_type = span_image_resample_affine<img_source_type>;
                 interpolator_type interpolator(tr);
                 span_gen_type sg(img_src, interpolator, filter);
                 sg.blur(m_blur.value());
@@ -207,7 +222,7 @@ public:
                 agg::trans_perspective tr(m_quad.polygon(), g_x1, g_y1, g_x2, g_y2);
                 if(tr.is_valid())
                 {
-                    typedef agg::span_interpolator_linear_subdiv<agg::trans_perspective> interpolator_type;
+                    using interpolator_type = agg::span_interpolator_linear_subdiv<agg::trans_perspective>;
                     interpolator_type interpolator(tr);
 
                     typedef span_image_filter_2x2<img_source_type,
@@ -223,7 +238,7 @@ public:
                 agg::trans_perspective tr(m_quad.polygon(), g_x1, g_y1, g_x2, g_y2);
                 if(tr.is_valid())
                 {
-                    typedef agg::span_interpolator_trans<agg::trans_perspective> interpolator_type;
+                    using interpolator_type = agg::span_interpolator_trans<agg::trans_perspective>;
                     interpolator_type interpolator(tr);
 
                     typedef span_image_filter_2x2<img_source_type,
@@ -236,8 +251,8 @@ public:
 
             case 4:
             {
-                typedef agg::span_interpolator_persp_lerp<> interpolator_type;
-                typedef agg::span_subdiv_adaptor<interpolator_type> subdiv_adaptor_type;
+                using interpolator_type = agg::span_interpolator_persp_lerp<>;
+                using subdiv_adaptor_type = agg::span_subdiv_adaptor<interpolator_type>;
 
                 interpolator_type interpolator(m_quad.polygon(), g_x1, g_y1, g_x2, g_y2);
                 subdiv_adaptor_type subdiv_adaptor(interpolator);
@@ -255,8 +270,8 @@ public:
 
             case 5:
             {
-                typedef agg::span_interpolator_persp_exact<> interpolator_type;
-                typedef agg::span_subdiv_adaptor<interpolator_type> subdiv_adaptor_type;
+                using interpolator_type = agg::span_interpolator_persp_exact<>;
+                using subdiv_adaptor_type = agg::span_subdiv_adaptor<interpolator_type>;
 
                 interpolator_type interpolator(m_quad.polygon(), g_x1, g_y1, g_x2, g_y2);
                 subdiv_adaptor_type subdiv_adaptor(interpolator);

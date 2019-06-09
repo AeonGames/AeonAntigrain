@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -269,7 +284,7 @@ namespace agg
         const char* cur_glyph = gbuf;
         const char* end_glyph = gbuf + total_size;
         double x, y;
-        typedef typename PathStorage::value_type value_type;
+        using value_type = typename PathStorage::value_type;
         
         while(cur_glyph < end_glyph)
         {
@@ -595,8 +610,6 @@ namespace agg
         }
     }
 
-
-
     //------------------------------------------------------------------------
     bool font_engine_win32_tt_base::prepare_glyph(unsigned glyph_code)
     {
@@ -614,6 +627,8 @@ namespace agg
             case glyph_ren_agg_mono:
             case glyph_ren_agg_gray8:
                 format = GGO_NATIVE;
+                break;
+            default:
                 break;
             }
 
@@ -826,6 +841,8 @@ namespace agg
                 {
                     m_path16.serialize(data);
                 }
+                break;
+            default:
                 break;
             }
         }

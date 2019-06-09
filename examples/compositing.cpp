@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include <cassert>
 #include "agg_rendering_buffer.h"
@@ -21,13 +36,13 @@
 
 enum flip_y_e { flip_y = true };
 
-typedef color_type color;
-typedef component_order order;
-typedef agg::rendering_buffer rbuf_type;
+using color = color_type;
+using order = component_order;
+using rbuf_type = agg::rendering_buffer;
 
-typedef agg::blender_rgba<color, order> prim_blender_type; 
-typedef agg::pixfmt_alpha_blend_rgba<prim_blender_type, rbuf_type> prim_pixfmt_type;
-typedef agg::renderer_base<prim_pixfmt_type> prim_ren_base_type;
+using prim_blender_type = agg::blender_rgba<color, order>; 
+using prim_pixfmt_type = agg::pixfmt_alpha_blend_rgba<prim_blender_type, rbuf_type>;
+using prim_ren_base_type = agg::renderer_base<prim_pixfmt_type>;
 
 void force_comp_op_link()
 {
@@ -87,11 +102,11 @@ void circle(RenBase& rbase, color c1, color c2,
             double x1, double y1, double x2, double y2,
             double shadow_alpha)
 {
-    typedef RenBase renderer_base_type;
-    typedef agg::gradient_x gradient_func_type;
-    typedef agg::gradient_linear_color<color> color_func_type;
-    typedef agg::span_interpolator_linear<> interpolator_type;
-    typedef agg::span_allocator<color> span_allocator_type;
+    using renderer_base_type = RenBase;
+    using gradient_func_type = agg::gradient_x;
+    using color_func_type = agg::gradient_linear_color<color>;
+    using interpolator_type = agg::span_interpolator_linear<>;
+    using span_allocator_type = agg::span_allocator<color>;
     typedef agg::span_gradient<color, 
                                interpolator_type, 
                                gradient_func_type, 
@@ -127,11 +142,11 @@ template<class RenBase>
 void src_shape(RenBase& rbase, color c1, color c2, 
                double x1, double y1, double x2, double y2)
 {
-    typedef RenBase renderer_base_type;
-    typedef agg::gradient_x gradient_func_type;
-    typedef agg::gradient_linear_color<color> color_func_type;
-    typedef agg::span_interpolator_linear<> interpolator_type;
-    typedef agg::span_allocator<color> span_allocator_type;
+    using renderer_base_type = RenBase;
+    using gradient_func_type = agg::gradient_x;
+    using color_func_type = agg::gradient_linear_color<color>;
+    using interpolator_type = agg::span_interpolator_linear<>;
+    using span_allocator_type = agg::span_allocator<color>;
     typedef agg::span_gradient<color, 
                                interpolator_type, 
                                gradient_func_type, 
@@ -227,9 +242,9 @@ public:
 
     void render_scene(rbuf_type& rbuf, prim_pixfmt_type& pixf)
     {
-        typedef agg::comp_op_adaptor_rgba<color, order> blender_type;
-        typedef agg::pixfmt_custom_blend_rgba<blender_type, rbuf_type> pixfmt_type;
-        typedef agg::renderer_base<pixfmt_type> renderer_type;
+        using blender_type = agg::comp_op_adaptor_rgba<color, order>;
+        using pixfmt_type = agg::pixfmt_custom_blend_rgba<blender_type, rbuf_type>;
+        using renderer_type = agg::renderer_base<pixfmt_type>;
 
         pixfmt_type ren_pixf(rbuf);
         renderer_type renderer(ren_pixf);
@@ -284,9 +299,9 @@ public:
         rb2.clear(agg::srgba8(0,0,0,0));
         //rb2.clear(agg::srgba8(255,255,255,255));
 
-        typedef agg::blender_rgba_pre<color, order> blender_type_pre; 
-        typedef agg::pixfmt_alpha_blend_rgba<blender_type_pre, rbuf_type> pixfmt_pre;
-        typedef agg::renderer_base<pixfmt_pre> ren_base_pre;
+        using blender_type_pre = agg::blender_rgba_pre<color, order>; 
+        using pixfmt_pre = agg::pixfmt_alpha_blend_rgba<blender_type_pre, rbuf_type>;
+        using ren_base_pre = agg::renderer_base<pixfmt_pre>;
 
         pixfmt_pre pixf_pre(rbuf_window());
         ren_base_pre rb_pre(pixf_pre);

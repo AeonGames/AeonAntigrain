@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -405,7 +420,7 @@ class the_application : public agg::platform_support
     double m_center_y;
     double m_phase;
 
-    typedef agg::pod_auto_array<color_type, 256> color_array_type;
+    using color_array_type = agg::pod_auto_array<color_type, 256>;
     color_array_type m_gradient_colors;
 
 public:
@@ -470,8 +485,8 @@ public:
         double img_width = rbuf_img(0).width();
         double img_height = rbuf_img(0).height();
     
-        typedef pixfmt pixfmt; 
-        typedef agg::renderer_base<pixfmt> renderer_base;
+        using pixfmt = pixfmt; 
+        using renderer_base = agg::renderer_base<pixfmt>;
 
         pixfmt pixf(rbuf_window());
         pixfmt img_pixf(rbuf_img(0));
@@ -495,7 +510,7 @@ public:
         img_mtx.invert();
 
 
-        typedef agg::span_allocator<color_type> span_alloc_type;
+        using span_alloc_type = agg::span_allocator<color_type>;
 
         span_alloc_type sa;
         
@@ -526,7 +541,7 @@ public:
 
         interpolator_type interpolator(img_mtx, *dist);
 
-        typedef agg::image_accessor_clip<pixfmt> img_source_type;
+        using img_source_type = agg::image_accessor_clip<pixfmt>;
         img_source_type img_src(img_pixf, agg::rgba(1,1,1));
 
 /*

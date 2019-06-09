@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -57,7 +72,7 @@ namespace agg
     template<class VertexConsumer> class math_stroke
     {
     public:
-        typedef typename VertexConsumer::value_type coord_type;
+        using coord_type = typename VertexConsumer::value_type;
 
         math_stroke();
 
@@ -65,9 +80,9 @@ namespace agg
         void line_join(line_join_e lj)   { m_line_join = lj; }
         void inner_join(inner_join_e ij) { m_inner_join = ij; }
 
-        line_cap_e   line_cap()   const { return m_line_cap; }
-        line_join_e  line_join()  const { return m_line_join; }
-        inner_join_e inner_join() const { return m_inner_join; }
+        [[nodiscard]] line_cap_e   line_cap()   const { return m_line_cap; }
+        [[nodiscard]] line_join_e  line_join()  const { return m_line_join; }
+        [[nodiscard]] inner_join_e inner_join() const { return m_inner_join; }
 
         void width(double w);
         void miter_limit(double ml) { m_miter_limit = ml; }
@@ -75,10 +90,10 @@ namespace agg
         void inner_miter_limit(double ml) { m_inner_miter_limit = ml; }
         void approximation_scale(double as) { m_approx_scale = as; }
 
-        double width() const { return m_width * 2.0; }
-        double miter_limit() const { return m_miter_limit; }
-        double inner_miter_limit() const { return m_inner_miter_limit; }
-        double approximation_scale() const { return m_approx_scale; }
+        [[nodiscard]] double width() const { return m_width * 2.0; }
+        [[nodiscard]] double miter_limit() const { return m_miter_limit; }
+        [[nodiscard]] double inner_miter_limit() const { return m_inner_miter_limit; }
+        [[nodiscard]] double approximation_scale() const { return m_approx_scale; }
 
         void calc_cap(VertexConsumer& vc,
                       const vertex_dist& v0, 
@@ -113,30 +128,23 @@ namespace agg
                         double mlimit,
                         double dbevel);
 
-        double       m_width;
-        double       m_width_abs;
+        double       m_width{0.5};
+        double       m_width_abs{0.5};
         double       m_width_eps;
-        int          m_width_sign;
-        double       m_miter_limit;
-        double       m_inner_miter_limit;
-        double       m_approx_scale;
-        line_cap_e   m_line_cap;
-        line_join_e  m_line_join;
-        inner_join_e m_inner_join;
+        int          m_width_sign{1};
+        double       m_miter_limit{4.0};
+        double       m_inner_miter_limit{1.01};
+        double       m_approx_scale{1.0};
+        line_cap_e   m_line_cap{butt_cap};
+        line_join_e  m_line_join{miter_join};
+        inner_join_e m_inner_join{inner_miter};
     };
 
     //-----------------------------------------------------------------------
     template<class VC> math_stroke<VC>::math_stroke() :
-        m_width(0.5),
-        m_width_abs(0.5),
-        m_width_eps(0.5/1024.0),
-        m_width_sign(1),
-        m_miter_limit(4.0),
-        m_inner_miter_limit(1.01),
-        m_approx_scale(1.0),
-        m_line_cap(butt_cap),
-        m_line_join(miter_join),
-        m_inner_join(inner_miter)
+        
+        m_width_eps(0.5/1024.0)
+        
     {
     }
 
