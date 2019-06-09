@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -21,9 +36,7 @@
 
 namespace agg
 {
-
     // See Implementation agg_curves.cpp
-
     //--------------------------------------------curve_approximation_method_e
     enum curve_approximation_method_e
     {
@@ -36,7 +49,7 @@ namespace agg
     {
     public:
         curve3_inc() :
-          m_num_steps(0), m_step(0), m_scale(1.0) { }
+          m_num_steps(0), m_step(0), m_scale(1.0){}
 
         curve3_inc(double x1, double y1, 
                    double x2, double y2, 
@@ -47,15 +60,15 @@ namespace agg
         }
 
         void reset() { m_num_steps = 0; m_step = -1; }
-        void init(double x1, double y1, 
+        AGGAPI void init(double x1, double y1, 
                   double x2, double y2, 
                   double x3, double y3);
 
         void approximation_method(curve_approximation_method_e) {}
         curve_approximation_method_e approximation_method() const { return curve_inc; }
 
-        void approximation_scale(double s);
-        double approximation_scale() const;
+        AGGAPI void approximation_scale(double s);
+        AGGAPI double approximation_scale() const;
 
         void angle_tolerance(double) {}
         double angle_tolerance() const { return 0.0; }
@@ -63,8 +76,8 @@ namespace agg
         void cusp_limit(double) {}
         double cusp_limit() const { return 0.0; }
 
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGAPI void     rewind(unsigned path_id);
+        AGGAPI unsigned vertex(double* x, double* y);
 
     private:
         int      m_num_steps;
@@ -85,10 +98,6 @@ namespace agg
         double   m_saved_dfx; 
         double   m_saved_dfy;
     };
-
-
-
-
 
     //-------------------------------------------------------------curve3_div
     class curve3_div
@@ -111,7 +120,7 @@ namespace agg
         }
 
         void reset() { m_points.remove_all(); m_count = 0; }
-        void init(double x1, double y1, 
+        AGGAPI void init(double x1, double y1, 
                   double x2, double y2, 
                   double x3, double y3);
 
@@ -142,10 +151,10 @@ namespace agg
         }
 
     private:
-        void bezier(double x1, double y1, 
+        AGGAPI void bezier(double x1, double y1,
                     double x2, double y2, 
                     double x3, double y3);
-        void recursive_bezier(double x1, double y1, 
+        AGGAPI void recursive_bezier(double x1, double y1, 
                               double x2, double y2, 
                               double x3, double y3,
                               unsigned level);
@@ -213,7 +222,7 @@ namespace agg
         }
 
         void reset() { m_num_steps = 0; m_step = -1; }
-        void init(double x1, double y1, 
+        AGGAPI void init(double x1, double y1, 
                   double x2, double y2, 
                   double x3, double y3,
                   double x4, double y4);
@@ -226,8 +235,8 @@ namespace agg
         void approximation_method(curve_approximation_method_e) {}
         curve_approximation_method_e approximation_method() const { return curve_inc; }
 
-        void approximation_scale(double s);
-        double approximation_scale() const;
+        AGGAPI void approximation_scale(double s);
+        AGGAPI double approximation_scale() const;
 
         void angle_tolerance(double) {}
         double angle_tolerance() const { return 0.0; }
@@ -235,8 +244,8 @@ namespace agg
         void cusp_limit(double) {}
         double cusp_limit() const { return 0.0; }
 
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGAPI void     rewind(unsigned path_id);
+        AGGAPI unsigned vertex(double* x, double* y);
 
     private:
         int      m_num_steps;
@@ -402,7 +411,7 @@ namespace agg
         }
 
         void reset() { m_points.remove_all(); m_count = 0; }
-        void init(double x1, double y1, 
+        AGGAPI void init(double x1, double y1, 
                   double x2, double y2, 
                   double x3, double y3,
                   double x4, double y4);
@@ -450,12 +459,12 @@ namespace agg
         }
 
     private:
-        void bezier(double x1, double y1, 
+        AGGAPI void bezier(double x1, double y1, 
                     double x2, double y2, 
                     double x3, double y3, 
                     double x4, double y4);
 
-        void recursive_bezier(double x1, double y1, 
+        AGGAPI void recursive_bezier(double x1, double y1, 
                               double x2, double y2, 
                               double x3, double y3, 
                               double x4, double y4,
@@ -684,10 +693,5 @@ namespace agg
         curve4_div m_curve_div;
         curve_approximation_method_e m_approximation_method;
     };
-
-
-
-
 }
-
 #endif

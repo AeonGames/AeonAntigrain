@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -83,7 +98,7 @@ namespace agg
     class polygon_ctrl_impl : public ctrl
     {
     public:
-        polygon_ctrl_impl(unsigned np, double point_radius=5);
+        AGGCTRLAPI polygon_ctrl_impl(unsigned np, double point_radius=5);
 
         unsigned num_points() const { return m_num_points; }
         double xn(unsigned n) const { return m_polygon[n * 2];     }
@@ -107,19 +122,19 @@ namespace agg
 
         // Vertex source interface
         unsigned num_paths() { return 1; }
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGCTRLAPI void rewind(unsigned path_id);
+        AGGCTRLAPI unsigned vertex(double* x, double* y);
 
-        virtual bool in_rect(double x, double y) const;
-        virtual bool on_mouse_button_down(double x, double y);
-        virtual bool on_mouse_button_up(double x, double y);
-        virtual bool on_mouse_move(double x, double y, bool button_flag);
-        virtual bool on_arrow_keys(bool left, bool right, bool down, bool up);
-
+        AGGCTRLAPI bool in_rect(double x, double y) const override;
+        AGGCTRLAPI bool on_mouse_button_down(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_button_up(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_move(double x, double y, bool button_flag) override;
+        AGGCTRLAPI bool on_arrow_keys(bool left, bool right, bool down, bool up) override;
+        AGGCTRLAPI ~polygon_ctrl_impl() override;
 
     private:
-        bool check_edge(unsigned i, double x, double y) const;
-        bool point_in_polygon(double x, double y) const;
+        AGGCTRLAPI bool check_edge(unsigned i, double x, double y) const;
+        AGGCTRLAPI bool point_in_polygon(double x, double y) const;
 
         pod_array<double> m_polygon;
         unsigned          m_num_points;

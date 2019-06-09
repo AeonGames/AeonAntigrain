@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -1310,7 +1325,7 @@ namespace agg
             }
         }
 
-        void width(double w);
+        AGGAPI void width(double w);
 
         unsigned profile_size() const { return m_profile.size(); }
         int subpixel_width() const { return m_subpixel_width; }
@@ -1326,11 +1341,11 @@ namespace agg
         }
 
     private:
-        line_profile_aa(const line_profile_aa&);
-        const line_profile_aa& operator = (const line_profile_aa&);
+        AGGAPI line_profile_aa(const line_profile_aa&);
+        AGGAPI const line_profile_aa& operator = (const line_profile_aa&);
 
-        value_type* profile(double w);
-        void set(double center_width, double smoother_width);
+        AGGAPI value_type* profile(double w);
+        AGGAPI void set(double center_width, double smoother_width);
 
         //---------------------------------------------------------------------
         pod_array<value_type> m_profile;

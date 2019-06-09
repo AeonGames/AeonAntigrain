@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -136,50 +151,50 @@ namespace agg
         //      /                 /
         //     /(x1,y1)   (x2,y2)/
         //    *-----------------*
-        const trans_affine& parl_to_parl(const double* src, 
+        AGGAPI const trans_affine& parl_to_parl(const double* src, 
                                          const double* dst);
 
-        const trans_affine& rect_to_parl(double x1, double y1, 
+        AGGAPI const trans_affine& rect_to_parl(double x1, double y1, 
                                          double x2, double y2, 
                                          const double* parl);
 
-        const trans_affine& parl_to_rect(const double* parl, 
+        AGGAPI const trans_affine& parl_to_rect(const double* parl, 
                                          double x1, double y1, 
                                          double x2, double y2);
 
 
         //------------------------------------------ Operations
         // Reset - load an identity matrix
-        const trans_affine& reset();
+        AGGAPI const trans_affine& reset();
 
         // Direct transformations operations
-        const trans_affine& translate(double x, double y);
-        const trans_affine& rotate(double a);
-        const trans_affine& scale(double s);
-        const trans_affine& scale(double x, double y);
+        AGGAPI const trans_affine& translate(double x, double y);
+        AGGAPI const trans_affine& rotate(double a);
+        AGGAPI const trans_affine& scale(double s);
+        AGGAPI const trans_affine& scale(double x, double y);
 
         // Multiply matrix to another one
-        const trans_affine& multiply(const trans_affine& m);
+        AGGAPI const trans_affine& multiply(const trans_affine& m);
 
         // Multiply "m" to "this" and assign the result to "this"
-        const trans_affine& premultiply(const trans_affine& m);
+        AGGAPI const trans_affine& premultiply(const trans_affine& m);
 
         // Multiply matrix to inverse of another one
         const trans_affine& multiply_inv(const trans_affine& m);
 
         // Multiply inverse of "m" to "this" and assign the result to "this"
-        const trans_affine& premultiply_inv(const trans_affine& m);
+        AGGAPI const trans_affine& premultiply_inv(const trans_affine& m);
 
         // Invert matrix. Do not try to invert degenerate matrices, 
         // there's no check for validity. If you set scale to 0 and 
         // then try to invert matrix, expect unpredictable result.
-        const trans_affine& invert();
+        AGGAPI const trans_affine& invert();
 
         // Mirroring around X
-        const trans_affine& flip_x();
+        AGGAPI const trans_affine& flip_x();
 
         // Mirroring around Y
-        const trans_affine& flip_y();
+        AGGAPI const trans_affine& flip_y();
 
         //------------------------------------------- Load/Store
         // Store matrix to an array [6] of double
@@ -244,15 +259,15 @@ namespace agg
 
         //-------------------------------------------- Transformations
         // Direct transformation of x and y
-        void transform(double* x, double* y) const;
+        AGGAPI void transform(double* x, double* y) const;
 
         // Direct transformation of x and y, 2x2 matrix only, no translation
-        void transform_2x2(double* x, double* y) const;
+        AGGAPI void transform_2x2(double* x, double* y) const;
 
         // Inverse transformation of x and y. It works slower than the 
         // direct transformation. For massive operations it's better to 
         // invert() the matrix and then use direct transformations. 
-        void inverse_transform(double* x, double* y) const;
+        AGGAPI void inverse_transform(double* x, double* y) const;
 
         //-------------------------------------------- Auxiliary
         // Calculate the determinant of matrix
@@ -270,23 +285,23 @@ namespace agg
         // Get the average scale (by X and Y). 
         // Basically used to calculate the approximation_scale when
         // decomposinting curves into line segments.
-        double scale() const;
+        AGGAPI double scale() const;
 
         // Check to see if the matrix is not degenerate
-        bool is_valid(double epsilon = affine_epsilon) const;
+        AGGAPI bool is_valid(double epsilon = affine_epsilon) const;
 
         // Check to see if it's an identity matrix
-        bool is_identity(double epsilon = affine_epsilon) const;
+        AGGAPI bool is_identity(double epsilon = affine_epsilon) const;
 
         // Check to see if two matrices are equal
-        bool is_equal(const trans_affine& m, double epsilon = affine_epsilon) const;
+        AGGAPI bool is_equal(const trans_affine& m, double epsilon = affine_epsilon) const;
 
         // Determine the major parameters. Use with caution considering 
         // possible degenerate cases.
-        double rotation() const;
-        void   translation(double* dx, double* dy) const;
-        void   scaling(double* x, double* y) const;
-        void   scaling_abs(double* x, double* y) const;
+        AGGAPI double rotation() const;
+        AGGAPI void   translation(double* dx, double* dy) const;
+        AGGAPI void   scaling(double* x, double* y) const;
+        AGGAPI void   scaling_abs(double* x, double* y) const;
     };
 
     //------------------------------------------------------------------------
@@ -513,6 +528,4 @@ namespace agg
 
 }
 
-
 #endif
-

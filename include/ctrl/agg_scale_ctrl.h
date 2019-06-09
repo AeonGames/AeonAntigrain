@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -43,35 +58,36 @@ namespace agg
         };
 
     public:
-        scale_ctrl_impl(double x1, double y1, double x2, double y2, bool flip_y=false);
+        AGGCTRLAPI scale_ctrl_impl(double x1, double y1, double x2, double y2, bool flip_y=false);
 
-        void border_thickness(double t, double extra=0.0);
-        void resize(double x1, double y1, double x2, double y2);
+        AGGCTRLAPI void border_thickness(double t, double extra=0.0);
+        AGGCTRLAPI void resize(double x1, double y1, double x2, double y2);
         
         double min_delta() const { return m_min_d; }
         void min_delta(double d) { m_min_d = d; }
         
         double value1() const { return m_value1; }
-        void value1(double value);
+        AGGCTRLAPI void value1(double value);
 
         double value2() const { return m_value2; }
-        void value2(double value);
+        AGGCTRLAPI void value2(double value);
 
-        void move(double d);
+        AGGCTRLAPI void move(double d);
 
-        virtual bool in_rect(double x, double y) const;
-        virtual bool on_mouse_button_down(double x, double y);
-        virtual bool on_mouse_button_up(double x, double y);
-        virtual bool on_mouse_move(double x, double y, bool button_flag);
-        virtual bool on_arrow_keys(bool left, bool right, bool down, bool up);
+        AGGCTRLAPI bool in_rect(double x, double y) const override;
+        AGGCTRLAPI bool on_mouse_button_down(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_button_up(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_move(double x, double y, bool button_flag) override;
+        AGGCTRLAPI bool on_arrow_keys(bool left, bool right, bool down, bool up) override;
+        AGGCTRLAPI ~scale_ctrl_impl() override;
 
-        // Vertex soutce interface
+        // Vertex source interface
         unsigned num_paths() { return 5; };
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGCTRLAPI void     rewind(unsigned path_id);
+        AGGCTRLAPI unsigned vertex(double* x, double* y);
 
     private:
-        void calc_box();
+        AGGCTRLAPI void calc_box();
 
         double   m_border_thickness;
         double   m_border_extra;
@@ -124,8 +140,8 @@ namespace agg
         const ColorT& color(unsigned i) const { return *m_colors[i]; } 
 
     private:
-        scale_ctrl(const scale_ctrl<ColorT>&);
-        const scale_ctrl<ColorT>& operator = (const scale_ctrl<ColorT>&);
+        AGGCTRLAPI scale_ctrl(const scale_ctrl<ColorT>&);
+        AGGCTRLAPI const scale_ctrl<ColorT>& operator = (const scale_ctrl<ColorT>&);
 
         ColorT m_background_color;
         ColorT m_border_color;
@@ -139,8 +155,4 @@ namespace agg
 
 
 }
-
-
-
 #endif
-

@@ -34,16 +34,28 @@ limitations under the License.
 
 #include <cmath>
 
-#ifndef DLL
-    #ifdef _WIN32
-        #ifdef antigrain_EXPORTS
-            #define DLL __declspec( dllexport )
-        #else
-            #define DLL __declspec( dllimport )
-        #endif
-    #else
-        #define DLL
-    #endif
+#ifndef AGGAPI
+#ifdef _WIN32
+#ifdef antigrain_EXPORTS
+#define AGGAPI __declspec( dllexport )
+#else
+#define AGGAPI __declspec( dllimport )
+#endif
+#else
+#define AGGAPI
+#endif
+#endif
+
+#ifndef AGGCTRLAPI
+#ifdef _WIN32
+#ifdef controls_EXPORTS
+#define AGGCTRLAPI __declspec( dllexport )
+#else
+#define AGGCTRLAPI __declspec( dllimport )
+#endif
+#else
+#define AGGCTRLAPI
+#endif
 #endif
 
 #include "agg_config.h"

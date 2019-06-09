@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -41,7 +56,7 @@ namespace agg
         typedef vertex_sequence<vertex_dist, 6> vertex_storage;
         typedef pod_bvector<point_d, 6>         coord_storage;
 
-        vcgen_contour();
+        AGGAPI vcgen_contour();
 
         void line_cap(line_cap_e lc)     { m_stroker.line_cap(lc); }
         void line_join(line_join_e lj)   { m_stroker.line_join(lj); }
@@ -66,16 +81,16 @@ namespace agg
         bool auto_detect_orientation() const { return m_auto_detect; }
 
         // Generator interface
-        void remove_all();
-        void add_vertex(double x, double y, unsigned cmd);
+        AGGAPI void remove_all();
+        AGGAPI void add_vertex(double x, double y, unsigned cmd);
 
         // Vertex Source Interface
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGAPI void     rewind(unsigned path_id);
+        AGGAPI unsigned vertex(double* x, double* y);
 
     private:
-        vcgen_contour(const vcgen_contour&);
-        const vcgen_contour& operator = (const vcgen_contour&);
+        AGGAPI vcgen_contour(const vcgen_contour&);
+        AGGAPI const vcgen_contour& operator = (const vcgen_contour&);
 
         math_stroke<coord_storage> m_stroker;
         double                     m_width;

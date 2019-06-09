@@ -1,4 +1,5 @@
 LINK_LIBRARIES(platform controls antigrain)
+
 ADD_EXECUTABLE( aa_demo ${WIN32GUI}
     aa_demo.cpp
 )

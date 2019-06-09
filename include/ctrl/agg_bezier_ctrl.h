@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -36,13 +51,13 @@ namespace agg
     class bezier_ctrl_impl : public ctrl
     {
     public:
-        bezier_ctrl_impl();
+        AGGCTRLAPI bezier_ctrl_impl();
 
-        void curve(double x1, double y1, 
+        AGGCTRLAPI void curve(double x1, double y1, 
                    double x2, double y2, 
                    double x3, double y3,
                    double x4, double y4);
-        curve4& curve();
+        AGGCTRLAPI curve4& curve();
 
         double x1() const { return m_poly.xn(0); }
         double y1() const { return m_poly.yn(0); }
@@ -68,17 +83,17 @@ namespace agg
         void   point_radius(double r) { m_poly.point_radius(r); }
         double point_radius() const   { return m_poly.point_radius(); }
 
-        virtual bool in_rect(double x, double y) const;
-        virtual bool on_mouse_button_down(double x, double y);
-        virtual bool on_mouse_button_up(double x, double y);
-        virtual bool on_mouse_move(double x, double y, bool button_flag);
-        virtual bool on_arrow_keys(bool left, bool right, bool down, bool up);
+        AGGCTRLAPI bool in_rect(double x, double y) const override;
+        AGGCTRLAPI bool on_mouse_button_down(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_button_up(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_move(double x, double y, bool button_flag) override;
+        AGGCTRLAPI bool on_arrow_keys(bool left, bool right, bool down, bool up) override;
+        AGGCTRLAPI ~bezier_ctrl_impl() override;
 
         // Vertex source interface
         unsigned num_paths() { return 7; };
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
-
+        AGGCTRLAPI void     rewind(unsigned path_id);
+        AGGCTRLAPI unsigned vertex(double* x, double* y);
 
     private:
         curve4              m_curve;
@@ -87,8 +102,6 @@ namespace agg
         polygon_ctrl_impl   m_poly;
         unsigned            m_idx;
     };
-
-
 
     //----------------------------------------------------------bezier_ctrl
     template<class ColorT> class bezier_ctrl : public bezier_ctrl_impl
@@ -103,26 +116,21 @@ namespace agg
         const ColorT& color(unsigned) const { return m_color; } 
 
     private:
-        bezier_ctrl(const bezier_ctrl<ColorT>&);
-        const bezier_ctrl<ColorT>& operator = (const bezier_ctrl<ColorT>&);
-
+        AGGCTRLAPI bezier_ctrl(const bezier_ctrl<ColorT>&);
+        AGGCTRLAPI const bezier_ctrl<ColorT>& operator = (const bezier_ctrl<ColorT>&);
         ColorT m_color;
     };
-
-
-
-
 
     //--------------------------------------------------------curve3_ctrl_impl
     class curve3_ctrl_impl : public ctrl
     {
     public:
-        curve3_ctrl_impl();
+        AGGCTRLAPI curve3_ctrl_impl();
 
-        void curve(double x1, double y1, 
+        AGGCTRLAPI void curve(double x1, double y1, 
                    double x2, double y2, 
                    double x3, double y3);
-        curve3& curve();
+        AGGCTRLAPI curve3& curve();
 
         double x1() const { return m_poly.xn(0); }
         double y1() const { return m_poly.yn(0); }
@@ -144,18 +152,16 @@ namespace agg
         void   point_radius(double r) { m_poly.point_radius(r); }
         double point_radius() const   { return m_poly.point_radius(); }
 
-        virtual bool in_rect(double x, double y) const;
-        virtual bool on_mouse_button_down(double x, double y);
-        virtual bool on_mouse_button_up(double x, double y);
-        virtual bool on_mouse_move(double x, double y, bool button_flag);
-        virtual bool on_arrow_keys(bool left, bool right, bool down, bool up);
+        AGGCTRLAPI virtual bool in_rect(double x, double y) const;
+        AGGCTRLAPI virtual bool on_mouse_button_down(double x, double y);
+        AGGCTRLAPI virtual bool on_mouse_button_up(double x, double y);
+        AGGCTRLAPI virtual bool on_mouse_move(double x, double y, bool button_flag);
+        AGGCTRLAPI virtual bool on_arrow_keys(bool left, bool right, bool down, bool up);
 
         // Vertex source interface
         unsigned num_paths() { return 6; };
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
-
-
+        AGGCTRLAPI void     rewind(unsigned path_id);
+        AGGCTRLAPI unsigned vertex(double* x, double* y);
     private:
         curve3              m_curve;
         ellipse             m_ellipse;
@@ -179,8 +185,8 @@ namespace agg
         const ColorT& color(unsigned i) const { return m_color; } 
 
     private:
-        curve3_ctrl(const curve3_ctrl<ColorT>&);
-        const curve3_ctrl<ColorT>& operator = (const curve3_ctrl<ColorT>&);
+        AGGCTRLAPI curve3_ctrl(const curve3_ctrl<ColorT>&);
+        AGGCTRLAPI const curve3_ctrl<ColorT>& operator = (const curve3_ctrl<ColorT>&);
 
         ColorT m_color;
     };

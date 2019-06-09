@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -40,27 +55,27 @@ namespace agg
     class bspline 
     {
     public:
-        bspline();
-        bspline(int num);
-        bspline(int num, const double* x, const double* y);
+        AGGAPI bspline();
+        AGGAPI bspline(int num);
+        AGGAPI bspline(int num, const double* x, const double* y);
 
-        void   init(int num);
-        void   add_point(double x, double y);
-        void   prepare();
+        AGGAPI void   init(int num);
+        AGGAPI void   add_point(double x, double y);
+        AGGAPI void   prepare();
 
-        void   init(int num, const double* x, const double* y);
+        AGGAPI void   init(int num, const double* x, const double* y);
 
-        double get(double x) const;
-        double get_stateful(double x) const;
+        AGGAPI double get(double x) const;
+        AGGAPI double get_stateful(double x) const;
     
     private:
-        bspline(const bspline&);
-        const bspline& operator = (const bspline&);
+        AGGAPI bspline(const bspline&);
+        AGGAPI const bspline& operator = (const bspline&);
 
-        static void bsearch(int n, const double *x, double x0, int *i);
-        double extrapolation_left(double x) const;
-        double extrapolation_right(double x) const;
-        double interpolation(double x, int i) const;
+        AGGAPI static void bsearch(int n, const double *x, double x0, int *i);
+        AGGAPI double extrapolation_left(double x) const;
+        AGGAPI double extrapolation_right(double x) const;
+        AGGAPI double interpolation(double x, int i) const;
 
         int               m_max;
         int               m_num;
@@ -69,8 +84,6 @@ namespace agg
         pod_array<double> m_am;
         mutable int       m_last_idx;
     };
-
-
 }
 
 #endif

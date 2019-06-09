@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -26,8 +41,6 @@
 
 namespace agg
 {
-
-
     //---------------------------------------------------------------gsv_text
     //
     // See Implementation agg_gsv_text.cpp 
@@ -43,21 +56,20 @@ namespace agg
         };
 
     public:
-        gsv_text();
-
-        void font(const void* font);
+        AGGAPI gsv_text();
+        AGGAPI void font(const void* font);
         void flip(bool flip_y) { m_flip = flip_y; }
-        void load_font(const char* file);
-        void size(double height, double width=0.0);
-        void space(double space);
-        void line_space(double line_space);
-        void start_point(double x, double y);
-        void text(const char* text);
+        AGGAPI void load_font(const char* file);
+        AGGAPI void size(double height, double width=0.0);
+        AGGAPI void space(double space);
+        AGGAPI void line_space(double line_space);
+        AGGAPI void start_point(double x, double y);
+        AGGAPI void text(const char* text);
         
-        double text_width();
+        AGGAPI double text_width();
 
-        void rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGAPI void rewind(unsigned path_id);
+        AGGAPI unsigned vertex(double* x, double* y);
 
     private:
         // not supposed to be copied
@@ -104,9 +116,6 @@ namespace agg
         double          m_w;
         double          m_h;
     };
-
-
-
 
     //--------------------------------------------------------gsv_text_outline
     template<class Transformer = trans_affine> class gsv_text_outline

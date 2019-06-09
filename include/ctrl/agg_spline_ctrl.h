@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -39,48 +54,49 @@ namespace agg
     class spline_ctrl_impl : public ctrl
     {
     public:
-        spline_ctrl_impl(double x1, double y1, double x2, double y2, 
+        AGGCTRLAPI spline_ctrl_impl(double x1, double y1, double x2, double y2, 
                          unsigned num_pnt, bool flip_y=false);
 
         // Set other parameters
-        void border_width(double t, double extra=0.0);
+        AGGCTRLAPI void border_width(double t, double extra=0.0);
         void curve_width(double t) { m_curve_width = t; }
         void point_size(double s)  { m_point_size = s; }
 
         // Event handlers. Just call them if the respective events
         // in your system occure. The functions return true if redrawing
         // is required.
-        virtual bool in_rect(double x, double y) const;
-        virtual bool on_mouse_button_down(double x, double y);
-        virtual bool on_mouse_button_up(double x, double y);
-        virtual bool on_mouse_move(double x, double y, bool button_flag);
-        virtual bool on_arrow_keys(bool left, bool right, bool down, bool up);
+        AGGCTRLAPI bool in_rect(double x, double y) const override;
+        AGGCTRLAPI bool on_mouse_button_down(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_button_up(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_move(double x, double y, bool button_flag) override;
+        AGGCTRLAPI bool on_arrow_keys(bool left, bool right, bool down, bool up) override;
+        AGGCTRLAPI ~spline_ctrl_impl() override;
 
-        void active_point(int i);
+        AGGCTRLAPI void active_point(int i);
 
         const double* spline()  const { return m_spline_values;  }
         const int8u*  spline8() const { return m_spline_values8; }
-        double value(double x) const;
-        void   value(unsigned idx, double y);
-        void   point(unsigned idx, double x, double y);
+        AGGCTRLAPI double value(double x) const;
+        AGGCTRLAPI void   value(unsigned idx, double y);
+        AGGCTRLAPI void   point(unsigned idx, double x, double y);
         void   x(unsigned idx, double x) { m_xp[idx] = x; }
         void   y(unsigned idx, double y) { m_yp[idx] = y; }
         double x(unsigned idx) const { return m_xp[idx]; }
         double y(unsigned idx) const { return m_yp[idx]; }
-        void  update_spline();
+        AGGCTRLAPI void  update_spline();
 
         // Vertex soutce interface
         unsigned num_paths() { return 5; }
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGCTRLAPI void     rewind(unsigned path_id);
+        AGGCTRLAPI unsigned vertex(double* x, double* y);
 
     private:
-        void calc_spline_box();
-        void calc_curve();
-        double calc_xp(unsigned idx);
-        double calc_yp(unsigned idx);
-        void set_xp(unsigned idx, double val);
-        void set_yp(unsigned idx, double val);
+        AGGCTRLAPI void calc_spline_box();
+        AGGCTRLAPI void calc_curve();
+        AGGCTRLAPI double calc_xp(unsigned idx);
+        AGGCTRLAPI double calc_yp(unsigned idx);
+        AGGCTRLAPI void set_xp(unsigned idx, double val);
+        AGGCTRLAPI void set_yp(unsigned idx, double val);
 
         unsigned m_num_pnt;
         double   m_xp[32];
@@ -149,11 +165,5 @@ namespace agg
         ColorT  m_active_pnt_color;
         ColorT* m_colors[5];
     };
-
-
-
-
 }
-
-
 #endif

@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -37,7 +52,7 @@ namespace agg
     public:
         typedef vertex_sequence<vertex_dist, 6> vertex_storage;
 
-        trans_double_path();
+        AGGAPI trans_double_path();
 
         //--------------------------------------------------------------------
         void   base_length(double v)  { m_base_length = v; }
@@ -52,12 +67,12 @@ namespace agg
         bool preserve_x_scale() const { return m_preserve_x_scale; }
 
         //--------------------------------------------------------------------
-        void reset();
-        void move_to1(double x, double y);
-        void line_to1(double x, double y);
-        void move_to2(double x, double y);
-        void line_to2(double x, double y);
-        void finalize_paths();
+        AGGAPI void reset();
+        AGGAPI void move_to1(double x, double y);
+        AGGAPI void line_to1(double x, double y);
+        AGGAPI void move_to2(double x, double y);
+        AGGAPI void line_to2(double x, double y);
+        AGGAPI void finalize_paths();
 
         //--------------------------------------------------------------------
         template<class VertexSource1, class VertexSource2> 
@@ -104,9 +119,9 @@ namespace agg
         }
 
         //--------------------------------------------------------------------
-        double total_length1() const;
-        double total_length2() const;
-        void transform(double *x, double *y) const;
+        AGGAPI double total_length1() const;
+        AGGAPI double total_length2() const;
+        AGGAPI void transform(double *x, double *y) const;
 
     private:
         double finalize_path(vertex_storage& vertices);
@@ -124,8 +139,5 @@ namespace agg
         status_e       m_status2;
         bool           m_preserve_x_scale;
     };
-
 }
-
-
 #endif

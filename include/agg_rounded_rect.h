@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -32,22 +47,22 @@ namespace agg
     class rounded_rect
     {
     public:
-        rounded_rect() {}
-        rounded_rect(double x1, double y1, double x2, double y2, double r);
+		rounded_rect() = default;
+        AGGAPI rounded_rect(double x1, double y1, double x2, double y2, double r);
 
-        void rect(double x1, double y1, double x2, double y2);
-        void radius(double r);
-        void radius(double rx, double ry);
-        void radius(double rx_bottom, double ry_bottom, double rx_top, double ry_top);
-        void radius(double rx1, double ry1, double rx2, double ry2, 
+        AGGAPI void rect(double x1, double y1, double x2, double y2);
+        AGGAPI void radius(double r);
+        AGGAPI void radius(double rx, double ry);
+        AGGAPI void radius(double rx_bottom, double ry_bottom, double rx_top, double ry_top);
+        AGGAPI void radius(double rx1, double ry1, double rx2, double ry2, 
                     double rx3, double ry3, double rx4, double ry4);
-        void normalize_radius();
+        AGGAPI void normalize_radius();
 
         void approximation_scale(double s) { m_arc.approximation_scale(s); }
         double approximation_scale() const { return m_arc.approximation_scale(); }
 
-        void rewind(unsigned);
-        unsigned vertex(double* x, double* y);
+        AGGAPI void rewind(unsigned);
+        AGGAPI unsigned vertex(double* x, double* y);
 
     private:
         double m_x1;
@@ -65,8 +80,5 @@ namespace agg
         unsigned m_status;
         arc      m_arc;
     };
-
 }
-
 #endif
-

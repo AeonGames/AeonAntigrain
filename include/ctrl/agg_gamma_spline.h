@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -64,16 +79,16 @@ namespace agg
     class gamma_spline
     {
     public:
-        gamma_spline();
+        AGGCTRLAPI gamma_spline();
 
-        void values(double kx1, double ky1, double kx2, double ky2);
+        AGGCTRLAPI void values(double kx1, double ky1, double kx2, double ky2);
         const unsigned char* gamma() const { return m_gamma; }
-        double y(double x) const;
-        void values(double* kx1, double* ky1, double* kx2, double* ky2) const;
-        void box(double x1, double y1, double x2, double y2);
+        AGGCTRLAPI double y(double x) const;
+        AGGCTRLAPI void values(double* kx1, double* ky1, double* kx2, double* ky2) const;
+        AGGCTRLAPI void box(double x1, double y1, double x2, double y2);
 
-        void     rewind(unsigned);
-        unsigned vertex(double* x, double* y);
+        AGGCTRLAPI void     rewind(unsigned);
+        AGGCTRLAPI unsigned vertex(double* x, double* y);
 
     private:
         unsigned char m_gamma[256];

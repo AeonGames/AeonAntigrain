@@ -170,6 +170,7 @@ SET(controls_HEADERS
 )
 
 add_library(controls
+    ctrl/agg_ctrl.cpp
     ctrl/agg_spline_ctrl.cpp
     ctrl/agg_slider_ctrl.cpp
     ctrl/agg_scale_ctrl.cpp

@@ -1,3 +1,18 @@
+/*
+Copyright (C) 2019 Rodrigo Jose Hernandez Cordoba
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 //----------------------------------------------------------------------------
 // Anti-Grain Geometry - Version 2.4
 // Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
@@ -38,35 +53,36 @@ namespace agg
     class slider_ctrl_impl : public ctrl
     {
     public:
-        slider_ctrl_impl(double x1, double y1, double x2, double y2, bool flip_y=false);
+        AGGCTRLAPI slider_ctrl_impl(double x1, double y1, double x2, double y2, bool flip_y=false);
 
-        void border_width(double t, double extra=0.0);
+        AGGCTRLAPI void border_width(double t, double extra=0.0);
 
         void range(double min, double max) { m_min = min; m_max = max; }
         void num_steps(unsigned num) { m_num_steps = num; }
-        void label(const char* fmt);
+        AGGCTRLAPI void label(const char* fmt);
         void text_thickness(double t) { m_text_thickness = t; }
 
         bool descending() const { return m_descending; }
         void descending(bool v) { m_descending = v; }
 
         double value() const { return m_value * (m_max - m_min) + m_min; }
-        void value(double value);
+        AGGCTRLAPI void value(double value);
 
-        virtual bool in_rect(double x, double y) const;
-        virtual bool on_mouse_button_down(double x, double y);
-        virtual bool on_mouse_button_up(double x, double y);
-        virtual bool on_mouse_move(double x, double y, bool button_flag);
-        virtual bool on_arrow_keys(bool left, bool right, bool down, bool up);
+        AGGCTRLAPI bool in_rect(double x, double y) const override;
+        AGGCTRLAPI bool on_mouse_button_down(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_button_up(double x, double y) override;
+        AGGCTRLAPI bool on_mouse_move(double x, double y, bool button_flag) override;
+        AGGCTRLAPI bool on_arrow_keys(bool left, bool right, bool down, bool up) override;
+		AGGCTRLAPI ~slider_ctrl_impl() override;
 
         // Vertex source interface
         unsigned num_paths() { return 6; };
-        void     rewind(unsigned path_id);
-        unsigned vertex(double* x, double* y);
+        AGGCTRLAPI void     rewind(unsigned path_id);
+        AGGCTRLAPI unsigned vertex(double* x, double* y);
 
     private:
-        void calc_box();
-        bool normalize_value(bool preview_value_flag);
+        AGGCTRLAPI void calc_box();
+        AGGCTRLAPI bool normalize_value(bool preview_value_flag);
 
         double   m_border_width;
         double   m_border_extra;
