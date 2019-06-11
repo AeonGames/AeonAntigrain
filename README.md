@@ -45,3 +45,4 @@ This is a fork of said sourceforge repository.
 
 - Fast development time: The project may lay dormant for long periods as this is not our focus.
 - Drop in replacement with the original code (for too long): We may need to make changes and cannot promise the API to remain backward compatible to version 2.4.
+- Staying away from the STL: C++ has come a long way since 2005, STL containers are no longer worse than anything a single person can come up with.

@@ -170,7 +170,7 @@ namespace agg
     //-------------------------------------------------------------curve4_points
     struct curve4_points
     {
-        double cp[8];
+        std::array<double, 8> cp;
         curve4_points() = default;
         curve4_points(double x1, double y1,
                       double x2, double y2,

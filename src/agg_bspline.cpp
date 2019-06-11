@@ -43,20 +43,17 @@ namespace agg
 
     //------------------------------------------------------------------------
     bspline::bspline(int num) :
-        
         m_x(nullptr),
-        m_y(nullptr)
-        
+        m_y(nullptr),
+        m_am{}
     {
         init(num);
     }
 
     //------------------------------------------------------------------------
     bspline::bspline(int num, const double* x, const double* y) :
-        
         m_x(nullptr),
         m_y(nullptr)
-        
     {
         init(num, x, y);
     }

@@ -31,6 +31,7 @@ limitations under the License.
 #define AGG_RENDERER_OUTLINE_AA_INCLUDED
 
 #include <cstdlib>
+#include <array>
 #include "agg_array.h"
 #include "agg_math.h"
 #include "agg_line_aa_basics.h"
@@ -484,10 +485,7 @@ namespace agg
         using color_type = typename Renderer::color_type;
 
         //---------------------------------------------------------------------
-        enum max_half_width_e
-        { 
-            max_half_width = 64
-        };
+        static const size_t max_half_width;
 
         //---------------------------------------------------------------------
         line_interpolator_aa_base(renderer_type& ren, line_parameters& lp) :
@@ -577,15 +575,11 @@ namespace agg
         int m_width;
         int m_max_extent;
         int m_step;
-        int m_dist[max_half_width + 1];
-        cover_type m_covers[max_half_width * 2 + 4];
+        std::array<int,max_half_width+1> m_dist{};
+        std::array<cover_type,max_half_width*2+4> m_covers{};
     };
 
-
-
-
-
-
+    template<class Renderer> const size_t line_interpolator_aa_base<Renderer>::max_half_width = 64;
 
     //====================================================line_interpolator_aa0
     template<class Renderer> class line_interpolator_aa0 :
@@ -611,7 +605,7 @@ namespace agg
             int dist;
             int dy;
             int s1 = base_type::step_hor_base(m_di);
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             *p1++ = (cover_type)base_type::m_ren.cover(s1);
@@ -642,7 +636,7 @@ namespace agg
             int dist;
             int dx;
             int s1 = base_type::step_ver_base(m_di);
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             *p1++ = (cover_type)base_type::m_ren.cover(s1);
@@ -772,7 +766,7 @@ namespace agg
             int s1 = base_type::step_hor_base(m_di);
 
             dist_start = m_di.dist_start();
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             *p1 = 0;
@@ -822,7 +816,7 @@ namespace agg
             int dist;
             int dx;
             int s1 = base_type::step_ver_base(m_di);
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             dist_start = m_di.dist_start();
@@ -866,10 +860,11 @@ namespace agg
             return ++base_type::m_step < base_type::m_count;
         }
 
-    private:
         line_interpolator_aa1(const line_interpolator_aa1<Renderer>&) = delete;
         const line_interpolator_aa1<Renderer>& 
             operator = (const line_interpolator_aa1<Renderer>&) = delete;
+
+    private:
 
         //---------------------------------------------------------------------
         distance_interpolator2 m_di; 
@@ -914,7 +909,7 @@ namespace agg
             int dist;
             int dy;
             int s1 = base_type::step_hor_base(m_di);
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             dist_end = m_di.dist_end();
@@ -969,7 +964,7 @@ namespace agg
             int dist;
             int dx;
             int s1 = base_type::step_ver_base(m_di);
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             dist_end = m_di.dist_end();
@@ -1017,10 +1012,11 @@ namespace agg
             return npix && ++base_type::m_step < base_type::m_count;
         }
 
-    private:
         line_interpolator_aa2(const line_interpolator_aa2<Renderer>&) = delete;
         const line_interpolator_aa2<Renderer>& 
             operator = (const line_interpolator_aa2<Renderer>&) = delete;
+
+    private:
 
         //---------------------------------------------------------------------
         distance_interpolator2 m_di; 
@@ -1120,7 +1116,7 @@ namespace agg
             int dist;
             int dy;
             int s1 = base_type::step_hor_base(m_di);
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             dist_start = m_di.dist_start();
@@ -1183,7 +1179,7 @@ namespace agg
             int dist;
             int dx;
             int s1 = base_type::step_ver_base(m_di);
-            cover_type* p0 = base_type::m_covers + base_type::max_half_width + 2;
+            cover_type* p0 = base_type::m_covers.data() + base_type::max_half_width + 2;
             cover_type* p1 = p0;
 
             dist_start = m_di.dist_start();
@@ -1238,10 +1234,11 @@ namespace agg
             return npix && ++base_type::m_step < base_type::m_count;
         }
 
-    private:
         line_interpolator_aa3(const line_interpolator_aa3<Renderer>&) = delete;
         const line_interpolator_aa3<Renderer>& 
             operator = (const line_interpolator_aa3<Renderer>&) = delete;
+
+    private:
 
         //---------------------------------------------------------------------
         distance_interpolator3 m_di; 
@@ -1330,7 +1327,7 @@ namespace agg
 
         //---------------------------------------------------------------------
         pod_array<value_type> m_profile;
-        value_type            m_gamma[aa_scale];
+        std::array<value_type,aa_scale> m_gamma{};
         int                   m_subpixel_width{0};
         double                m_min_width{1.0};
         double                m_smoother_width{1.0};
@@ -1405,9 +1402,9 @@ namespace agg
                            int xc1, int yc1, int xc2, int yc2, 
                            int x1,  int y1,  int x2)
         {
-            cover_type covers[line_interpolator_aa_base<self_type>::max_half_width * 2 + 4];
-            cover_type* p0 = covers;
-            cover_type* p1 = covers;
+            std::array<cover_type,line_interpolator_aa_base<self_type>::max_half_width * 2 + 4> covers;
+            cover_type* p0 = covers.data();
+            cover_type* p1 = covers.data();
             int x = x1 << line_subpixel_shift;
             int y = y1 << line_subpixel_shift;
             int w = subpixel_width();
@@ -1477,9 +1474,9 @@ namespace agg
         {
             if(m_clipping && clipping_flags(xc, yc, m_clip_box)) return;
            
-            cover_type covers[line_interpolator_aa_base<self_type>::max_half_width * 2 + 4];
-            cover_type* p0 = covers;
-            cover_type* p1 = covers;
+            std::array<cover_type,line_interpolator_aa_base<self_type>::max_half_width * 2 + 4> covers;
+            cover_type* p0 = covers.data();
+            cover_type* p1 = covers.data();
             int x = xh1 << line_subpixel_shift;
             int y = yh1 << line_subpixel_shift;
             int w = subpixel_width();
@@ -1826,9 +1823,6 @@ namespace agg
         rect_i                 m_clip_box;
         bool                   m_clipping;
     };
-
-
-
 }
 
 #endif

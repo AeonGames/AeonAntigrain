@@ -82,7 +82,7 @@ namespace agg
         int               m_num{0};
         double*           m_x{nullptr};
         double*           m_y{nullptr};
-        pod_array<double> m_am;
+        pod_array<double> m_am{};
         mutable int       m_last_idx{-1};
     };
 }

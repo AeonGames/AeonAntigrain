@@ -35,6 +35,9 @@ limitations under the License.
 
 namespace agg
 {
+#ifdef __cplusplus
+    extern "C" {
+#endif
     extern AGGAPI const int8u gse4x6[];
     extern AGGAPI const int8u gse4x8[];
     extern AGGAPI const int8u gse5x7[];
@@ -69,6 +72,9 @@ namespace agg
     extern AGGAPI const int8u verdana17_bold[];
     extern AGGAPI const int8u verdana18[];
     extern AGGAPI const int8u verdana18_bold[];
+#ifdef __cplusplus
+    }
+#endif
 }
 
 #endif

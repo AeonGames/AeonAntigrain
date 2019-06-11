@@ -31,6 +31,7 @@ limitations under the License.
 #define AGG_ARRAY_INCLUDED
 
 #include <array>
+#include <vector>
 #include <cstddef>
 #include <cstring>
 #include "agg_basics.h"
@@ -118,57 +119,7 @@ namespace agg
 
 
     //---------------------------------------------------------------pod_array
-    template<class T> class pod_array
-    {
-    public:
-        using value_type = T;
-        using self_type = pod_array<T>;
-
-        ~pod_array() { pod_allocator<T>::deallocate(m_array, m_size); }
-        pod_array() : m_array{nullptr} {}
-
-        pod_array(unsigned size) : 
-            m_array(pod_allocator<T>::allocate(size)), 
-            m_size(size) 
-        {}
-
-        pod_array(const self_type& v) : 
-            m_array(pod_allocator<T>::allocate(v.m_size)), 
-            m_size(v.m_size) 
-        {
-            std::memcpy(m_array, v.m_array, sizeof(T) * m_size);
-        }
-
-        void resize(unsigned size)
-        {
-            if(size != m_size)
-            {
-                pod_allocator<T>::deallocate(m_array, m_size);
-                m_array = pod_allocator<T>::allocate(m_size = size);
-            }
-        }
-        const self_type& operator = (const self_type& v)
-        {
-            resize(v.size());
-            std::memcpy(m_array, v.m_array, sizeof(T) * m_size);
-            return *this;
-        }
-
-        [[nodiscard]] unsigned size() const { return m_size; }
-        const T& operator [] (unsigned i) const { return m_array[i]; }
-              T& operator [] (unsigned i)       { return m_array[i]; }
-        [[nodiscard]] const T& at(unsigned i) const           { return m_array[i]; }
-              T& at(unsigned i)                 { return m_array[i]; }
-        [[nodiscard]] T  value_at(unsigned i) const           { return m_array[i]; }
-
-        [[nodiscard]] const T* data() const { return m_array; }
-              T* data()       { return m_array; }
-    private:
-        T*       m_array{nullptr};
-        unsigned m_size{0};
-    };
-
-
+    template<typename T> using pod_array = std::vector<T>;
 
     //--------------------------------------------------------------pod_vector
     // A simple class template to store Plain Old Data, a vector

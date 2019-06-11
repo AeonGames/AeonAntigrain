@@ -13,6 +13,21 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+//----------------------------------------------------------------------------
+// Anti-Grain Geometry - Version 2.4
+// Copyright (C) 2002-2005 Maxim Shemanarev (http://www.antigrain.com)
+//
+// Permission to copy, use, modify, sell and distribute this software 
+// is granted provided this copyright notice appears in all copies. 
+// This software is provided "as is" without express or implied
+// warranty, and with no claim as to its suitability for any purpose.
+//
+//----------------------------------------------------------------------------
+// Contact: mcseem@antigrain.com
+//          mcseemagg@yahoo.com
+//          http://www.antigrain.com
+//----------------------------------------------------------------------------
+
 #include <stdio.h>
 #include "agg_basics.h"
 #include "agg_rendering_buffer.h"
@@ -35,9 +50,6 @@ limitations under the License.
 
 enum flip_y_e { flip_y = true };
 
-
-
-
 //------------------------------------------------------------------------
 template<class GradientF> class gradient_sine_repeat_adaptor
 {
@@ -55,9 +67,6 @@ private:
     GradientF m_gradient;
     double    m_periods;
 };
-
-
-
 
 //------------------------------------------------------------------------
 class the_application : public agg::platform_support
@@ -81,7 +90,7 @@ public:
         }
         fonts[] = 
         {
-            { agg::gse4x6,                  "gse4x6"               },
+            { agg::gse4x6,           "gse4x6"                      },
             { agg::gse4x8,                  "gse4x8"               },
             { agg::gse5x7,                  "gse5x7"               },
             { agg::gse5x9,                  "gse5x9"               },
@@ -118,13 +127,10 @@ public:
             0, 0
         };
 
-
-
         glyph_gen glyph(0);
         pixfmt pixf(rbuf_window());
         ren_base rb(pixf);
         rb.clear(agg::rgba(1,1,1));
-
 
         agg::renderer_raster_htext_solid<ren_base, glyph_gen> rt(rb, glyph);
 
@@ -178,7 +184,6 @@ public:
 
 };
 
-
 int agg_main(int argc, char* argv[])
 {
     the_application app(pix_format, flip_y);
@@ -190,5 +195,3 @@ int agg_main(int argc, char* argv[])
     }
     return 1;
 }
-
-
