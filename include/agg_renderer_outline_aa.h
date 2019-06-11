@@ -485,7 +485,7 @@ namespace agg
         using color_type = typename Renderer::color_type;
 
         //---------------------------------------------------------------------
-        static const size_t max_half_width;
+        static const size_t max_half_width=64;
 
         //---------------------------------------------------------------------
         line_interpolator_aa_base(renderer_type& ren, line_parameters& lp) :
@@ -578,8 +578,6 @@ namespace agg
         std::array<int,max_half_width+1> m_dist{};
         std::array<cover_type,max_half_width*2+4> m_covers{};
     };
-
-    template<class Renderer> const size_t line_interpolator_aa_base<Renderer>::max_half_width = 64;
 
     //====================================================line_interpolator_aa0
     template<class Renderer> class line_interpolator_aa0 :
