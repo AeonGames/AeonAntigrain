@@ -81,6 +81,7 @@ option( agg_USE_SDL_PLATFORM "Use SDL as platform" OFF)
 option( agg_USE_PACK "Package Agg" OFF)
 option( agg_USE_AGG2D "Agg 2D graphical context" OFF)
 option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
+option(BUILD_EXAMPLES "Build Executable Examples" ON)
 option(USE_CLANG_TIDY "Use the clang-tidy tool to find and fix issues" OFF)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -96,14 +97,12 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 set(CLANG_TIDY_CHECKS
-    #"-warnings-as-errors=performance-*,modernize-*,-modernize-pass-by-value"
+    "-warnings-as-errors=performance-*,modernize-*,-modernize-pass-by-value"
     "-checks=performance-*,modernize-*,-modernize-pass-by-value")
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
-define_property(TARGET PROPERTY DEBUG_ARGUMENTS INHERITED
-    BRIEF_DOCS "Debug Arguments"
-    FULL_DOCS "Arguments to be passed when debugging")
+include(vscode)
 
 # for the moment this decides the platform code.
 IF(WIN32)
@@ -245,7 +244,9 @@ SET( AGG_LIBRARIES ${AGG_LIBRARIES} CACHE STRING "Agg package libraries" FORCE )
 
 ADD_SUBDIRECTORY( src )
 
-ADD_SUBDIRECTORY( examples )
+if(BUILD_EXAMPLES)
+    ADD_SUBDIRECTORY( examples )
+endif()
 
 #-------------------------------------------------------------------
 # Build a CPack installer if CPack is available and this is a build
@@ -278,4 +279,8 @@ IF ( agg_USE_PACK )
     ENDIF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 ENDIF ( agg_USE_PACK )
 
-include(vscode)
+if(BUILD_EXAMPLES)
+    configure_vscode(${CMAKE_SOURCE_DIR}/examples)
+else()
+    configure_vscode()
+endif()

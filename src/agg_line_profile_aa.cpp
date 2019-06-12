@@ -108,7 +108,7 @@ namespace agg
                                   (double(i) / subpixel_smoother_width)) * aa_mask)];
         }
 
-        unsigned n_smoother = profile_size() - 
+        size_t n_smoother = profile_size() - 
                               subpixel_smoother_width - 
                               subpixel_center_width - 
                               subpixel_scale*2;

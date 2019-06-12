@@ -1302,7 +1302,7 @@ namespace agg
 
         AGGAPI void width(double w);
 
-        [[nodiscard]] unsigned profile_size() const { return m_profile.size(); }
+        [[nodiscard]] size_t profile_size() const { return m_profile.size(); }
         [[nodiscard]] int subpixel_width() const { return m_subpixel_width; }
 
         //---------------------------------------------------------------------

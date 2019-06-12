@@ -12,9 +12,14 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+define_property(TARGET PROPERTY DEBUG_ARGUMENTS INHERITED
+    BRIEF_DOCS "Debug Arguments"
+    FULL_DOCS "Arguments to be passed when debugging")
+
 #
 # Generate VS Code Environment
 #
+function(configure_vscode)
 if(CMAKE_GENERATOR MATCHES "(MSYS|Unix) Makefiles")
   set(CODE_ZOOMLEVEL "0" CACHE STRING "window.zoomLevel for VS Code.")
   find_program(GDB_EXECUTABLE gdb HINTS ENV MINGW_PREFIX MSYS2_PATH)
@@ -29,9 +34,8 @@ if(CMAKE_GENERATOR MATCHES "(MSYS|Unix) Makefiles")
 
   set(DEBUG_CONFIGURATIONS "")
 
-  set(directories ${CMAKE_SOURCE_DIR}/examples)
-  
-  foreach(DIRECTORY ${directories})
+  if(${ARGC})
+  foreach(DIRECTORY ${ARGV0})
       if(IS_DIRECTORY ${DIRECTORY} AND EXISTS ${DIRECTORY}/CMakeLists.txt)
           get_directory_property(TARGETS DIRECTORY "${DIRECTORY}" BUILDSYSTEM_TARGETS)
           foreach(TARGET ${TARGETS})
@@ -69,6 +73,7 @@ if(CMAKE_GENERATOR MATCHES "(MSYS|Unix) Makefiles")
           endforeach(TARGET)
       endif()
   endforeach()
+  endif()
 
   configure_file("${CMAKE_SOURCE_DIR}/cmake/settings.json.in"
                  "${CMAKE_SOURCE_DIR}/.vscode/settings.json")
@@ -77,3 +82,4 @@ if(CMAKE_GENERATOR MATCHES "(MSYS|Unix) Makefiles")
   configure_file("${CMAKE_SOURCE_DIR}/cmake/c_cpp_properties.json.in"
                  "${CMAKE_SOURCE_DIR}/.vscode/c_cpp_properties.json" @ONLY)
 endif()
+endfunction(configure_vscode)
